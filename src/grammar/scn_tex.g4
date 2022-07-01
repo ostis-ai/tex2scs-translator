@@ -7,16 +7,21 @@ options
 
 @parser::header
 {
+#include "../translator/commands/tree/sc_scn_prefix_tree.h"
 }
 
 scn_tex_text
-  : scn_tex_command* EOF
+  locals
+  [
+  ScSCnPrefixTree * prefixTree = new ScSCnPrefixTree();
+  ]
+  : scn_tex_command[$ctx->prefixTree, $ctx->commands]* EOF
   ;
 
-scn_tex_command
-  : WS? '\\' scn_tex_command_name WS? ('{' arg=scn_tex_command_args '}')* WS?
+scn_tex_command[ScSCnPrefixTree * prefixTree, ScSCnTexCommands * commands]
+  : WS? '\\' name=scn_tex_command_name WS? ('{' arg=scn_tex_command_args '}')* WS?
   ('{'
-      (scn_tex_command
+      (scn_tex_command[$prefixTree, $commands]
       | scn_tex_command_content)*
   '}')?
   ;
