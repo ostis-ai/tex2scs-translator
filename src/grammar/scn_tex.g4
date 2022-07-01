@@ -14,7 +14,7 @@ scn_tex_text
   ;
 
 scn_tex_command
-  : WS? '\\' scn_tex_command_name WS? ('{' scn_tex_command_args '}')* WS?
+  : WS? '\\' scn_tex_command_name WS? ('{' arg=scn_tex_command_args '}')* WS?
   ('{'
       (scn_tex_command
       | scn_tex_command_content)*
@@ -34,8 +34,8 @@ scn_tex_command_name
   ;
 
 TEXT
-  : ([а-яёЁА-Яa-zA-Z0-9._#+=> <'"«»/()*-]
-  | '.' | ',' | '.' | '?' | '!')+
+  : ([а-яёЁА-Яa-zA-Z0-9_#+=> <'"«»/()*-]
+  | '.' | ',' | '~' | '?' | '!')+
   ;
 
 NAME
