@@ -1,5 +1,14 @@
 grammar scn_tex;
 
+options
+{
+  language = Cpp;
+}
+
+@parser::header
+{
+}
+
 scn_tex_text
   : scn_tex_command* EOF
   ;
