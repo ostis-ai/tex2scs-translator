@@ -10,7 +10,8 @@ int main(int argc, const char * argv[]) try
   options_description.add_options()
       ("help", "Display this message")
       ("sources,s",
-          boost::program_options::value<std::string>(), "Path to directory with work directory with tex sources");
+          boost::program_options::value<std::string>(), "Path to directory with work directory with tex sources")
+      ("target,t", boost::program_options::value<std::string>(), "Path to target directory for scs sources");
 
   boost::program_options::variables_map vm;
   boost::program_options::store(
@@ -21,6 +22,10 @@ int main(int argc, const char * argv[]) try
   if (vm.count("sources"))
     workDirectory = vm["sources"].as<std::string>();
 
+  std::string targetDirectory;
+  if (vm.count("target"))
+    workDirectory = vm["target"].as<std::string>();
+
   if (vm.count("help"))
   {
     std::cout << options_description;
@@ -29,7 +34,7 @@ int main(int argc, const char * argv[]) try
 
   auto translator = ScSCnTex2SCsTranslatorBuilder::BuildDefaultTranslator();
 
-  return translator->Run(workDirectory) ? EXIT_SUCCESS : EXIT_FAILURE;
+  return translator->Run(workDirectory, targetDirectory) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 catch (std::exception const & e)
 {

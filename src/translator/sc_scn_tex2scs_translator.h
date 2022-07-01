@@ -13,7 +13,7 @@ public:
   ScSCnTex2SCsTranslator(ScSCnTexCommands commands)
     : m_commands(std::move(commands)) {}
 
-  bool Run(std::string const & workDirectory)
+  bool Run(std::string const & workDirectory, std::string const & targetDirectory)
   {
     return true;
   }
