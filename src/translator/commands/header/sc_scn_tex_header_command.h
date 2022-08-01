@@ -2,7 +2,7 @@
 
 #include "../sc_scn_tex_command.h"
 
-class ScSCnTexTextRelationCommand : public ScSCnTexCommand
+class ScSCnTexHeaderCommand : public ScSCnTexCommand
 {
 public:
   ScScnTexCommandResult Complete(
