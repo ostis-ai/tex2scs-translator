@@ -1,4 +1,4 @@
-grammar scn_tex;
+grammar SCnTex;
 
 options
 {
@@ -7,28 +7,71 @@ options
 
 @parser::header
 {
-#include "../translator/commands/tree/sc_scn_prefix_tree.h"
-#include "../sc_scn_tex2scs_commands.h"
+#include "tree/sc_scn_prefix_tree.h"
+#include "commands/sc_scn_tex2scs_commands.h"
 }
 
 scnTexText
+  returns [std::string resultText]
   locals
   [
-  ScSCnPrefixTree * prefixTree = new ScSCnPrefixTree();
+  using ScSCnCommandsHistory = std::vector<std::string>,
+  ScSCnCommandsHistory * history = new ScSCnCommandsHistory(),
+
+  ScSCnPrefixTree * prefixTree = new ScSCnPrefixTree(),
   ]
-  : scnTexCommand[$ctx->prefixTree]* EOF
+  :
+  {
+  std::stringstream resultStream;
+  }
+  (result=scnTexCommand[$history, $prefixTree]
+    {
+    resultStream << $result.resultText;
+    }
+  )* EOF
+  {
+  $resultText = resultStream.str();
+
+  delete $prefixTree;
+  delete $history;
+  }
   ;
 
-scnTexCommand[ScSCnPrefixTree * prefixTree]
+scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   returns [std::string resultText]
-  : WS? '\\' name=scnTexCommandName WS?
+  locals [ScSCnTexCommand * command, std::string commandName]
+  :
+  WS? '\\' (name=scnTexCommandName
   {
-  std::cout << "Command: " << $name.text << std::endl;
-  auto const & it = commands.find($name.text);
-  ScSCnTexCommand * command;
-  if (it != commands.cend())
-    command = it->second;
+  $commandName = $name.text;
+  auto const & it = commands.find($commandName);
 
+  auto const & ignoreIt = ignoreCommands.find($commandName);
+  if (ignoreIt == ignoreCommands.cend())
+  {
+    if (it != commands.cend())
+      $command = it->second;
+    else
+      std::cout << "Not found: " << $commandName << std::endl;
+  }
+  else
+  {
+    std::cout << "Ignore command: " << $commandName << std::endl;
+    $command = nullptr;
+  }
+  }
+  | '\\'
+  {
+  $commandName = "\\";
+
+  auto const & it = commands.find($commandName);
+  if (it != commands.cend())
+    $command = it->second;
+  else
+    std::cout << "Not found: " << $commandName << std::endl;
+  })
+  WS?
+  {
   ScScnTexCommandParams params;
   }
   (
@@ -41,9 +84,9 @@ scnTexCommand[ScSCnPrefixTree * prefixTree]
       {
       argStream << $sent.text;;
       }
-      | result=scnTexCommand[$prefixTree]
+      | result=scnTexCommand[$history, $prefixTree]
       {
-      argStream << $result.text;;
+      argStream << $result.resultText;;
       }
     )*
     {
@@ -56,9 +99,9 @@ scnTexCommand[ScSCnPrefixTree * prefixTree]
         {
         argStream << $sent.text;;
         }
-        | result=scnTexCommand[$prefixTree]
+        | result=scnTexCommand[$history, $prefixTree]
         {
-        argStream << $result.text;;
+        argStream << $result.resultText;;
         }
       )*
       {
@@ -67,11 +110,16 @@ scnTexCommand[ScSCnPrefixTree * prefixTree]
     )*
     '}'
     {
-    params.push_back("new");
+    params.push_back("/");
     }
   )*
   {
-  $resultText = command->Complete(*prefixTree, params);
+  if ($command != nullptr)
+  {
+    std::cout << "Interpreter command: " << $commandName << std::endl;
+    $resultText = $command->Complete(*history, *prefixTree, params);
+    history->push_back($commandName);
+  }
   }
   WS?
   ;
