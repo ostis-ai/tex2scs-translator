@@ -28,6 +28,7 @@ scnTexText
     {
     resultStream << $result.resultText;
     }
+  | lineComment WS
   )* EOF?
   {
   $resultText = resultStream.str();
@@ -41,7 +42,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   returns [std::string resultText]
   locals [ScSCnTexCommand * command, std::string commandName]
   :
-  WS? (name=scnTexCommandName
+  (name=scnTexCommandName
   {
   $commandName = $name.text.substr(1);
   auto const & it = commands.find($commandName);
@@ -52,7 +53,10 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     if (it != commands.cend())
       $command = it->second;
     else
+    {
       std::cout << "Not found: " << $commandName << std::endl;
+      $command = nullptr;
+    }
   }
   else
   {
@@ -65,17 +69,16 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   ScScnTexCommandParams params;
   }
   (
-   '{'
-    WS?
+    WS? ('{' | '[') WS?
     {
     std::stringstream argStream;
     }
     (
-      sent=scnTexCommandContent
+      WS? sent=scnTexCommandContent
       {
       argStream << $sent.text;
       }
-      | result=scnTexCommand[$history, $prefixTree]
+      | WS? result=scnTexCommand[$history, $prefixTree]
       {
       argStream << $result.resultText;
       }
@@ -88,11 +91,11 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
       std::stringstream argStream;
       }
       (
-        sent=scnTexCommandContent
+        WS? sent=scnTexCommandContent
         {
         argStream << $sent.text;
         }
-        | result=scnTexCommand[$history, $prefixTree]
+        | WS? result=scnTexCommand[$history, $prefixTree]
         {
         argStream << $result.resultText;
         }
@@ -101,8 +104,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
         params.push_back(argStream.str());
       }
     )*
-    WS?
-    '}'
+    WS? ('}' | ']') WS?
     {
     params.push_back("/");
     }
@@ -114,8 +116,8 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     $resultText = $command->Complete(*history, *prefixTree, params);
     history->push_back($commandName);
   }
+  $command == nullptr;
   }
-  WS?
   ;
 
 scnTexCommandContent
@@ -128,7 +130,7 @@ scnTexCommandName
 
 TEXT
   : ([а-яёЁА-Яa-zA-Z0-9_#+=> <'"«»/()*-]
-  | '.' | ',' | '~' | '?' | '!' | ':' | ';' | '`')+
+  | '.' | ',' | '~' | '?' | '!' | ':' | ';' | '`' | '–' | '…')+
   ;
 
 NAME
@@ -137,4 +139,8 @@ NAME
 
 WS
   : [ \t\r\n\u2028\u2029]+
+  ;
+
+lineComment
+  : '%' (NAME | TEXT | '{' | '}')*
   ;
