@@ -2,7 +2,7 @@
 
 #include "unordered_map"
 
-#include "../sc_scn_tex2scs_translations.h"
+#include "../commands/sc_scn_tex2scs_translations.h"
 
 class ScSCnPrefixTree
 {
