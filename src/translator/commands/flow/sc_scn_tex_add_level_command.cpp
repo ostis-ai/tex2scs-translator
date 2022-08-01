@@ -5,16 +5,25 @@ ScScnTexCommandResult ScSCnTexAddLevelCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & number = params.at(0);
+  int32_t number = std::stoi(params.at(0));
 
-  if (number == "1")
+  ScStringStream stream;
+  for (int i = 0; i < abs(number); ++i)
   {
-    offset += "\t";
-    return "\n\t(*\n";
+    if (number < 0)
+    {
+      if (offset.size() > 1)
+        offset = offset.substr(0, offset.size() - 1);
+      else
+        offset = "";
+      stream << offset << "\t*)" << EndLine();
+    }
+    else
+    {
+      stream << "\n" << offset << "\t(*\n";
+      offset += "\t";
+    }
   }
-  else
-  {
-    offset = offset.substr(0, offset.size() - 1);
-    return "\t*)" + EndLine();
-  }
+
+  return stream;
 }
