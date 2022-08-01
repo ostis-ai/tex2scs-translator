@@ -16,7 +16,7 @@
 class  SCnTexParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, TEXT = 5, NAME = 6, WS = 7
+    T__0 = 1, T__1 = 2, T__2 = 3, TEXT = 4, NAME = 5, WS = 6
   };
 
   enum {
@@ -98,7 +98,7 @@ public:
   public:
     ScnTexCommandNameContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *TEXT();
+    antlr4::tree::TerminalNode *NAME();
 
    
   };

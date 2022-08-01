@@ -12,7 +12,7 @@
 class  SCnTexLexer : public antlr4::Lexer {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, TEXT = 5, NAME = 6, WS = 7
+    T__0 = 1, T__1 = 2, T__2 = 3, TEXT = 4, NAME = 5, WS = 6
   };
 
   SCnTexLexer(antlr4::CharStream *input);
