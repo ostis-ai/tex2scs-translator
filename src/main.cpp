@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) try
 
   std::string targetDirectory;
   if (vm.count("target"))
-    workDirectory = vm["target"].as<std::string>();
+    targetDirectory = vm["target"].as<std::string>();
 
   if (vm.count("help"))
   {
