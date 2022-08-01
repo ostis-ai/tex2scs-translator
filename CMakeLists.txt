@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
 project(sc-scn-tex2scs-translator)
 cmake_policy(SET CMP0048 NEW)
+set(TRANSLATOR_ROOT ${CMAKE_CURRENT_LIST_DIR})
 
-include(src/CMakeLists.txt)
+set(CMAKE_CXX_STANDARD 17)
+
+set(THIRDPARTY_DIR "${TRANSLATOR_ROOT}/thirdparty")
+set(ANTLR_DIR "${THIRDPARTY_DIR}/antlr")
+
+add_subdirectory(${ANTLR_DIR}/runtime)
+add_subdirectory(${TRANSLATOR_ROOT}/src)

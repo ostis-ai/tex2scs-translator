@@ -2,9 +2,16 @@
 
 #include "unordered_map"
 
+#include "../sc_scn_tex2scs_translations.h"
+
 class ScSCnPrefixTree
 {
 public:
+  ScSCnPrefixTree()
+  {
+    m_instance = translations;
+  }
+
   std::string Add(std::string const & key)
   {
     auto const & item = m_instance.find(key);
@@ -18,5 +25,5 @@ public:
 
 private:
   std::string cached;
-  std::unordered_map<std::string, std::string> m_instance;
+  ScSCnTexTranslations m_instance;
 };

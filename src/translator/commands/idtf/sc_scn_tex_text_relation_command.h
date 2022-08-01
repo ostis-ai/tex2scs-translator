@@ -1,8 +1,8 @@
 #pragma once
 
-#include "sc_scn_tex_relation_command.h"
+#include "../sc_scn_tex_command.h"
 
-class ScSCnTexIdtfCommand : public ScSCnTexRelationCommand
+class ScSCnTexTextRelationCommand : public ScSCnTexCommand
 {
 public:
   ScScnTexCommandResult Complete(ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) override;
