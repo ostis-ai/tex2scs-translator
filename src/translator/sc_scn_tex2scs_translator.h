@@ -2,28 +2,117 @@
 
 #include <utility>
 #include <unordered_map>
+#include <fstream>
+#include <filesystem>
+#include <iostream>
+
+#include "filesystem/sc_file_system.h"
 
 #include "commands/sc_scn_tex_command.h"
+
+#include "SCnTexLexer.h"
+#include "SCnTexParser.h"
 
 using ScSCnTexCommands = std::unordered_map<std::string, ScSCnTexCommand *>;
 
 class ScSCnTex2SCsTranslator
 {
 public:
-  explicit ScSCnTex2SCsTranslator(ScSCnTexCommands commands)
-    : m_commands(std::move(commands)) {}
-
   bool Run(std::string const & workDirectory, std::string const & targetDirectory)
   {
+    auto const & dir = ScDirectory(workDirectory);
+    m_filesCount = dir.CountFiles();
+
+    std::cout << "SCn-tex sources directory: " << workDirectory << std::endl;
+    std::cout << "Target SCs sources directory: " << targetDirectory << std::endl;
+
+    std::cout << "Start translate scn-tex sources:" << std::endl;
+    TranslateFiles(workDirectory, workDirectory, targetDirectory, 0);
+    std::cout << "Translation finished" << std::endl;
+
     return true;
   }
 
-  ~ScSCnTex2SCsTranslator()
+private:
+  size_t m_filesCount;
+
+  void TranslateFiles(
+      std::string const & workDirectory,
+      std::string const & startDirectory,
+      std::string const & startTargetDirectory,
+      size_t fileNumber)
   {
-    for (auto const & item : m_commands)
-      delete item.second;
+    std::string targetDirectory = GetTargetDirectory(workDirectory, startDirectory, startTargetDirectory);
+
+    std::filesystem::directory_entry dir{targetDirectory};
+    if (!dir.exists())
+      std::filesystem::create_directory(dir);
+
+    auto const & it = std::filesystem::directory_iterator(workDirectory);
+    for (auto & item : it)
+    {
+      std::string const & path = item.path();
+      if (item.is_directory())
+        TranslateFiles(path, startDirectory, startTargetDirectory, fileNumber);
+      else
+      {
+        bool result = TranslateFile(path, targetDirectory);
+        std::cout << "[" << ++fileNumber << "/" << m_filesCount << "]: " << path
+                  << " - " << (result ? "OK" : "ERROR") << std::endl;
+      }
+    }
   }
 
-private:
-  ScSCnTexCommands m_commands;
+  std::string GetTargetDirectory(
+      std::string const & workDirectory, std::string const & startDirectory, std::string const & startTargetDirectory)
+  {
+    std::string nestedDirectory = workDirectory;
+    size_t pos = nestedDirectory.find(startDirectory);
+    nestedDirectory.replace(pos, startDirectory.size(), "");
+
+    std::string targetDirectory;
+    ScStringStream stream;
+    stream << startTargetDirectory << targetDirectory;
+    stream >> targetDirectory;
+
+    return targetDirectory;
+  }
+
+  bool TranslateFile(
+      std::string const & filePath, std::string const & targetDirectory)
+  {
+    std::string targetFilePath = GetTargetFilePath(filePath, targetDirectory);
+    std::string const & scsText = TranslateText(filePath);
+
+    ScFile file{targetFilePath};
+    file.Write(scsText);
+
+    return true;
+  }
+
+  std::string GetTargetFilePath(std::string const & filePath, std::string const & targetDirectory)
+  {
+    std::string nestedFile = filePath.substr(filePath.rfind('/'), filePath.size());
+    nestedFile = nestedFile.substr(0, nestedFile.rfind('.'));
+    nestedFile = nestedFile.substr(1);
+
+    ScStringStream stream;
+    stream << targetDirectory << nestedFile << ".scs";
+
+    return stream;
+  }
+
+  std::string TranslateText(std::string const & filePath)
+  {
+    std::ifstream file(filePath, std::ios_base::in);
+    antlr4::ANTLRInputStream input(file);
+    SCnTexLexer lexer(&input);
+
+    antlr4::CommonTokenStream tokens(&lexer);
+    SCnTexParser parser(&tokens);
+
+    SCnTexParser::ScnTexTextContext * ctx = parser.scnTexText();
+    file.close();
+    return ctx->resultText;
+  }
 };
