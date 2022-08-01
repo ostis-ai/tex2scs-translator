@@ -26,7 +26,7 @@ ScScnTexCommandResult ScSCnTexNrelFromSetCommand::Complete(
       stream << EndLine();
   }
 
-  stream << StartLine() << offset << "}";
+  stream << "\n" << offset << offset << "}";
 
   return stream;
 }

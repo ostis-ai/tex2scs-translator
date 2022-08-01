@@ -2,7 +2,7 @@
 
 #include "../sc_scn_tex_command.h"
 
-class ScSCnTexTextbfCommand : public ScSCnTexCommand
+class ScSCnTexIncludeGraphicsCommand : public ScSCnTexCommand
 {
 public:
   ScScnTexCommandResult Complete(

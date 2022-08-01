@@ -1,6 +1,6 @@
-#include "sc_scn_tex_textb_command.h"
+#include "sc_scn_tex_textbf_command.h"
 
-ScScnTexCommandResult ScSCnTexTextbCommand::Complete(
+ScScnTexCommandResult ScSCnTexTextbfCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)

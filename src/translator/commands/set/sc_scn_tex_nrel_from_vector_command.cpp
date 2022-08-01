@@ -29,7 +29,7 @@ ScScnTexCommandResult ScSCnTexNrelFromVectorCommand::Complete(
     }
   }
 
-  stream << StartLine() << offset << "}";
+  stream << "\n" << offset << "}";
 
   return stream;
 }

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../sc_scn_tex_command.h"
+#include "sc_scn_tex_nrel_from_set_command.h"
 
-class ScSCnTexTextbfCommand : public ScSCnTexCommand
+class ScSCnTexSubdividingCommand : public ScSCnTexNrelFromSetCommand
 {
 public:
   ScScnTexCommandResult Complete(

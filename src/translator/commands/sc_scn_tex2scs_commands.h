@@ -9,7 +9,7 @@ using ScSCnTexCommands = std::unordered_map<std::string, ScSCnTexCommand *>;
 
 static ScSCnTexCommands const commands = {
     { "textit", new ScSCnTexTextitCommand() },
-    { "textb", new ScSCnTexTextbCommand() },
+    { "textbf", new ScSCnTexTextbfCommand() },
     { "uline", new ScSCnTexUlineCommand() },
     { "\\", new ScSCnTexNewLineCommand() },
     { "begin", new ScSCnTexBeginListCommand() },
@@ -34,16 +34,22 @@ static ScSCnTexCommands const commands = {
     { "scnrelfrom", new ScSCnTexNrelFromCommand() },
     { "scnsubset", new ScSCnTexSubsetCommand() },
     { "scnrelfromset", new ScSCnTexNrelFromSetCommand() },
+    { "scnsubdividing", new ScSCnTexSubdividingCommand() },
     { "scnrelfromlist", new ScSCnTexNrelFromListCommand() },
     { "scnrelfromvector", new ScSCnTexNrelFromVectorCommand() },
 
     { "scnfileitem", new ScSCnTexFileItemCommand() },
+    { "scnfilescg", new ScSCnTexFileSCgItemCommand() },
+    { "scnfileimage", new ScSCnTexFileImageCommand() },
+    { "includegraphics", new ScSCnTexIncludeGraphicsCommand() },
 
     { "scnaddlevel", new ScSCnTexAddLevelCommand() },
+
+    { "scnrolesign", new ScSCnTexRoleSignCommand() },
 };
 
 using ScSCnTexIgnoreCommands = std::unordered_set<std::string>;
 
 static ScSCnTexIgnoreCommands const ignoreCommands = {
-    "newpage", "scnbigspace", "bigskip", "mbox", "label", "scncite", "nameref",
+    "newpage", "scnbigspace", "bigskip", "mbox", "label", "scncite", "nameref", "linewidth"
 };

@@ -11,4 +11,5 @@ static ScSCnTexTranslations const translations = {
     { "эпиграф", "nrel_epigraph" },
     { "аннотация", "nrel_summary" },
     { "включение", "nrel_inclusion" },
+    { "разбиение", "nrel_subdividing" },
 };
