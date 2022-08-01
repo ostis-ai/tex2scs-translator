@@ -28,7 +28,7 @@ scnTexText
     {
     resultStream << $result.resultText;
     }
-  )* EOF
+  )* EOF?
   {
   $resultText = resultStream.str();
 
@@ -41,9 +41,9 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   returns [std::string resultText]
   locals [ScSCnTexCommand * command, std::string commandName]
   :
-  WS? '\\' (name=scnTexCommandName
+  WS? (name=scnTexCommandName
   {
-  $commandName = $name.text;
+  $commandName = $name.text.substr(1);
   auto const & it = commands.find($commandName);
 
   auto const & ignoreIt = ignoreCommands.find($commandName);
@@ -59,16 +59,6 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     std::cout << "Ignore command: " << $commandName << std::endl;
     $command = nullptr;
   }
-  }
-  | '\\'
-  {
-  $commandName = "\\";
-
-  auto const & it = commands.find($commandName);
-  if (it != commands.cend())
-    $command = it->second;
-  else
-    std::cout << "Not found: " << $commandName << std::endl;
   })
   WS?
   {
@@ -76,38 +66,42 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   }
   (
    '{'
+    WS?
     {
     std::stringstream argStream;
     }
     (
       sent=scnTexCommandContent
       {
-      argStream << $sent.text;;
+      argStream << $sent.text;
       }
       | result=scnTexCommand[$history, $prefixTree]
       {
-      argStream << $result.resultText;;
+      argStream << $result.resultText;
       }
     )*
     {
     params.push_back(argStream.str());
-    argStream.clear();
     }
-    (';'
+    (WS? ';' WS?
+      {
+      std::stringstream argStream;
+      }
       (
         sent=scnTexCommandContent
         {
-        argStream << $sent.text;;
+        argStream << $sent.text;
         }
         | result=scnTexCommand[$history, $prefixTree]
         {
-        argStream << $result.resultText;;
+        argStream << $result.resultText;
         }
       )*
       {
         params.push_back(argStream.str());
       }
     )*
+    WS?
     '}'
     {
     params.push_back("/");
@@ -129,16 +123,16 @@ scnTexCommandContent
   ;
 
 scnTexCommandName
-  : TEXT
+  : NAME
   ;
 
 TEXT
   : ([а-яёЁА-Яa-zA-Z0-9_#+=> <'"«»/()*-]
-  | '.' | ',' | '~' | '?' | '!')+
+  | '.' | ',' | '~' | '?' | '!' | ':' | ';' | '`')+
   ;
 
 NAME
-  : [a-z]+
+  : '\\' ([a-zA-Z0-9\\])*
   ;
 
 WS
