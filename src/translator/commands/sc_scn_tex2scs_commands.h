@@ -46,6 +46,7 @@ static ScSCnTexCommands const commands = {
     { "scnaddlevel", new ScSCnTexAddLevelCommand() },
 
     { "scnrolesign", new ScSCnTexRoleSignCommand() },
+    { "scnsupergroupsign", new ScSCnTexSupergroupSignCommand() },
 };
 
 using ScSCnTexIgnoreCommands = std::unordered_set<std::string>;

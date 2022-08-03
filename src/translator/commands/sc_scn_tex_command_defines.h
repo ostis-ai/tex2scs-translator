@@ -5,6 +5,8 @@
 #include "format/sc_scn_tex_begin_list_command.h"
 #include "format/sc_scn_tex_list_item_command.h"
 #include "format/sc_scn_tex_end_list_command.h"
+#include "format/sc_scn_tex_qq_command.h"
+#include "format/sc_scn_tex_qqi_command.h"
 
 #include "header/sc_scn_tex_header_command.h"
 #include "header/sc_scn_tex_struct_header_command.h"
@@ -36,3 +38,4 @@
 #include "flow/sc_scn_tex_add_level_command.h"
 
 #include "sign/sc_scn_tex_role_sign_command.h"
+#include "sign/sc_scn_tex_supergroup_sign_command.h"
