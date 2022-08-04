@@ -18,7 +18,7 @@ scnTexText
   using ScSCnCommandsHistory = std::vector<std::string>,
   ScSCnCommandsHistory * history = new ScSCnCommandsHistory(),
 
-  ScSCnPrefixTree * prefixTree = new ScSCnPrefixTree(),
+  ScSCnPrefixTree * prefixTree = ScSCnPrefixTree::GetInstance(),
   ]
   :
   {
@@ -31,9 +31,9 @@ scnTexText
   | lineComment WS
   )* EOF?
   {
+  resultStream << ";;\n";
   $resultText = resultStream.str();
 
-  delete $prefixTree;
   delete $history;
   }
   ;
@@ -129,8 +129,8 @@ scnTexCommandName
   ;
 
 TEXT
-  : ([а-яёЁА-Яa-zA-Z0-9_#+=> <'"«»/()*-]
-  | '.' | ',' | '~' | '?' | '!' | ':' | ';' | '`' | '–' | '…')+
+  : ([а-яёЁА-Яa-zA-Z0-9_#+=> <'"«»/()$*-]
+  | '.' | ',' | '~' | '?' | '!' | ':' | '`' | '–' | '…' | '—')+
   ;
 
 NAME
