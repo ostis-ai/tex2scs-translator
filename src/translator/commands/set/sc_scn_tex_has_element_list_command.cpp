@@ -1,16 +1,16 @@
-#include "sc_scn_tex_has_element_set_command.h"
+#include "sc_scn_tex_has_element_list_command.h"
 
-ScScnTexCommandResult ScSCnTexHasElementSetCommand::Complete(
+ScScnTexCommandResult ScSCnTexHasElementListCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
+  std::string const & role = tree.Add(params.at(0));
+
   ScStringStream stream;
-  stream << StartLine() << offset << "->";
+  stream << StartLine() << offset << "-> " << role << ":\n";
 
-  stream << offset << "\n{\n";
-
-  size_t const START = 0;
+  size_t const START = 2;
   std::string subject;
   for (size_t i = START; i < params.size() - 1; ++i)
   {
@@ -22,12 +22,9 @@ ScScnTexCommandResult ScSCnTexHasElementSetCommand::Complete(
     else
       subject = tree.Add(params.at(i));
     stream << offset << "\t" << subject;
-
-    if (i != params.size() - 2)
-      stream << EndLine();
   }
 
-  stream << StartLine() << offset << "}";
+  stream << EndLine();
 
   return stream;
 }

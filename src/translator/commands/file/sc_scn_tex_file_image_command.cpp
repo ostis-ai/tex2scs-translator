@@ -5,7 +5,7 @@ ScScnTexCommandResult ScSCnTexFileImageCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & content = tree.Add(params.at(0));
+  std::string const & content = params.at(0);
 
   ScStringStream stream;
   stream << "\"" << content << "\"" << EndLine();

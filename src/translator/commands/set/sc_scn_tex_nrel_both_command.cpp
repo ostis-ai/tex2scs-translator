@@ -1,6 +1,6 @@
-#include "sc_scn_tex_nrel_to_command.h"
+#include "sc_scn_tex_nrel_both_command.h"
 
-ScScnTexCommandResult ScSCnTexNrelToCommand::Complete(
+ScScnTexCommandResult ScSCnTexNrelBothCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
@@ -13,7 +13,7 @@ ScScnTexCommandResult ScSCnTexNrelToCommand::Complete(
     subject = tree.Add(params.at(2));
 
   ScStringStream stream;
-  stream << StartLine() << offset << "<= " << relation << ": " << subject << EndLine();
+  stream << StartLine() << offset << "<=> " << relation << ": " << subject << EndLine();
 
   return stream;
 }

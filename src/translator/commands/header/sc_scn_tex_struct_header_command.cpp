@@ -14,7 +14,7 @@ ScScnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
 
   stream << subject;
   stream << "\n<- sc_node_struct";
-  stream << ";\n=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; )";
+  stream << ";\n=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
 
   return stream;
 }

@@ -9,6 +9,7 @@
 #include "format/sc_scn_tex_qqi_command.h"
 
 #include "header/sc_scn_tex_header_command.h"
+#include "header/sc_scn_tex_current_name_command.h"
 #include "header/sc_scn_tex_struct_header_command.h"
 #include "header/sc_scn_tex_section_header_command.h"
 #include "header/sc_scn_tex_segment_header_command.h"
@@ -19,8 +20,14 @@
 #include "idtf/sc_scn_tex_explanation_command.h"
 
 #include "set/sc_scn_tex_is_element_command.h"
+#include "set/sc_scn_tex_is_element_role_command.h"
 #include "set/sc_scn_tex_has_element_command.h"
+#include "set/sc_scn_tex_has_element_role_command.h"
 #include "set/sc_scn_tex_has_element_set_command.h"
+#include "set/sc_scn_tex_has_element_list_command.h"
+#include "set/sc_scn_tex_sd_main_class_command.h"
+#include "set/sc_scn_tex_sd_class_command.h"
+#include "set/sc_scn_tex_sd_relation_command.h"
 #include "set/sc_scn_tex_nrel_to_command.h"
 #include "set/sc_scn_tex_superset_command.h"
 #include "set/sc_scn_tex_nrel_from_command.h"
@@ -29,11 +36,17 @@
 #include "set/sc_scn_tex_subdividing_command.h"
 #include "set/sc_scn_tex_nrel_from_list_command.h"
 #include "set/sc_scn_tex_nrel_from_vector_command.h"
+#include "set/sc_scn_tex_nrel_both_command.h"
+#include "set/sc_scn_tex_start_set_command.h"
+#include "set/sc_scn_tex_start_set_local_command.h"
+#include "set/sc_scn_tex_start_substruct_command.h"
+#include "set/sc_scn_tex_end_struct_command.h"
 
 #include "file/sc_scn_tex_file_item_command.h"
 #include "file/sc_scn_tex_file_scg_item_command.h"
 #include "file/sc_scn_tex_file_image_command.h"
 #include "file/sc_scn_tex_include_graphics_command.h"
+#include "file/sc_scn_tex_file_long_command.h"
 
 #include "flow/sc_scn_tex_add_level_command.h"
 

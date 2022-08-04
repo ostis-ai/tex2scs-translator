@@ -46,7 +46,7 @@ public:
     std::string resultText;
     using ScSCnCommandsHistory = std::vector<std::string>;
     ScSCnCommandsHistory * history = new ScSCnCommandsHistory();
-    ScSCnPrefixTree * prefixTree = new ScSCnPrefixTree();
+    ScSCnPrefixTree * prefixTree = ScSCnPrefixTree::GetInstance();
     SCnTexParser::ScnTexCommandContext *result = nullptr;;
     ScnTexTextContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;

@@ -9,7 +9,8 @@ ScScnTexCommandResult ScSCnTexTextRelationCommand::Complete(
   std::string const & content = params.at(2);
 
   ScStringStream stream;
-  stream << StartLine() << offset << "=> " << relation << ": [<p>" << content << "</p>]" << EndLine();
+  stream << StartLine() << offset << "=> " << relation
+         << ": [<p>" << content << "</p>] (* <- lang_ru;; => nrel_format: format_html;; *)" << EndLine();
 
   return stream;
 }

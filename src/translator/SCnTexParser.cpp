@@ -132,9 +132,9 @@ SCnTexParser::ScnTexTextContext* SCnTexParser::scnTexText() {
 
     }
 
+      resultStream << ";;\n";
       dynamic_cast<ScnTexTextContext *>(_localctx)->resultText =  resultStream.str();
 
-      delete _localctx->prefixTree;
       delete _localctx->history;
       
    

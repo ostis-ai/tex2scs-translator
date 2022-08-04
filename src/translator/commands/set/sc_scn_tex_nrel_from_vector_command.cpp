@@ -19,12 +19,12 @@ ScScnTexCommandResult ScSCnTexNrelFromVectorCommand::Complete(
     if (i != START)
       stream << StartLine();
 
-    subject = params.at(i);
+    subject = tree.Add(params.at(i));
     stream << offset << "\t" << subject;
 
     if (i != params.size() - 2)
     {
-      stream << "(* => nrel_basic_sequence: " << params.at(i + 1) << ";;)";
+      stream << "(* => nrel_basic_sequence: " << tree.Add(params.at(i + 1)) << ";;)";
       stream << EndLine();
     }
   }

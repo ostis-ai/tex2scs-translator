@@ -7,23 +7,54 @@
 class ScSCnPrefixTree
 {
 public:
-  ScSCnPrefixTree()
+  static ScSCnPrefixTree * GetInstance()
   {
-    m_instance = translations;
+    if (m_instance == nullptr)
+      m_instance = new ScSCnPrefixTree();
+
+    return m_instance;
   }
 
   std::string Add(std::string const & key)
   {
-    auto const & item = m_instance.find(key);
-    if (item != m_instance.end())
+    auto const & item = m_translations.find(key);
+    if (item != m_translations.end())
       return item->second;
 
-    m_instance.insert({key, key}); // todo: implement addr creating
+    std::string const & value = "system_element_" + std::to_string(index);
+    m_translations.insert({key, value});
 
-    return key;
+    ++index;
+
+    return value;
+  }
+
+  std::string Get(std::string const & key)
+  {
+    auto const & item = m_translations.find(key);
+    if (item != m_translations.end())
+      return item->second;
+
+    return "";
+  }
+
+protected:
+  static ScSCnPrefixTree * m_instance;
+
+  ScSCnPrefixTree()
+  {
+    m_instance = nullptr;
+    index = 0;
+    m_translations = translations;
+  }
+
+  ~ScSCnPrefixTree()
+  {
+    delete m_instance;
+    m_instance = nullptr;
   }
 
 private:
-  std::string cached;
-  ScSCnTexTranslations m_instance;
+  long long index;
+  ScSCnTexTranslations m_translations;
 };

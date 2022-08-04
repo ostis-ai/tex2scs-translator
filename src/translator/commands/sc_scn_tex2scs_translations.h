@@ -12,4 +12,7 @@ static ScSCnTexTranslations const translations = {
     { "аннотация", "nrel_summary" },
     { "включение", "nrel_inclusion" },
     { "разбиение", "nrel_subdividing" },
+    { "максимальный класс объектов исследования", "rrel_maximum_studied_object_class" },
+    { "класс объектов исследования", "rrel_studied_object_class" },
+    { "исследуемое отношение", "rrel_explored_relation" },
 };

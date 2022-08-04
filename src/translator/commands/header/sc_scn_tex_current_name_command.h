@@ -1,12 +1,10 @@
 #pragma once
 
-#include "../sc_scn_tex_command.h"
+#include "sc_scn_tex_header_command.h"
 
-class ScSCnTexHeaderCommand : public ScSCnTexCommand
+class ScSCnTexCurrentNameCommand : public ScSCnTexHeaderCommand
 {
 public:
-  static std::string lastHeader;
-
   ScScnTexCommandResult Complete(
       ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) override;
 };

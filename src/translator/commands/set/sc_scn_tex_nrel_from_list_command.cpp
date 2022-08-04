@@ -17,7 +17,10 @@ ScScnTexCommandResult ScSCnTexNrelFromListCommand::Complete(
     if (i != START)
       stream << StartLine();
 
-    subject = params.at(i);
+    if (params.at(i) == "[")
+      subject = params.at(i);
+    else
+      subject = tree.Add(params.at(i));
     stream << offset << "\t" << subject;
   }
 

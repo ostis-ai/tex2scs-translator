@@ -56,6 +56,7 @@ private:
         TranslateFiles(path, startDirectory, startTargetDirectory, fileNumber);
       else
       {
+        ScSCnTexAddLevelCommand::offset = "";
         bool result = TranslateFile(path, targetDirectory);
         std::cout << "[" << ++fileNumber << "/" << m_filesCount << "]: " << path
                   << " - " << (result ? "OK" : "ERROR") << std::endl;
