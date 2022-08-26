@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_set>
 #include <fstream>
 #include <utility>
 #include <filesystem>
@@ -35,10 +36,10 @@ public:
   {
   }
 
-  [[nodiscard]] size_t CountFiles() const
+  [[nodiscard]] size_t CountFiles(std::unordered_set<std::string> const & extensions) const
   {
     size_t count = 0;
-    PathFiles(m_path, count);
+    PathFiles(m_path, count, extensions);
 
     return count;
   }
@@ -46,7 +47,7 @@ public:
 private:
   std::string m_path;
 
-  void PathFiles(std::string const & workDirectory, size_t & count) const
+  void PathFiles(std::string const & workDirectory, size_t & count, std::unordered_set<std::string> const & extensions) const
   {
     auto const & it = std::filesystem::directory_iterator(workDirectory);
     for (auto & item : it)
@@ -54,9 +55,13 @@ private:
       std::string const & path = item.path();
 
       if (item.is_directory())
-        PathFiles(path, count);
-      else
+      {
+        PathFiles(path, count, extensions);
+      }
+      else if (extensions.find(path.substr(path.rfind('.'))) != extensions.cend())
+      {
         ++count;
+      }
     }
   }
 };

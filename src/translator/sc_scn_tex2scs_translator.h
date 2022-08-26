@@ -21,7 +21,7 @@ public:
   bool Run(std::string const & workDirectory, std::string const & targetDirectory)
   {
     auto const & dir = ScDirectory(workDirectory);
-    m_filesCount = dir.CountFiles();
+    m_filesCount = dir.CountFiles(m_extensions);
 
     std::cout << "SCn-tex sources directory: " << workDirectory << std::endl;
     std::cout << "Target SCs sources directory: " << targetDirectory << std::endl;
@@ -34,6 +34,7 @@ public:
   }
 
 private:
+  std::unordered_set<std::string> m_extensions = {".tex"};
   size_t m_filesCount;
 
   void TranslateFiles(
@@ -54,7 +55,7 @@ private:
       std::string const & path = item.path();
       if (item.is_directory())
         TranslateFiles(path, startDirectory, startTargetDirectory, fileNumber);
-      else
+      else if (m_extensions.find(path.substr(path.rfind('.'))) != m_extensions.cend())
       {
         ScSCnTexAddLevelCommand::offset = "";
         bool result = TranslateFile(path, targetDirectory);
