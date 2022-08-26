@@ -18,16 +18,20 @@ using ScSCnTexCommands = std::unordered_map<std::string, ScSCnTexCommand *>;
 class ScSCnTex2SCsTranslator
 {
 public:
-  bool Run(std::string const & workDirectory, std::string const & targetDirectory)
+  bool Run(std::string const & workDirectoryPath, std::string const & targetDirectoryPath)
   {
-    auto const & dir = ScDirectory(workDirectory);
-    m_filesCount = dir.CountFiles(m_extensions);
+    ScDirectory const & workDirectory{workDirectoryPath};
+    m_filesCount = workDirectory.CountFiles(m_extensions);
+    ScDirectory const & targetDirectory{targetDirectoryPath};
 
-    std::cout << "SCn-tex sources directory: " << workDirectory << std::endl;
-    std::cout << "Target SCs sources directory: " << targetDirectory << std::endl;
+    std::string const & startDirectoryPath = workDirectory.GetPath();
+    size_t const startFileIndex = 0;
+
+    std::cout << "SCn-tex sources directory: " << workDirectory.GetPath() << std::endl;
+    std::cout << "Target SCs sources directory: " << targetDirectory.GetPath() << std::endl;
 
     std::cout << "Start translate scn-tex sources:" << std::endl;
-    TranslateFiles(workDirectory, workDirectory, targetDirectory, 0);
+    TranslateFiles(startDirectoryPath, workDirectory, targetDirectory, startFileIndex);
     std::cout << "Translation finished" << std::endl;
 
     return true;
@@ -38,73 +42,36 @@ private:
   size_t m_filesCount;
 
   void TranslateFiles(
-      std::string const & workDirectory,
-      std::string const & startDirectory,
-      std::string const & startTargetDirectory,
+      std::string const & nestedDirectoryPath,
+      ScDirectory const & startDirectory,
+      ScDirectory const & startTargetDirectory,
       size_t fileNumber)
   {
-    std::string targetDirectory = GetTargetDirectory(workDirectory, startDirectory, startTargetDirectory);
+    ScDirectory targetDirectory = startDirectory.CopyDirectory(nestedDirectoryPath, startTargetDirectory);
 
-    std::filesystem::directory_entry dir{targetDirectory};
-    if (!dir.exists())
-      std::filesystem::create_directory(dir);
-
-    auto const & it = std::filesystem::directory_iterator(workDirectory);
-    for (auto & item : it)
-    {
-      std::string const & path = item.path();
-      if (item.is_directory())
-        TranslateFiles(path, startDirectory, startTargetDirectory, fileNumber);
-      else if (m_extensions.find(path.substr(path.rfind('.'))) != m_extensions.cend())
-      {
-        ScSCnTexAddLevelCommand::offset = "";
-        bool result = TranslateFile(path, targetDirectory);
-        std::cout << "[" << ++fileNumber << "/" << m_filesCount << "]: " << path
-                  << " - " << (result ? "OK" : "ERROR") << std::endl;
-      }
-    }
+    targetDirectory.ForEach(
+    [this, &startDirectory, &startTargetDirectory, &fileNumber](ScDirectory const & directory) {
+      TranslateFiles(directory.GetPath(), startDirectory, startTargetDirectory, fileNumber);
+    },
+    [this, &fileNumber, &targetDirectory](ScFile const & file) {
+      ScSCnTexAddLevelCommand::offset = "";
+      bool result = TranslateFile(file.GetPath(), targetDirectory);
+      std::cout << "[" << ++fileNumber << "/" << m_filesCount << "]: " << file.GetPath()
+                << " - " << (result ? "OK" : "ERROR") << std::endl;
+    });
   }
 
-  std::string GetTargetDirectory(
-      std::string const & workDirectory, std::string const & startDirectory, std::string const & startTargetDirectory)
-  {
-    std::string nestedDirectory = workDirectory;
-    size_t pos = nestedDirectory.find(startDirectory);
-    nestedDirectory.replace(pos, startDirectory.size(), "");
-
-    std::string targetDirectory;
-    ScStringStream stream;
-    stream << startTargetDirectory << targetDirectory;
-    stream >> targetDirectory;
-
-    return targetDirectory;
-  }
 
   bool TranslateFile(
-      std::string const & filePath, std::string const & targetDirectory)
+      std::string const & filePath, ScDirectory const & targetDirectory)
   {
-    std::string targetFilePath = GetTargetFilePath(filePath, targetDirectory);
+    ScFile targetFile = targetDirectory.CopyFile(filePath, ".scs");
+
     std::string const & scsText = TranslateText(filePath);
 
-    ScFile file{targetFilePath};
-    file.Write(scsText);
+    targetFile.Write(scsText);
 
     return true;
-  }
-
-  std::string GetTargetFilePath(std::string const & filePath, std::string const & targetDirectory)
-  {
-    std::string nestedFile = filePath.substr(filePath.rfind('/'), filePath.size());
-    nestedFile = nestedFile.substr(0, nestedFile.rfind('.'));
-    nestedFile = nestedFile.substr(1);
-
-    ScStringStream stream;
-    (targetDirectory.at(targetDirectory.size() - 1) == '/'
-      ? stream << targetDirectory
-      : stream << targetDirectory << "/")
-      << nestedFile << ".scs";
-
-    return stream;
   }
 
   std::string TranslateText(std::string const & filePath)
