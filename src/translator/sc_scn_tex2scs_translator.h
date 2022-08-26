@@ -98,7 +98,10 @@ private:
     nestedFile = nestedFile.substr(1);
 
     ScStringStream stream;
-    stream << targetDirectory << nestedFile << ".scs";
+    (targetDirectory.at(targetDirectory.size() - 1) == '/'
+      ? stream << targetDirectory
+      : stream << targetDirectory << "/")
+      << nestedFile << ".scs";
 
     return stream;
   }
