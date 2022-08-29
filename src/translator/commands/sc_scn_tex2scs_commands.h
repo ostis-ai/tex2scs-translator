@@ -20,31 +20,44 @@ static ScSCnTexCommands const commands = {
     { "scnqqi", new ScSCnTexQQICommand() },
 
     { "scnheader", new ScSCnTexHeaderCommand() },
+    { "scnheaderlocal", new ScSCnTexHeaderLocalCommand() },
     { "currentname", new ScSCnTexCurrentNameCommand() },
     { "scnstructheader", new ScSCnTexStructHeaderCommand() },
+    { "scnstructheaderlocal", new ScSCnTexStructHeaderLocalCommand() },
     { "scnsectionheader", new ScSCnTexSectionHeaderCommand() },
     { "scnsegmentheader", new ScSCnTexSegmentHeaderCommand() },
 
+    { "scnstructidtf", new ScSCnTexStructIdtfCommand() },
+    { "scnkeyword", new ScSCnTexKeywordCommand() },
+
     { "scntext", new ScSCnTexTextRelationCommand() },
     { "scnidtf", new ScSCnTexIdtfCommand() },
-    { "scnnote", new ScSCnTexNoteCommand() },
-    { "scnidtfexp", new ScSCnTexNoteCommand() },
-    { "scnexplanation", new ScSCnTexExplanationCommand() },
-    { "scnidtfdef", new ScSCnTexExplanationCommand() },
+    // { "scnidtftext", new ScSCnTexIdtfTextCommand() },
+    { "scnnote", new ScSCnTexNoteCommand() }, // DEPRECATED 
+    { "scnidtfexp", new ScSCnTexNoteCommand() }, // DEPRECATED 
+    { "scnexplanation", new ScSCnTexExplanationCommand() }, // DEPRECATED
+    { "scnidtfdef", new ScSCnTexExplanationCommand() }, // DEPRECATED
 
     { "scniselement", new ScSCnTexIsElementCommand() },
+    { "scnisvarelement", new ScSCnTexIsVarElementCommand() },
     { "scniselementrole", new ScSCnTexIsElementRoleCommand() },
     { "scnhaselement", new ScSCnTexHasElementCommand() },
+    { "scnhasvarelement", new ScSCnTexHasVarElementCommand() },
     { "scnhaselementrole", new ScSCnTexHasElementRoleCommand() },
-    { "scnhaselementset", new ScSCnTexHasElementSetCommand() },
-    { "scnhaselementlist", new ScSCnTexHasElementListCommand() },
-    { "scnsdmainclasssingle", new ScSCnTexSdMainClassCommand() },
-    { "scnsdclass", new ScSCnTexSdClassCommand() },
-    { "scnsdrelation", new ScSCnTexSdRelationCommand() },
+    { "scnhasvarelementrole", new ScSCnTexHasVarElementRoleCommand() },
+    { "scnhaselementset", new ScSCnTexHasElementSetCommand() }, // DEPRECATED
+    { "scnhaselementlist", new ScSCnTexHasElementListCommand() }, // DEPRECATED
+    { "scnsdmainclasssingle", new ScSCnTexSdMainClassCommand() }, // DEPRECATED
+    { "scnsdclass", new ScSCnTexSdClassCommand() }, // DEPRECATED
+    { "scnsdrelation", new ScSCnTexSdRelationCommand() }, // DEPRECATED
     { "scnrelto", new ScSCnTexNrelToCommand() },
+    { "scnvarrelto", new ScSCnTexVarNrelToCommand() },
     { "scnsuperset", new ScSCnTexSupersetCommand() },
     { "scnrelfrom", new ScSCnTexNrelFromCommand() },
+    //{ "scnrelsuperset", new ScSCnTexRelSupersetCommand() },
+    { "scnvarrelfrom", new ScSCnTexVarNrelFromCommand() },
     { "scnsubset", new ScSCnTexSubsetCommand() },
+    { "scnnotsubset", new ScSCnTexNotSubsetCommand() },
     { "scnrelfromset", new ScSCnTexNrelFromSetCommand() },
     { "scnsubdividing", new ScSCnTexSubdividingCommand() },
     { "scnrelfromlist", new ScSCnTexNrelFromListCommand() },
@@ -54,15 +67,21 @@ static ScSCnTexCommands const commands = {
     { "scnstartsetlocal", new ScSCnTexStartSetLocalCommand() },
     { "scnstartsubstruct", new ScSCnTexStartSubstructCommand() },
     { "scnendstruct", new ScSCnTexEndStructCommand() },
+    //{ "scneq", new ScSCnTexEqCommand() },
+    //{ "scneqfile", new ScSCnTexEqFileCommand() },
+    //{ "scneqimage", new ScSCnTexEqImageCommand() },
+    //{ "scnfiletable", },
+    //{ "scneqtable", },
+    //{ "scnfileclass", new ScSCnTexFileClassCommand() },
+    //{ "scneqfileclass", new ScSCnTexEqFileClassCommand() },
 
-    { "scnfileitem", new ScSCnTexFileItemCommand() },
-    { "scnfilescg", new ScSCnTexFileSCgItemCommand() },
+    { "scnfileitem", new ScSCnTexFileItemCommand() }, // DEPRECATED
+    { "scnfilescg", new ScSCnTexFileSCgItemCommand() }, // DEPRECATED
     { "scnfileimage", new ScSCnTexFileImageCommand() },
     { "includegraphics", new ScSCnTexIncludeGraphicsCommand() },
     { "scnfilelong", new ScSCnTexFileLongCommand() },
 
-    { "scnaddlevel", new ScSCnTexAddLevelCommand() },
-
+    { "scnnonamednode", new ScSCnTexNoNamedNodeCommand() },
     { "scnrolesign", new ScSCnTexRoleSignCommand() },
     { "scnsupergroupsign", new ScSCnTexSupergroupSignCommand() },
 };

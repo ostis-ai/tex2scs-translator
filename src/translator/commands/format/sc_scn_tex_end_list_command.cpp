@@ -14,6 +14,11 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
     stream << "</ul>\n";
   else if (type == "scnnumerize")
     stream << "</ol>\n";
+  else if (type == "scnindent")
+  {
+    stream << "\n" << offset << "*)";
+    offset = offset.substr(0, offset.size() - 1);
+  }
 
   return stream;
 }

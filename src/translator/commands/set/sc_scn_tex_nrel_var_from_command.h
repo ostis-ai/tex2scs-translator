@@ -2,7 +2,7 @@
 
 #include "../sc_scn_tex_command.h"
 
-class ScSCnTexAddLevelCommand : public ScSCnTexCommand
+class ScSCnTexVarNrelFromCommand : public ScSCnTexCommand
 {
 public:
   ScScnTexCommandResult Complete(

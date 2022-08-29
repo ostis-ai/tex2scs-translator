@@ -14,6 +14,11 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
     stream << "<ul>\n";
   else if (type == "scnnumerize")
     stream << "<ol>\n";
+  else if (type == "scnindent")
+  {
+    offset += "\t";
+    stream << offset << "(*\n";
+  }
 
   return stream;
 }
