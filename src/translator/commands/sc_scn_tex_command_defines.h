@@ -7,6 +7,7 @@
 #include "format/sc_scn_tex_end_list_command.h"
 #include "format/sc_scn_tex_qq_command.h"
 #include "format/sc_scn_tex_qqi_command.h"
+#include "format/sc_scn_tex_scnitem_command.h"
 
 #include "header/sc_scn_tex_current_name_command.h"
 #include "header/sc_scn_tex_header_command.h"
@@ -52,6 +53,7 @@
 #include "set/sc_scn_tex_nrel_var_to_command.h"
 #include "set/sc_scn_tex_nrel_var_from_command.h"
 #include "set/sc_scn_tex_not_subset_command.h"
+#include "set/sc_scn_tex_nrel_superset_command.h"
 
 #include "file/sc_scn_tex_file_item_command.h"
 #include "file/sc_scn_tex_file_scg_item_command.h"

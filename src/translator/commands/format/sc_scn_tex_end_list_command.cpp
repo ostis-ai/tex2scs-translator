@@ -8,7 +8,6 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
   std::string const & type = params.at(0);
 
   ScStringStream stream;
-  stream << "<li>\n" << offset;
 
   if (type == "scnitemize")
     stream << "</ul>\n";
@@ -16,9 +15,12 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
     stream << "</ol>\n";
   else if (type == "scnindent")
   {
-    stream << "\n" << offset << "*)";
     offset = offset.substr(0, offset.size() - 1);
+    stream << "\n" << offset << "*)";
   }
-
+  else if (type == "scnhaselementset")
+  {
+    stream << "\n" << offset << "}";
+  }
   return stream;
 }

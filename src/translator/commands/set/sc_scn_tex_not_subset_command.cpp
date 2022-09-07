@@ -10,7 +10,7 @@ ScScnTexCommandResult ScSCnTexNotSubsetCommand::Complete(
   
   ScStringStream stream;
 
-  stream << StartLine() << offset << "=> " << inclusion << "|: " << set;
+  stream << StartLine(history) << "\n" << offset << "=> " << inclusion << "|: " << set;
   
   return stream;
 }

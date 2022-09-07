@@ -9,12 +9,9 @@ ScScnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
   std::string const & subject = tree.Add(idtf);
 
   ScStringStream stream;
-  if (!history.empty())
-    stream << ";;\n\n\n";
-
-  stream << subject;
-  stream << "\n<- sc_node_struct";
-  stream << ";\n=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
+  stream << StartLine(history) << "\n" << subject;
+  stream << "\n<- sc_node_struct;";
+  stream << "\n=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
 
   return stream;
 }

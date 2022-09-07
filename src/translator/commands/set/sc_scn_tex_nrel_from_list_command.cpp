@@ -8,14 +8,14 @@ ScScnTexCommandResult ScSCnTexNrelFromListCommand::Complete(
   std::string const & relation = tree.Add(params.at(0));
 
   ScStringStream stream;
-  stream << StartLine() << offset << "=> " << relation << ":\n";
+  stream << StartLine(history) << offset << "=> " << relation << ":\n";
 
   size_t const START = 2;
   std::string subject;
   for (size_t i = START; i < params.size() - 1; ++i)
   {
     if (i != START)
-      stream << StartLine();
+      stream << StartLine(history);
 
     if (params.at(i) == "[")
       subject = params.at(i);

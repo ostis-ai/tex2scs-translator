@@ -6,7 +6,7 @@ ScScnTexCommandResult ScSCnTexHasElementSetCommand::Complete(
     ScScnTexCommandParams const & params)
 {
   ScStringStream stream;
-  stream << StartLine() << offset << "->";
+  stream << StartLine(history) << offset << "->";
 
   stream << offset << "\n{\n";
 
@@ -15,7 +15,7 @@ ScScnTexCommandResult ScSCnTexHasElementSetCommand::Complete(
   for (size_t i = START; i < params.size() - 1; ++i)
   {
     if (i != START)
-      stream << StartLine();
+      stream << StartLine(history);
 
     if (params.at(i) == "[")
       subject = params.at(i);
@@ -23,11 +23,9 @@ ScScnTexCommandResult ScSCnTexHasElementSetCommand::Complete(
       subject = tree.Add(params.at(i));
     stream << offset << "\t" << subject;
 
-    if (i != params.size() - 2)
-      stream << EndLine();
   }
 
-  stream << StartLine() << offset << "}";
+  stream << StartLine(history) << offset << "}";
 
   return stream;
 }

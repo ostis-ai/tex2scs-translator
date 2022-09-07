@@ -9,7 +9,7 @@ ScScnTexCommandResult ScSCnTexHasElementRoleCommand::Complete(
   std::string const & subject = tree.Add(params.at(2));
 
   ScStringStream stream;
-  stream << StartLine() << offset << "-> " << role << ": " << subject << EndLine();
+  stream << StartLine(history) << "\n" << offset << "-> " << role << ": " << subject;
 
   return stream;
 }

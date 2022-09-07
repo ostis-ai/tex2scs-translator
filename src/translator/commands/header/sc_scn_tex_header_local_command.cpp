@@ -10,22 +10,20 @@ ScScnTexCommandResult ScSCnTexHeaderLocalCommand::Complete(
   lastHeader = idtf;
 
   ScStringStream stream;
-  if (!history.empty())
-    stream << ";;\n";
 
-  stream << offset << subject;
+  stream << StartLine(history) << "\n" << offset << subject;
 
   char lastSymb = subject.at(subject.size() - 1);
   if (lastSymb == '*')
-    stream << "\n" << offset << "<- sc_node_norole_relation";
+    stream << "\n" << offset << "<- sc_node_norole_relation;";
   else if (lastSymb == '\'')
-    stream << "\n" << offset << "<- sc_node_role_relation";
+    stream << "\n" << offset << "<- sc_node_role_relation;";
   else if (std::islower(subject.at(0)))
-    stream << "\n" << offset << "<- sc_node_class";
+    stream << "\n" << offset << "<- sc_node_class;";
   else
-    stream << "\n" << offset << "<- sc_node";
+    stream << "\n" << offset << "<- sc_node;";
 
-  stream << ";\n" << offset << "=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
+  stream << "\n" << offset << "=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
 
   return stream;
 }

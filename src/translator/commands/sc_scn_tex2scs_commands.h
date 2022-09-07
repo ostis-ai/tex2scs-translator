@@ -18,6 +18,7 @@ static ScSCnTexCommands const commands = {
     { "end", new ScSCnTexEndListCommand() },
     { "scnqq", new ScSCnTexQQCommand() },
     { "scnqqi", new ScSCnTexQQICommand() },
+    { "scnitem", new ScSCnTexScnitemCommand() },
 
     { "scnheader", new ScSCnTexHeaderCommand() },
     { "scnheaderlocal", new ScSCnTexHeaderLocalCommand() },
@@ -32,11 +33,11 @@ static ScSCnTexCommands const commands = {
 
     { "scntext", new ScSCnTexTextRelationCommand() },
     { "scnidtf", new ScSCnTexIdtfCommand() },
-    // { "scnidtftext", new ScSCnTexIdtfTextCommand() },
-    { "scnnote", new ScSCnTexNoteCommand() }, // DEPRECATED 
-    { "scnidtfexp", new ScSCnTexNoteCommand() }, // DEPRECATED 
-    { "scnexplanation", new ScSCnTexExplanationCommand() }, // DEPRECATED
-    { "scnidtfdef", new ScSCnTexExplanationCommand() }, // DEPRECATED
+    { "scnidtftext", new ScSCnTexIdtfTextCommand() },
+    { "scnnote", new ScSCnTexNoteCommand() }, // STANDARD-SPECIFIC 
+    { "scnidtfexp", new ScSCnTexNoteCommand() }, // STANDARD-SPECIFIC 
+    { "scnexplanation", new ScSCnTexExplanationCommand() }, // STANDARD-SPECIFIC
+    { "scnidtfdef", new ScSCnTexExplanationCommand() }, // STANDARD-SPECIFIC
 
     { "scniselement", new ScSCnTexIsElementCommand() },
     { "scnisvarelement", new ScSCnTexIsVarElementCommand() },
@@ -45,16 +46,16 @@ static ScSCnTexCommands const commands = {
     { "scnhasvarelement", new ScSCnTexHasVarElementCommand() },
     { "scnhaselementrole", new ScSCnTexHasElementRoleCommand() },
     { "scnhasvarelementrole", new ScSCnTexHasVarElementRoleCommand() },
-    { "scnhaselementset", new ScSCnTexHasElementSetCommand() }, // DEPRECATED
-    { "scnhaselementlist", new ScSCnTexHasElementListCommand() }, // DEPRECATED
-    { "scnsdmainclasssingle", new ScSCnTexSdMainClassCommand() }, // DEPRECATED
-    { "scnsdclass", new ScSCnTexSdClassCommand() }, // DEPRECATED
-    { "scnsdrelation", new ScSCnTexSdRelationCommand() }, // DEPRECATED
+    // { "scnhaselementset", new ScSCnTexHasElementSetCommand() }, // STANDARD-SPECIFIC
+    { "scnhaselementlist", new ScSCnTexHasElementListCommand() }, // STANDARD-SPECIFIC
+    { "scnsdmainclasssingle", new ScSCnTexSdMainClassCommand() }, // STANDARD-SPECIFIC
+    { "scnsdclass", new ScSCnTexSdClassCommand() }, // STANDARD-SPECIFIC
+    { "scnsdrelation", new ScSCnTexSdRelationCommand() }, // STANDARD-SPECIFIC
     { "scnrelto", new ScSCnTexNrelToCommand() },
     { "scnvarrelto", new ScSCnTexVarNrelToCommand() },
     { "scnsuperset", new ScSCnTexSupersetCommand() },
     { "scnrelfrom", new ScSCnTexNrelFromCommand() },
-    //{ "scnrelsuperset", new ScSCnTexRelSupersetCommand() },
+    { "scnrelsuperset", new ScSCnTexNrelSupersetCommand() },
     { "scnvarrelfrom", new ScSCnTexVarNrelFromCommand() },
     { "scnsubset", new ScSCnTexSubsetCommand() },
     { "scnnotsubset", new ScSCnTexNotSubsetCommand() },
@@ -75,8 +76,8 @@ static ScSCnTexCommands const commands = {
     //{ "scnfileclass", new ScSCnTexFileClassCommand() },
     //{ "scneqfileclass", new ScSCnTexEqFileClassCommand() },
 
-    { "scnfileitem", new ScSCnTexFileItemCommand() }, // DEPRECATED
-    { "scnfilescg", new ScSCnTexFileSCgItemCommand() }, // DEPRECATED
+    { "scnfileitem", new ScSCnTexFileItemCommand() }, // STANDARD-SPECIFIC
+    { "scnfilescg", new ScSCnTexFileSCgItemCommand() }, // STANDARD-SPECIFIC
     { "scnfileimage", new ScSCnTexFileImageCommand() },
     { "includegraphics", new ScSCnTexIncludeGraphicsCommand() },
     { "scnfilelong", new ScSCnTexFileLongCommand() },
@@ -89,5 +90,5 @@ static ScSCnTexCommands const commands = {
 using ScSCnTexIgnoreCommands = std::unordered_set<std::string>;
 
 static ScSCnTexIgnoreCommands const ignoreCommands = {
-    "scnbigspace", "bigskip", "mbox", "label", "scncite", "nameref", "linewidth"
+    "scsection", "bigskip", "mbox", "label", "scncite", "nameref", "linewidth"
 };

@@ -9,12 +9,10 @@ ScScnTexCommandResult ScSCnTexStructHeaderLocalCommand::Complete(
   std::string const & subject = tree.Add(idtf);
 
   ScStringStream stream;
-  if (!history.empty())
-    stream << ";;\n";
 
-  stream << offset << subject;
-  stream << "\n" << offset << "<- sc_node_struct";
-  stream << ";\n" << offset << "=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
+  stream << StartLine(history) << "\n" << offset << subject;
+  stream << "\n" << offset << "<- sc_node_struct;";
+  stream << "\n" << offset << "=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
 
   return stream;
 }

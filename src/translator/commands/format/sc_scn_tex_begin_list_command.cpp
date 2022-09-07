@@ -8,16 +8,20 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
   std::string const & type = params.at(0);
 
   ScStringStream stream;
-  stream << "\n" << offset;
 
   if (type == "scnitemize")
-    stream << "<ul>\n";
+    stream << "\n<ul>\n";
   else if (type == "scnnumerize")
-    stream << "<ol>\n";
+    stream << "\n<ol>\n";
   else if (type == "scnindent")
   {
+    stream << " (*\n";
     offset += "\t";
-    stream << offset << "(*\n";
+  }
+  else if (type == "scnhaselementset")
+  {
+    stream << ";" << offset << "->\n{\n";
+    offset += "\t";
   }
 
   return stream;

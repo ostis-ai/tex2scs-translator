@@ -8,7 +8,7 @@ ScScnTexCommandResult ScSCnTexNrelFromSetCommand::Complete(
   std::string const & relation = tree.Add(params.at(0));
 
   ScStringStream stream;
-  stream << StartLine() << offset << "=> " << relation << ": ";
+  stream << StartLine(history) << offset << "=> " << relation << ": ";
 
   stream << offset << "\n{\n";
 
@@ -17,7 +17,7 @@ ScScnTexCommandResult ScSCnTexNrelFromSetCommand::Complete(
   for (size_t i = START; i < params.size() - 1; ++i)
   {
     if (i != START)
-      stream << StartLine();
+      stream << StartLine(history);
 
     if (params.at(i) == "[")
       subject = params.at(i);
@@ -25,8 +25,6 @@ ScScnTexCommandResult ScSCnTexNrelFromSetCommand::Complete(
       subject = tree.Add(params.at(i));
     stream << offset << "\t" << subject;
 
-    if (i != params.size() - 2)
-      stream << EndLine();
   }
 
   stream << "\n" << offset << offset << "}";

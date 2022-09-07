@@ -5,8 +5,8 @@ ScScnTexCommandResult ScSCnTexIdtfTextCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  ScScnTexCommandParams newParams = { "идентификатор", "/" };
-  newParams.push_back(params.at(0));
-
+  ScScnTexCommandParams newParams = params;
+  newParams.insert(newParams.begin(), "идентификатор");
+    
   return ScSCnTexTextRelationCommand::Complete(history, tree, newParams);
 }

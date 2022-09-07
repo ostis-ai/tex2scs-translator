@@ -5,15 +5,22 @@ ScScnTexCommandResult ScSCnTexVarNrelToCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & relation = tree.Add(params.at(0));
+  std::string relation = tree.Add(params.at(0));
   std::string subject;
-  if (params.at(2) == "[")
-    subject = params.at(2);
+  if (params.at(params.size() - 2) == "[")
+    subject = params.at(params.size() - 2);
   else
-    subject = tree.Add(params.at(2));
+    subject = tree.Add(params.at(params.size() - 2));
 
   ScStringStream stream;
-  stream << StartLine() << offset << "_<= " << relation << ":: " << subject << EndLine();
+  stream << StartLine(history) << "\n" << offset << "_<= " << relation << "::";
 
+  for (size_t param = 1; params[param] != "/"; ++param)
+  {
+    relation = tree.Add(params.at(param));
+    stream << "\n" << offset << "    " << relation << "::";
+  }
+  stream << "\n" << offset << subject;
+  
   return stream;
 }

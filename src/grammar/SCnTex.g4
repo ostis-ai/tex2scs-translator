@@ -113,8 +113,8 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   if ($command != nullptr)
   {
     std::cout << "Interpreter command: " << $commandName << std::endl;
-    $resultText = $command->Complete(*history, *prefixTree, params);
     history->push_back($commandName);
+    $resultText = $command->Complete(*history, *prefixTree, params);
   }
   $command == nullptr;
   }

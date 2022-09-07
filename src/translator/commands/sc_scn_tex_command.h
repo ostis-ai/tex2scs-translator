@@ -24,13 +24,7 @@ public:
   virtual ~ScSCnTexCommand() = default;
 
 protected:
-  std::string StartLine()
-  {
-    return offset.empty() ? ";\n" : "";
-  }
-
-  std::string EndLine()
-  {
-    return offset.empty() ? "" : ";;\n";
-  }
+  static std::string default_command_separator;
+  
+  std::string StartLine(ScSCnCommandsHistory & history);
 };

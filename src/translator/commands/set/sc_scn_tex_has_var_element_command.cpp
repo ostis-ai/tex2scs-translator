@@ -8,7 +8,7 @@ ScScnTexCommandResult ScSCnTexHasVarElementCommand::Complete(
   std::string const & set = tree.Add(params.at(0));
 
   ScStringStream stream;
-  stream << StartLine() << offset << "_-> " << set << EndLine();
+  stream << StartLine(history) << "\n" << offset << "_-> " << set;
 
   return stream;
 }

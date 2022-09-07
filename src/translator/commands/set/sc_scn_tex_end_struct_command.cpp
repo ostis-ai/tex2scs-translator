@@ -6,7 +6,7 @@ ScScnTexCommandResult ScSCnTexEndStructCommand::Complete(
     ScScnTexCommandParams const & params)
 {
   ScStringStream stream;
-  stream << StartLine() << offset << "\n}" << EndLine();
+  stream << StartLine(history) << offset << "\n}";
 
   return stream;
 }

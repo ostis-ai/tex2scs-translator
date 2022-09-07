@@ -8,14 +8,14 @@ ScScnTexCommandResult ScSCnTexHasElementListCommand::Complete(
   std::string const & role = tree.Add(params.at(0));
 
   ScStringStream stream;
-  stream << StartLine() << offset << "-> " << role << ":\n";
+  stream << StartLine(history) << offset << "-> " << role << ":\n";
 
   size_t const START = 2;
   std::string subject;
   for (size_t i = START; i < params.size() - 1; ++i)
   {
     if (i != START)
-      stream << StartLine();
+      stream << StartLine(history);
 
     if (params.at(i) == "[")
       subject = params.at(i);
@@ -23,8 +23,6 @@ ScScnTexCommandResult ScSCnTexHasElementListCommand::Complete(
       subject = tree.Add(params.at(i));
     stream << offset << "\t" << subject;
   }
-
-  stream << EndLine();
 
   return stream;
 }

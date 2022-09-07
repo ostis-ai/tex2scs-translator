@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../sc_scn_tex_command.h"
+#include "../set/sc_scn_tex_nrel_from_command.h"
 
-class ScSCnTexTextRelationCommand : public ScSCnTexCommand
+class ScSCnTexTextRelationCommand : public ScSCnTexNrelFromCommand
 {
 public:
   ScScnTexCommandResult Complete(

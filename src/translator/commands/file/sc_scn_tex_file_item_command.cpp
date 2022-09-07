@@ -8,7 +8,7 @@ ScScnTexCommandResult ScSCnTexFileItemCommand::Complete(
   std::string const & content = params.at(0);
 
   ScStringStream stream;
-  stream << "[<p>" << content << "</p>]" << EndLine();
+  stream << "[<p>" << content << "</p>]";
 
   return stream;
 }

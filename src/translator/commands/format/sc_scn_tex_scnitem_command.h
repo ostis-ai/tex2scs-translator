@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../sc_scn_tex_command.h"
+#include "sc_scn_tex_list_command.h"
 
-class ScSCnTexFileLongCommand : public ScSCnTexCommand
+class ScSCnTexScnitemCommand : public ScSCnTexListCommand
 {
 public:
   ScScnTexCommandResult Complete(
