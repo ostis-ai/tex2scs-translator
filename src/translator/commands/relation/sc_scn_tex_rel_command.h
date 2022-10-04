@@ -1,10 +1,12 @@
 #pragma once
 
-#include "../relation/sc_scn_tex_rel_command.h"
+#include "../sc_scn_tex_command.h"
 
-class ScSCnTexNrelToCommand : public ScSCnTexRelCommand
+class ScSCnTexRelCommand : public ScSCnTexCommand
 {
 public:
   ScScnTexCommandResult Complete(
       ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) override;
+  
+  std::string scs_arrow;
 };

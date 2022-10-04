@@ -6,9 +6,12 @@ ScScnTexCommandResult ScSCnTexScnitemCommand::Complete(
     ScScnTexCommandParams const & params)
 {
   ScStringStream stream;
-  if (history.at(history.size() - 1) != "begin")
-    stream << ";\n" << params.at(0);
-  else stream << "\n" << params.at(0);
-
+  std::string subject;
+  if (params.at(0)[0] == '[')
+    subject = params.at(0);
+  else
+    subject = tree.Add(params.at(0));
+  
+  stream << StartLine(history) << "\n" << offset << subject;
   return stream;
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <stack>
 
 #include "../stream/sc_string_stream.h"
 
@@ -25,6 +26,7 @@ public:
 
 protected:
   static std::string default_command_separator;
+  static std::stack<std::string> current_env;
   
   std::string StartLine(ScSCnCommandsHistory & history);
 };
