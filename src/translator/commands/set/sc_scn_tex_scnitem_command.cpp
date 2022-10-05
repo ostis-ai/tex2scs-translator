@@ -11,7 +11,8 @@ ScScnTexCommandResult ScSCnTexScnitemCommand::Complete(
     subject = params.at(0);
   else
     subject = tree.Add(params.at(0));
-  
-  stream << StartLine(history) << "\n" << offset << subject;
-  return stream;
+
+  return SCsStream().Formatted([&subject]() -> SCsStream {
+    return { subject, ";\t" };
+  });
 }
