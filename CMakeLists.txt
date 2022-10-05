@@ -12,5 +12,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SC_BIN_PATH})
 set(THIRDPARTY_DIR "${TRANSLATOR_ROOT}/thirdparty")
 set(ANTLR_DIR "${THIRDPARTY_DIR}/antlr")
 
+set(CMAKE_BUILD_TYPE Debug)
+
 add_subdirectory(${ANTLR_DIR}/runtime)
 add_subdirectory(${TRANSLATOR_ROOT}/src)

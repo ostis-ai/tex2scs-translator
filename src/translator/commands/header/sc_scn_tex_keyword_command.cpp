@@ -5,9 +5,9 @@ ScScnTexCommandResult ScSCnTexKeywordCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & idtf = params.at(0);
+  std::string const & idtf = params.at(1);
 
-  ScStringStream stream;
-  stream << "<em>" << idtf << "</em>";
-  return stream;
+  return SCsStream().Row([&idtf]() -> SCsStream {
+    return { "<em>", idtf, "</em>" };
+  });
 }

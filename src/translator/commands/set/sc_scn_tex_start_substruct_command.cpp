@@ -5,8 +5,7 @@ ScScnTexCommandResult ScSCnTexStartSubstructCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  ScStringStream stream;
-  stream << StartLine(history) << offset << "= [*\n";
-
-  return stream;
+  return SCsStream().Formatted([](SCsStream & stream) -> SCsStream {
+    return { "= [*" };
+  });
 }

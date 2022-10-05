@@ -6,7 +6,7 @@ ScScnTexCommandResult ScSCnTexQQCommand::Complete(
     ScScnTexCommandParams const & params)
 {
   ScStringStream stream;
-  stream << "\"" << params.at(0) << "\"";
+  stream << "\"" << params.at(1) << "\"";
 
   return stream;
 }

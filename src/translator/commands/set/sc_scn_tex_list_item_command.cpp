@@ -5,9 +5,11 @@ ScScnTexCommandResult ScSCnTexListItemCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & string = params.at(0);
+  return "";
+
+  std::string const & string = params.at(1);
 
   return SCsStream().Formatted([&string]() -> SCsStream {
-    return { "\t<li>", string, "</li>\n" };
+    return { "<li>", string, "</li>" };
   });
 }

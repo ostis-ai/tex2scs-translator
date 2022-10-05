@@ -5,11 +5,10 @@ ScScnTexCommandResult ScSCnTexTextitCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & text = params.at(0);
+  std::string const & text = params.at(1);
   std::string const & idtf = tree.Add(text);
 
-  ScStringStream stream;
-  stream << "<i>" << text << "</i>";
-
-  return stream;
+  return SCsStream().Row([&text]() -> SCsStream {
+    return { "<i>", text, "</i>" };
+  });
 }

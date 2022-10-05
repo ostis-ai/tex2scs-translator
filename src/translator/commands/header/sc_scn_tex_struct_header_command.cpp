@@ -5,13 +5,19 @@ ScScnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & idtf = params.at(0);
-  std::string const & subject = tree.Add(idtf);
+  std::string const & idtf = params.at(1);
+  std::string const & systemIdtf = tree.Add(idtf);
 
-  ScStringStream stream;
-  stream << StartLine(history) << "\n" << subject;
-  stream << "\n<- sc_node_struct;";
-  stream << "\n=> nrel_main_idtf: [" << idtf << "] (* <- lang_ru;; *)";
-
-  return stream;
+  return SCsStream()
+    .Formatted([&systemIdtf]() -> SCsStream {
+      return { systemIdtf };
+    })
+    .SetLastCommandName(params.at(0))
+    .Formatted([]() -> SCsStream {
+      return { "<- sc_node_struct" };
+    })
+    .SetLastCommandName()
+    .Formatted([&idtf]() -> SCsStream {
+      return { "=> nrel_main_idtf: [", idtf, "] (* <- lang_ru;; *)" };
+    });
 }

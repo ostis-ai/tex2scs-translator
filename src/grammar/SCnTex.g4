@@ -7,8 +7,8 @@ options
 
 @parser::header
 {
-#include "tree/sc_scn_prefix_tree.h"
-#include "commands/sc_scn_tex2scs_commands.h"
+#include "../translator/tree/sc_scn_prefix_tree.h"
+#include "../translator/commands/sc_scn_tex2scs_commands.h"
 }
 
 scnTexText
@@ -53,10 +53,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     if (it != commands.cend())
       $command = it->second;
     else
-    {
-      std::cout << "Not found: " << $commandName << std::endl;
-      $command = nullptr;
-    }
+      $command = commands.find("relation")->second;
   }
   else
   {
@@ -67,6 +64,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   WS?
   {
   ScScnTexCommandParams params;
+  params.push_back($commandName);
   }
   (
     WS? ('{' | '[') WS?
@@ -105,9 +103,6 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
       }
     )*
     WS? ('}' | ']') WS?
-    {
-    params.push_back("/");
-    }
   )*
   {
   if ($command != nullptr)
@@ -129,7 +124,7 @@ scnTexCommandName
   ;
 
 TEXT
-  : ([а-яёЁА-Яa-zA-Z0-9_#+=> <'"«»/()$*-]
+  : ([а-яёЁА-Яa-zA-Z0-9_#+=> <^'"«»/()$*-]
   | '.' | ',' | '~' | '?' | '!' | ':' | '`' | '–' | '…' | '—')+
   ;
 

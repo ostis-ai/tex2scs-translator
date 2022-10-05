@@ -12,7 +12,7 @@ public:
     m_instance = std::stringstream();
   }
 
-  ScStringStream & operator<< (std::string const & string)
+  virtual ScStringStream & operator<< (std::string const & string)
   {
     m_instance << string;
     return *this;
@@ -23,11 +23,11 @@ public:
     m_instance >> string;
   }
 
-  operator std::string()
+  virtual operator std::string()
   {
     return m_instance.str();
   }
 
-private:
+protected:
   std::stringstream m_instance;
 };

@@ -5,9 +5,9 @@ ScScnTexCommandResult ScSCnTexStructIdtfCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & idtf = params.at(0);
+  std::string const & idtf = params.at(1);
 
-  ScStringStream stream;
-  stream << "<b><em>" << idtf << "</em></b>";
-  return stream;
+  return SCsStream().Row([&idtf]() -> SCsStream {
+    return { "<b><em>", idtf, "</b></em>]" };
+  });
 }

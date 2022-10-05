@@ -1,32 +1,34 @@
 #include "sc_scn_tex_end_list_command.h"
 
+/// 0: end 1: <command_name> 2: <relation>?
 ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & relationSetType = params.at(0);
-
-  SCsStream::RemoveTab();
+  std::string const & relationSetType = params.at(1);
 
   if (relationSetType == "scnitemize")
-    return "\n</ul>\n";
+    return "</ul>";
   else if (relationSetType == "scnnumerize")
-    return "\n</ol>\n";
+    return "</ol>";
   else if (relationSetType == "scnindent")
-    return SCsStream().Formatted([]() { return "\n*);\n"; });
+    return SCsStream()
+      .RemoveTab()
+      .Formatted([]() -> SCsStream { return {"*)"}; })
+      .UnsetDoubleSemicolons();
 
-  std::string const & relIdtf = params.size() > 2 ? params.at(1) : "";
+  auto const & item = m_setTypes.find(relationSetType);
+  if (item != m_setTypes.cend()) {
+    return SCsStream()
+      .RemoveTab()
+      .Row([&item](SCsStream & stream) {
+        std::string const & endBracket = item->second[2];
 
-  return SCsStream().Row([this, &relationSetType](SCsStream & stream) -> SCsStream {
-    auto const & item = m_setTypes.find(relationSetType);
-
-    if (item != m_setTypes.cend()) {
-      std::string endBracket = item->second[2];
-
-      stream.Formatted([&endBracket]() -> SCsStream {
-        return { "\n", endBracket, ";\n" };
-      });
-    }
-  });
+        stream.Formatted([&endBracket]() -> SCsStream {
+          return { endBracket };
+        });
+      })
+      .SetLastCommandName(params.at(0));
+  }
 }
