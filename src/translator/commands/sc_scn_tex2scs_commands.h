@@ -20,6 +20,12 @@ static ScSCnTexCommands const commands = {
     { "scnqqi", new ScSCnTexQQICommand() },
     { "scnitem", new ScSCnTexScnitemCommand() },
 
+    { "scnfileimage", new ScSCnTexFileImageCommand() },
+    { "scnfileitem", new ScSCnTexFileItemCommand() },
+    { "scnfilelong", new ScSCnTexFileLongCommand() },
+    { "scnfilescgitem", new ScSCnTexFileSCgItemCommand() },
+    { "scnincludegraphics", new ScSCnTexIncludeGraphicsCommand() },
+
     { "scnheader", new ScSCnTexHeaderCommand() },
     { "scnheaderlocal", new ScSCnTexHeaderLocalCommand() },
     { "currentname", new ScSCnTexCurrentNameCommand() },

@@ -14,9 +14,9 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
     return "</ol>";
   else if (relationSetType == "scnindent")
     return SCsStream()
+      .SetCurrentCommand("*)")
       .RemoveTab()
-      .Formatted([]() -> SCsStream { return {"*)"}; })
-      .UnsetDoubleSemicolons();
+      .Formatted([]() -> SCsStream { return { "*)" }; });
 
   auto const & item = m_setTypes.find(relationSetType);
   if (item != m_setTypes.cend()) {
@@ -25,10 +25,11 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
       .Row([&item](SCsStream & stream) {
         std::string const & endBracket = item->second[2];
 
-        stream.Formatted([&endBracket]() -> SCsStream {
+        stream
+        .SetCurrentCommand(endBracket.empty() ? "le" : endBracket)
+        .Formatted([&endBracket]() -> SCsStream {
           return { endBracket };
         });
-      })
-      .SetLastCommandName(params.at(0));
+      });
   }
 }

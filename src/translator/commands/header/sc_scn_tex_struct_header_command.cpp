@@ -9,14 +9,15 @@ ScScnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
   std::string const & systemIdtf = tree.Add(idtf);
 
   return SCsStream()
+    .SetCurrentCommand(params.at(0))
     .Formatted([&systemIdtf]() -> SCsStream {
       return { systemIdtf };
     })
-    .SetLastCommandName(params.at(0))
+    .SetCurrentCommand()
     .Formatted([]() -> SCsStream {
       return { "<- sc_node_struct" };
     })
-    .SetLastCommandName()
+    .SetCurrentCommand()
     .Formatted([&idtf]() -> SCsStream {
       return { "=> nrel_main_idtf: [", idtf, "] (* <- lang_ru;; *)" };
     });

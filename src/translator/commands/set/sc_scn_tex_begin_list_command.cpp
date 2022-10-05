@@ -12,18 +12,15 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
   if (ignItem != m_ignoredTypes.cend())
     return "";
 
-  std::string const & name = params.at(0);
-
   if (relationSetType == "scnitemize")
     return "<ul>";
   else if (relationSetType == "scnnumerize")
     return "<ol>";
   else if (relationSetType == "scnindent")
     return SCsStream()
-      .Row([]() -> SCsStream { return {"(*"}; })
-      .AddTab()
-      .SetDoubleSemicolons()
-      .SetLastCommandName(name);
+      .SetCurrentCommand("(*")
+      .Formatted([]() -> SCsStream { return {"(*"}; })
+      .AddTab();
 
   std::string relIdtf = params.size() > 2 ? params.at(2) : "";
 
@@ -38,15 +35,16 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
         if (relIdtf.empty())
           relIdtf = item->second.size() == 4 ? item->second[3] : "";
 
-        stream.Formatted([&tree, &edge, &beginBracket, &relIdtf]() -> SCsStream {
+        stream
+        .SetCurrentCommand(beginBracket.empty() ? "lb" : beginBracket)
+        .Formatted([&tree, &edge, &beginBracket, &relIdtf]() -> SCsStream {
           if (relIdtf.empty())
             return { edge, " ", beginBracket };
           else
             return { edge, " ", tree.Add(relIdtf), ": ", beginBracket };
         });
       })
-      .AddTab()
-      .SetLastCommandName(name);
+      .AddTab();
   }
 
   return "";

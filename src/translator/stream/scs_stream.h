@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include <functional>
+#include <unordered_set>
 
 #include "sc_string_stream.h"
 
@@ -44,13 +45,13 @@ public:
 
   SCsStream & Formatted(std::function<void(SCsStream &)> const & formatted)
   {
-    formatted(*this << DefineSemicolons() << DefineEndline() << m_offset);
+    formatted(*this << DefineSemicolons() << DefineEndline() <<  DefineOffset());
     return *this;
   }
 
   SCsStream & Formatted(std::function<SCsStream()> const & formatted)
   {
-    *this << DefineSemicolons() << DefineEndline() << m_offset << formatted();
+    *this << DefineSemicolons() << DefineEndline() << DefineOffset() << formatted();
     return *this;
   }
 
@@ -72,18 +73,6 @@ public:
     return *this;
   }
 
-  SCsStream & SetDoubleSemicolons()
-  {
-    m_semicolons = ";;";
-    return *this;
-  }
-
-  SCsStream & UnsetDoubleSemicolons()
-  {
-    m_semicolons = ";";
-    return *this;
-  }
-
   SCsStream & AddTab()
   {
     m_offset += "\t";
@@ -99,17 +88,20 @@ public:
     return *this;
   }
 
-  SCsStream & SetLastCommandName(std::string const & name = "any")
+  SCsStream & SetCurrentCommand(std::string const & name = "any")
   {
-    m_lastCommand = name;
+    m_lastCommand = m_currentCommand;
+    m_currentCommand = name;
     return *this;
   }
 
   static void Clear()
   {
     m_offset = "";
+    m_indent = 0;
     m_semicolons = ";";
     m_lastCommand = "";
+    m_currentCommand = "";
   }
 
   operator std::string() override
@@ -119,29 +111,90 @@ public:
 
 private:
   static std::string m_offset;
+  static uint32_t m_indent;
   static std::string m_semicolons;
+  static std::string m_currentCommand;
   static std::string m_lastCommand;
+
+  static std::unordered_map<std::string, std::vector<std::string>> m_formats;
+  static std::unordered_set<std::string> m_begins;
 
   static std::string DefineSemicolons()
   {
-    if (m_lastCommand.empty()
-      || m_lastCommand == "begin"
-      || m_lastCommand == "end"
-      || m_lastCommand == "\\"
-      || IsLastCommandHeader())
+    if (IsCommandHeader(m_lastCommand))
       return "";
+
+    if (m_begins.find(m_lastCommand) != m_begins.cend())
+      return "";
+
+    if (!m_lastCommand.empty() && IsCommandHeader(m_currentCommand))
+      return ";;";
+
+    auto const & item = m_formats.find(m_currentCommand);
+    if (item != m_formats.cend())
+    {
+      std::string const oldSemicolons = m_semicolons;
+
+      auto const formats = item->second;
+      if (formats.size() == 2)
+      {
+        auto const endStringType = formats.at(1);
+        if (endStringType == "++")
+          SetDoubleSemicolons();
+        else if (endStringType == "--")
+          UnsetDoubleSemicolons();
+        else
+          m_semicolons = endStringType;
+      }
+
+      auto const & begStringType = formats.at(0);
+      if (begStringType == "cur")
+        return oldSemicolons;
+
+      return formats.at(0);
+    }
+
+    if (m_lastCommand.empty() && IsCommandHeader(m_currentCommand) || m_currentCommand.empty())
+      return "";
+
+    if (m_lastCommand == "scnitem" && m_currentCommand == "scnitem")
+      return ";";
+
     return m_semicolons;
   }
 
+  static void SetDoubleSemicolons()
+  {
+    ++m_indent;
+    m_semicolons = ";;";
+  }
+
+  static void UnsetDoubleSemicolons()
+  {
+    --m_indent;
+    if (!m_indent)
+      m_semicolons = ";";
+  }
+
+
   static std::string DefineEndline()
   {
-    if (m_lastCommand.empty() && IsLastCommandHeader())
+    if (m_lastCommand.empty() && IsCommandHeader(m_currentCommand))
       return "";
+
+    if (IsCommandHeader(m_currentCommand))
+      return "\n\n";
+
     return "\n";
   }
 
-  static bool IsLastCommandHeader()
+  static std::string DefineOffset()
   {
-    return m_lastCommand.find("header") != std::string::npos;
+    return m_offset;
+  }
+
+  static bool IsCommandHeader(std::string const & name)
+  {
+    return name.find("header") != std::string::npos;
   }
 };

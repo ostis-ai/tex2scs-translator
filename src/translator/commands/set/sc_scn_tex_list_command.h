@@ -12,23 +12,23 @@ class ScSCnTexListCommand : public ScSCnTexCommand
 protected:
   std::unordered_map<std::string, std::vector<std::string>> m_setTypes = {
     { "scnrelfromlist",      { "=>", "", "" } },
-    { "scnrelfromset",       { "=>", "(", ")" } },
+    { "scnrelfromset",       { "=>", "{", "}" } },
     { "scnrelfromvector",    { "=>", "<", ">" } },
     { "scnreltolist",        { "<=", "", "" } },
-    { "scnreltoset",         { "<=", "(", ")" } },
+    { "scnreltoset",         { "<=", "{", "}" } },
     { "scnreltovector",      { "<=", "<", ">" } },
     { "scnrelbothlist",      { "<=>", "", "" } },
-    { "scnrelbothset",       { "<=>", "(", ")" } },
+    { "scnrelbothset",       { "<=>", "{", "}" } },
     { "scnrelbothvector",    { "<=>", "<", ">" } },
     { "scnhaselementlist",   { "->", "", "" } },
-    { "scnhaselementset",    { "->", "(", ")" } },
+    { "scnhaselementset",    { "->", "{", "}" } },
     { "scnhaselementvector", { "->", "<", ">" } },
     { "scnhassubstruct",     { "->", "[*", "*]" } },
-    { "scnhassubset",        { "->", "(", ")" } },
+    { "scnhassubset",        { "->", "{", "}" } },
 
     { "scnsubstruct",        { "=>", "[*", "*]", "включение" } },
 
-    { "scnsubdividing",      { "=>", "(", ")", "разбиение" } },
+    { "scnsubdividing",      { "=>", "{", "}", "разбиение" } },
     { "scnsdclass",          { "->", "", "", "класс объектов исследования" } },
     { "scnsdrelation",       { "->", "", "", "исследуемое отношение" } },
   };

@@ -5,14 +5,15 @@ ScScnTexCommandResult ScSCnTexScnitemCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & commandName = params.at(0);
+  std::string const & name = params.at(0);
   std::string subject = params.at(1);
 
   if (params.at(1)[0] != '[')
     subject = tree.Add(subject);
 
-  return SCsStream().Formatted([&subject]() -> SCsStream {
-    return { subject };
-  })
-  .SetLastCommandName(commandName);
+  return SCsStream()
+    .SetCurrentCommand(name)
+    .Formatted([&subject]() -> SCsStream {
+      return { subject };
+    });
 }
