@@ -9,7 +9,7 @@ ScScnTexCommandResult ScSCnTexFileLongCommand::Complete(
 
   return SCsStream().Tabulated([&content](SCsStream & stream) {
     stream.Row([&content]() -> SCsStream {
-      return { "[<p>", content, "</p>] (* <- lang_ru;; => nrel_format: format_html;; *)" };
+      return { "[<p>", content, "</p>]" };
     });
   });
 }

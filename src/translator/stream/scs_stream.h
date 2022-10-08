@@ -57,13 +57,17 @@ public:
 
   SCsStream & Formatted(std::function<void(SCsStream &)> const & formatted)
   {
-    formatted(*this << DefineSemicolons() << DefineEndline() <<  DefineOffset());
+    PreFormat([this, &formatted]() {
+      formatted(*this << DefineSemicolons() << DefineEndline() << DefineOffset());
+    });
     return *this;
   }
 
   SCsStream & Formatted(std::function<SCsStream()> const & formatted)
   {
-    *this << DefineSemicolons() << DefineEndline() << DefineOffset() << formatted();
+    PreFormat([this, &formatted]() {
+      *this << DefineSemicolons() << DefineEndline() << DefineOffset() << formatted();
+    });
     return *this;
   }
 
@@ -107,6 +111,16 @@ public:
     return *this;
   }
 
+  template <typename... Args>
+  SCsStream & Attached(Args const &... args)
+  {
+    std::vector<std::string> vector{args...};
+    for (auto const & item : vector)
+      m_attached.emplace_back(item);
+
+    return *this;
+  }
+
   static void Clear()
   {
     m_offset = "";
@@ -114,6 +128,7 @@ public:
     m_semicolons = ";";
     m_lastCommand = "";
     m_currentCommand = "";
+    m_attached.clear();
   }
 
   operator std::string() override
@@ -128,8 +143,50 @@ private:
   static std::string m_currentCommand;
   static std::string m_lastCommand;
 
+  static std::vector<std::string> m_attached;
+
   static std::unordered_map<std::string, std::vector<std::string>> m_formats;
   static std::unordered_set<std::string> m_begins;
+
+  void PreFormat(std::function<void()> const & format)
+  {
+    std::string const savedSemicolons = m_semicolons;
+    std::string const savedLastCommand = m_lastCommand;
+    std::string const savedCurrentCommand = m_currentCommand;
+
+    bool const noOtherAttached = m_currentCommand != "(*";
+    if (!m_attached.empty())
+    {
+      SetCurrentCommand("(*");
+      m_lastCommand = savedLastCommand;
+      *this << DefineSemicolons() << DefineEndline() << DefineOffset() << "(*";
+      if (noOtherAttached)
+        AddTab();
+
+      std::for_each(m_attached.begin(), m_attached.end(), [this](std::string const & element) {
+        SetCurrentCommand("any");
+        *this << DefineSemicolons() << DefineEndline() << DefineOffset() << element;
+      });
+
+      if (noOtherAttached)
+      {
+        RemoveTab();
+        SetCurrentCommand("*)");
+        *this << DefineSemicolons() << DefineEndline() << DefineOffset() << "*)";
+
+        m_semicolons = savedSemicolons;
+      }
+      else
+        *this << ";;";
+
+      SetCurrentCommand(savedCurrentCommand);
+    }
+
+    if (m_attached.empty() || noOtherAttached)
+      format();
+
+    m_attached.clear();
+  }
 
   static std::string DefineSemicolons()
   {
@@ -169,7 +226,7 @@ private:
     if (m_lastCommand.empty() && IsCommandHeader(m_currentCommand) || m_currentCommand.empty())
       return "";
 
-    if (m_lastCommand == "scnitem" && m_currentCommand == "scnitem")
+    if ((m_lastCommand == "scnitem" || m_formats.find(m_lastCommand) != m_formats.cend()) && m_currentCommand == "scnitem")
       return ";";
 
     return m_semicolons;
@@ -187,7 +244,6 @@ private:
     if (!m_indent)
       m_semicolons = ";";
   }
-
 
   static std::string DefineEndline()
   {

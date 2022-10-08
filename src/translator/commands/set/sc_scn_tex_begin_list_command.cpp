@@ -14,14 +14,14 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
 
   if (relationSetType == "scnitemize")
     return SCsStream()
-      .Offset([]() -> SCsStream { return { "<ul>" };})
+      .Offset([]() -> SCsStream { return { "<ul>" }; })
       .AddTab()
-      .Offset([]() -> SCsStream { return { "<li>" };});
+      .Offset([]() -> SCsStream { return { "<li>" }; });
   else if (relationSetType == "scnnumerize")
     return SCsStream()
-      .Offset([]() -> SCsStream { return { "<ol>" };})
+      .Offset([]() -> SCsStream { return { "<ol>" }; })
       .AddTab()
-      .Offset([]() -> SCsStream { return { "<li>" };});
+      .Offset([]() -> SCsStream { return { "<li>" }; });
   else if (relationSetType == "scnindent")
     return SCsStream()
       .SetCurrentCommand("(*")

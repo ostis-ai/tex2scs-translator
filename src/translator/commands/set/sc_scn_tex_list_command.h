@@ -54,8 +54,8 @@ protected:
     { "scnisvarelementrole", { "_<-" } },
     { "scnhasvarelementrole",{ "_->" } },
 
-    { "scneqfile",           { "=" } },
-    { "scneqimage",          { "=" } },
+    { "scneqfile",           { "<=>" } },
+    { "scneqimage",          { "<=>" } },
     { "scnidtftext",         { "=>", "идентификатор" } },
     { "scntext",             { "=>", "идентификатор" } },
     { "scnnote",             { "=>", "примечание" } },

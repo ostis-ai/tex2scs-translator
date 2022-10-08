@@ -27,13 +27,15 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
         else
           relIdtf = tree.Add(relIdtf) + ": ";
 
-        stream.Formatted([this, &relationSetType, &tree, &edge, &relIdtf, &subject]() -> SCsStream {
-          auto const & item = m_fileTypes.find(relationSetType);
-          if (item == m_fileTypes.cend())
-            return { edge, " ", relIdtf , tree.Add(subject) };
-          else
-            return { edge, " ", relIdtf, "[<p>", subject, "</p>] (* <- lang_ru;; => nrel_format: format_html;; *)" };
+        auto const & fileItem = m_fileTypes.find(relationSetType);
+        std::string const target = (fileItem == m_fileTypes.cend()) ? tree.Add(subject) : "[<p>" + subject + "</p>]";
+
+        stream
+        .Formatted([&edge, &relIdtf, &target]() -> SCsStream {
+          return { edge, " ", relIdtf, target };
         });
+        if (target.at(0) == '[')
+          stream.Attached("<- lang_ru", "=> nrel_format: format_html");
     });
   }
 
