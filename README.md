@@ -1,6 +1,3 @@
-# tex2scs-translator
-Tool for translating *.tex with SCn macros into SCs-code
-
 # Tex2SCs-translator
 
 Tex2SCs-translator is a tool for translating SCn-represented *.tex files into SCs-represented *.scs files.
