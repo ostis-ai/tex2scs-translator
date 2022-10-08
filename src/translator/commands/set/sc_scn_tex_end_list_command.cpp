@@ -32,4 +32,6 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
         });
       });
   }
+
+  return "";
 }

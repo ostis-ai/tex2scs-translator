@@ -40,12 +40,10 @@ protected:
   std::unordered_map<std::string, std::vector<std::string>> m_elementTypes = {
     { "scnrelfrom",          { "=>" } },
     { "scnrelto",            { "<=" } },
-    { "scnrelsuperset",      { "=>", "включение" } },
+    { "scnsuperset",         { "=>", "включение" } },
     { "scnsubset",           { "<=", "включение" } },
     { "scnvarrelfrom",       { "_=>" } },
     { "scnvarrelto",         { "_<=" } },
-    { "scnvarrelsuperset",   { "_=>", "включение" } },
-    { "scnvarrelsubset",     { "_<=", "включение" } },
     { "scnrelboth",          { "<=>" } },
     { "scneq",               { "=" } },
     { "scniselement",        { "<-" } },
