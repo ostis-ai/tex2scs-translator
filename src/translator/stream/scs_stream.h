@@ -43,6 +43,18 @@ public:
     return *this;
   }
 
+  SCsStream & Offset(std::function<void(SCsStream &)> const & formatted)
+  {
+    formatted(*this << DefineEndline() <<  DefineOffset());
+    return *this;
+  }
+
+  SCsStream & Offset(std::function<SCsStream()> const & formatted)
+  {
+    *this << DefineEndline() << DefineOffset() << formatted();
+    return *this;
+  }
+
   SCsStream & Formatted(std::function<void(SCsStream &)> const & formatted)
   {
     formatted(*this << DefineSemicolons() << DefineEndline() <<  DefineOffset());

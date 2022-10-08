@@ -13,13 +13,19 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
     return "";
 
   if (relationSetType == "scnitemize")
-    return "<ul>";
+    return SCsStream()
+      .Offset([]() -> SCsStream { return { "<ul>" };})
+      .AddTab()
+      .Offset([]() -> SCsStream { return { "<li>" };});
   else if (relationSetType == "scnnumerize")
-    return "<ol>";
+    return SCsStream()
+      .Offset([]() -> SCsStream { return { "<ol>" };})
+      .AddTab()
+      .Offset([]() -> SCsStream { return { "<li>" };});
   else if (relationSetType == "scnindent")
     return SCsStream()
       .SetCurrentCommand("(*")
-      .Formatted([]() -> SCsStream { return {"(*"}; })
+      .Formatted([]() -> SCsStream { return { "(*" }; })
       .AddTab();
 
   std::string relIdtf = params.size() > 2 ? params.at(2) : "";

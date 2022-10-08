@@ -9,9 +9,15 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
   std::string const & relationSetType = params.at(1);
 
   if (relationSetType == "scnitemize")
-    return "</ul>";
+    return SCsStream()
+      .Row([]() -> SCsStream { return { "</li>" };})
+      .RemoveTab()
+      .Offset([]() -> SCsStream { return { "<ul>" };});
   else if (relationSetType == "scnnumerize")
-    return "</ol>";
+    return SCsStream()
+      .Row([]() -> SCsStream { return { "</li>" };})
+      .RemoveTab()
+      .Offset([]() -> SCsStream { return { "<ol>" };});
   else if (relationSetType == "scnindent")
     return SCsStream()
       .SetCurrentCommand("*)")

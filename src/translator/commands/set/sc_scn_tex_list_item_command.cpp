@@ -5,11 +5,9 @@ ScScnTexCommandResult ScSCnTexListItemCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  return "";
+  if (history.at(history.size() - 2) == "begin")
+    return "";
 
-  std::string const & string = params.at(1);
-
-  return SCsStream().Formatted([&string]() -> SCsStream {
-    return { "<li>", string, "</li>" };
-  });
+  return SCsStream()
+    .Offset([]() -> SCsStream { return { "<li>" };});
 }
