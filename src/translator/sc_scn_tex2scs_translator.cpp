@@ -77,7 +77,9 @@ std::string ScSCnTex2SCsTranslator::TranslateText(std::string const & filePath)
 
 void ScSCnTex2SCsTranslator::DumpIdentifiers(ScDirectory const & targetDirectory)
 {
-  ScFile dumpFile = targetDirectory.GetPath() + "identifiers.scs";
+  std::string const targetDirPath = targetDirectory.GetPath();
+  ScFile dumpFile = (targetDirPath.at(targetDirPath.size() - 1) == '/'
+    ? targetDirPath : targetDirPath + "/") + "identifiers.scs";
 
   std::string const scsText = ScSCnPrefixTree::GetInstance()->Dump();
   dumpFile.Write(scsText);
