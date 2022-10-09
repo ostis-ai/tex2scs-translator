@@ -19,6 +19,8 @@ static ScSCnTexCommands const commands = {
     { "scnqq", new ScSCnTexQQCommand() },
     { "scnqqi", new ScSCnTexQQICommand() },
     { "scnitem", new ScSCnTexScnitemCommand() },
+    { "cite", new ScSCnTexCiteCommand() },
+    { "nameref", new ScSCnTexRefCommand() },
 
     { "scnfileimage", new ScSCnTexFileImageCommand() },
     { "scnfileitem", new ScSCnTexFileItemCommand() },
@@ -53,5 +55,5 @@ static ScSCnTexCommands const commands = {
 using ScSCnTexIgnoreCommands = std::unordered_set<std::string>;
 
 static ScSCnTexIgnoreCommands const ignoreCommands = {
-    "scsection", "bigskip", "mbox", "label", "scncite", "nameref", "linewidth"
+    "scsection", "bigskip", "mbox", "label", "linewidth"
 };
