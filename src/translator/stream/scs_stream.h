@@ -91,16 +91,13 @@ public:
 
   SCsStream & AddTab()
   {
-    m_offset += "\t";
+    Tab();
     return *this;
   }
 
   SCsStream & RemoveTab()
   {
-    if (m_offset.size() <= 1)
-      m_offset = "";
-    else
-      m_offset = SCsStream::m_offset.substr(0, m_offset.size() - 1);
+    Untab();
     return *this;
   }
 
@@ -143,6 +140,7 @@ private:
   static std::string m_currentCommand;
   static std::string m_lastCommand;
 
+  static bool m_savedTab;
   static std::vector<std::string> m_attached;
 
   static std::unordered_map<std::string, std::vector<std::string>> m_formats;
@@ -160,8 +158,6 @@ private:
       SetCurrentCommand("(*");
       m_lastCommand = savedLastCommand;
       *this << DefineSemicolons() << DefineEndline() << DefineOffset() << "(*";
-      if (noOtherAttached)
-        AddTab();
 
       std::for_each(m_attached.begin(), m_attached.end(), [this](std::string const & element) {
         SetCurrentCommand("any");
@@ -170,10 +166,8 @@ private:
 
       if (noOtherAttached)
       {
-        RemoveTab();
         SetCurrentCommand("*)");
         *this << DefineSemicolons() << DefineEndline() << DefineOffset() << "*)";
-
         m_semicolons = savedSemicolons;
       }
       else
@@ -232,15 +226,30 @@ private:
     return m_semicolons;
   }
 
+  static void Tab()
+  {
+    m_offset += "\t";
+  }
+
+  static void Untab()
+  {
+    if (m_offset.size() <= 1)
+      m_offset = "";
+    else
+      m_offset = SCsStream::m_offset.substr(0, m_offset.size() - 1);
+  }
+
   static void SetDoubleSemicolons()
   {
     ++m_indent;
+    Tab();
     m_semicolons = ";;";
   }
 
   static void UnsetDoubleSemicolons()
   {
     --m_indent;
+    Untab();
     if (!m_indent)
       m_semicolons = ";";
   }
@@ -258,6 +267,9 @@ private:
 
   static std::string DefineOffset()
   {
+    if (m_currentCommand == "(*")
+      return SCsStream::m_offset.substr(0, m_offset.size() - 1);
+
     return m_offset;
   }
 
