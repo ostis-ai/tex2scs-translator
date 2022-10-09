@@ -1,13 +1,15 @@
 #include "sc_scn_tex_file_scg_item_command.h"
 
+#include "../../helper/scs_helper.h"
+
 ScScnTexCommandResult ScSCnTexFileSCgItemCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & content = params.at(1);
+  std::string const & content = params.at(params.size() - 1);
 
   return SCsStream().Row([&content]() -> SCsStream {
-    return {"\"", content, "\""};
+    return { SCsHelper::Url(content) };
   });
 }

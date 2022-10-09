@@ -254,11 +254,12 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
           match(SCnTexParser::WS);
         }
         setState(37);
+        dynamic_cast<ScnTexCommandContext *>(_localctx)->b = _input->LT(1);
         _la = _input->LA(1);
         if (!(_la == SCnTexParser::T__0
 
         || _la == SCnTexParser::T__1)) {
-        _errHandler->recoverInline(this);
+          dynamic_cast<ScnTexCommandContext *>(_localctx)->b = _errHandler->recoverInline(this);
         }
         else {
           _errHandler->reportMatch(this);
@@ -298,7 +299,8 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
               setState(45);
               dynamic_cast<ScnTexCommandContext *>(_localctx)->sent = scnTexCommandContent();
 
-                    argStream << (dynamic_cast<ScnTexCommandContext *>(_localctx)->sent != nullptr ? _input->getText(dynamic_cast<ScnTexCommandContext *>(_localctx)->sent->start, dynamic_cast<ScnTexCommandContext *>(_localctx)->sent->stop) : nullptr);
+                    if (_localctx->b->getText() == "{")
+                      argStream << (dynamic_cast<ScnTexCommandContext *>(_localctx)->sent != nullptr ? _input->getText(dynamic_cast<ScnTexCommandContext *>(_localctx)->sent->start, dynamic_cast<ScnTexCommandContext *>(_localctx)->sent->stop) : nullptr);
                     
               break;
             }
@@ -327,7 +329,8 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
           alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 9, _ctx);
         }
 
-            params.push_back(argStream.str());
+            if (_localctx->b->getText() == "{")
+              params.push_back(argStream.str());
             
         setState(88);
         _errHandler->sync(this);

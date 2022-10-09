@@ -6,7 +6,7 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & relationSetType = params.at(1);
+  std::string const & relationSetType = params.at(COMMAND_TYPE_POS);
 
   if (relationSetType == "scnitemize")
     return SCsStream()
@@ -25,19 +25,24 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
       .Formatted([]() -> SCsStream { return { "*)" }; });
 
   auto const & item = m_setTypes.find(relationSetType);
-  if (item != m_setTypes.cend()) {
-    return SCsStream()
-      .RemoveTab()
-      .Row([&item](SCsStream & stream) {
-        std::string const & endBracket = item->second[2];
+  if (item == m_setTypes.cend())
+    return "";
 
-        stream
-        .SetCurrentCommand(endBracket.empty() ? "le" : endBracket)
-        .Formatted([&endBracket]() -> SCsStream {
-          return { endBracket };
-        });
+  return SCsStream()
+    .RemoveTab()
+    .Row([&](SCsStream & stream) {
+      auto const attrs = item->second;
+
+      auto const GetEndBracket = [&]() -> std::string {
+        return attrs[END_BRACKET_POS];
+      };
+
+      std::string const endBracket = GetEndBracket();
+
+      stream
+      .SetCurrentCommand(endBracket.empty() ? "le" : endBracket)
+      .Formatted([&]() -> SCsStream {
+        return { endBracket };
       });
-  }
-
-  return "";
+    });
 }
