@@ -7,13 +7,13 @@ bool ScSCnTex2SCsTranslator::Run(std::string const & workDirectoryPath, std::str
   ScDirectory const & targetDirectory{targetDirectoryPath};
 
   std::string const & startDirectoryPath = workDirectory.GetPath();
-  size_t const startFileIndex = 0;
+  m_fileNumber = 0;
 
   std::cout << "SCn-tex sources directory: " << workDirectory.GetPath() << std::endl;
   std::cout << "Target SCs sources directory: " << targetDirectory.GetPath() << std::endl;
 
   std::cout << "Start translate scn-tex sources:" << std::endl;
-  TranslateFiles(startDirectoryPath, workDirectory, targetDirectory, startFileIndex);
+  TranslateFiles(startDirectoryPath, workDirectory, targetDirectory);
   DumpIdentifiers(targetDirectory);
   std::cout << "Translation finished" << std::endl;
 
@@ -23,19 +23,18 @@ bool ScSCnTex2SCsTranslator::Run(std::string const & workDirectoryPath, std::str
 void ScSCnTex2SCsTranslator::TranslateFiles(
     std::string const & nestedDirectoryPath,
     ScDirectory startDirectory,
-    ScDirectory const & startTargetDirectory,
-    size_t fileNumber)
+    ScDirectory const & startTargetDirectory)
 {
   ScDirectory targetDirectory = startDirectory.CopyDirectory(nestedDirectoryPath, startTargetDirectory);
 
   ScDirectory{nestedDirectoryPath}.ForEach(
-      [this, &startDirectory, &startTargetDirectory, &fileNumber](ScDirectory const & directory) {
-        TranslateFiles(directory.GetPath(), startDirectory, startTargetDirectory, fileNumber);
+      [this, &startDirectory, &startTargetDirectory](ScDirectory const & directory) {
+        TranslateFiles(directory.GetPath(), startDirectory, startTargetDirectory);
       },
-      [this, &fileNumber, &targetDirectory](ScFile const & file) {
+      [this, &targetDirectory](ScFile const & file) {
         SCsStream::Clear();
         bool result = TranslateFile(file.GetPath(), targetDirectory);
-        std::cout << "[" << ++fileNumber << "/" << m_filesCount << "]: " << file.GetPath()
+        std::cout << "[" << ++m_fileNumber << "/" << m_filesCount << "]: " << file.GetPath()
                   << " - " << (result ? "OK" : "ERROR") << std::endl;
       });
 }
@@ -46,7 +45,16 @@ bool ScSCnTex2SCsTranslator::TranslateFile(
 {
   ScFile targetFile = targetDirectory.CopyFile(filePath, ".scs");
 
-  std::string const & scsText = TranslateText(filePath);
+  std::string scsText;
+  try
+  {
+    scsText = TranslateText(filePath);
+  }
+  catch (std::exception const & e)
+  {
+    std::cout << e.what() << std::endl;
+    return false;
+  }
 
   targetFile.Write(scsText);
 

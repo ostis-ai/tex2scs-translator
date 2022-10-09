@@ -23,12 +23,12 @@ public:
 private:
   std::unordered_set<std::string> m_extensions = {".tex"};
   size_t m_filesCount;
+  size_t m_fileNumber;
 
   void TranslateFiles(
       std::string const & nestedDirectoryPath,
       ScDirectory startDirectory,
-      ScDirectory const & startTargetDirectory,
-      size_t fileNumber);
+      ScDirectory const & startTargetDirectory);
 
   bool TranslateFile(std::string const & filePath, ScDirectory const & targetDirectory);
 
