@@ -38,7 +38,11 @@ ScDirectory ScDirectory::CopyDirectory(std::string nestedDirectoryPath, std::str
   std::string const & nestedDirectoryName = nestedDirectoryPath.replace(pos, m_path.size(), "");
 
   ScStringStream stream;
-  stream << targetDirectoryPath << nestedDirectoryName;
+  stream
+    << (targetDirectoryPath.at(targetDirectoryPath.size() - 1) == '/'
+      ? targetDirectoryPath
+      : targetDirectoryPath + "/")
+    << nestedDirectoryName;
 
   return ScDirectory{stream};
 }
