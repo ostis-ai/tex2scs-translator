@@ -21,7 +21,6 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
   else if (relationSetType == "scnindent")
     return SCsStream()
       .SetCurrentCommand("*)")
-      .RemoveTab()
       .Formatted([]() -> SCsStream { return { "*)" }; });
 
   auto const & item = m_setTypes.find(relationSetType);

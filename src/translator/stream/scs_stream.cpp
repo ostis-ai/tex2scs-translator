@@ -6,6 +6,7 @@ std::string SCsStream::m_semicolons = ";";
 std::string SCsStream::m_lastCommand;
 std::string SCsStream::m_currentCommand;
 
+bool SCsStream::m_savedTab = false;
 std::vector<std::string> SCsStream::m_attached;
 
 std::unordered_map<std::string, std::vector<std::string>> SCsStream::m_formats = {
