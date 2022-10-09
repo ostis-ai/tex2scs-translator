@@ -71,6 +71,7 @@ public:
     ScSCnTexCommand * command;
     std::string commandName;
     SCnTexParser::ScnTexCommandNameContext *name = nullptr;;
+    antlr4::Token *b = nullptr;;
     SCnTexParser::ScnTexCommandContentContext *sent = nullptr;;
     SCnTexParser::ScnTexCommandContext *result = nullptr;;
     ScnTexCommandContext(antlr4::ParserRuleContext *parent, size_t invokingState);

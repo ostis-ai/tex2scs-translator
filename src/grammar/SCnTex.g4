@@ -67,14 +67,15 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   params.push_back($commandName);
   }
   (
-    WS? ('{' | '[') WS?
+    WS? b=('{' | '[') WS?
     {
     std::stringstream argStream;
     }
     (
       WS? sent=scnTexCommandContent
       {
-      argStream << $sent.text;
+      if ($ctx->b->getText() == "{")
+        argStream << $sent.text;
       }
       | WS? result=scnTexCommand[$history, $prefixTree]
       {
@@ -82,7 +83,8 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
       }
     )*
     {
-    params.push_back(argStream.str());
+    if ($ctx->b->getText() == "{")
+      params.push_back(argStream.str());
     }
     (WS? ';' WS?
       {

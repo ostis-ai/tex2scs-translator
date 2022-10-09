@@ -33,4 +33,6 @@ private:
   bool TranslateFile(std::string const & filePath, ScDirectory const & targetDirectory);
 
   std::string TranslateText(std::string const & filePath);
+
+  void DumpIdentifiers(ScDirectory const & targetDirectory);
 };

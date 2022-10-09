@@ -21,4 +21,6 @@ public:
       ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) = 0;
 
   virtual ~ScSCnTexCommand() = default;
+
+  uint8_t const COMMAND_TYPE = 0;
 };

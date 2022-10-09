@@ -9,7 +9,4 @@ public:
 
   ScScnTexCommandResult Complete(
       ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) override;
-
-private:
-  std::string DefineNodeTypeByIdtf(std::string const & name);
 };

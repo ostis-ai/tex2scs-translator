@@ -1,43 +1,78 @@
 #include "sc_scn_tex_nrel_command.h"
 
+#include "../../helper/scs_helper.h"
+
 /// 0: <command_name> 1: <relation>? 2: <subject>
 ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & relationSetType = params.at(0);
+  std::string const & relationType = params.at(COMMAND_TYPE);
 
-  auto const & item = m_elementTypes.find(relationSetType);
-  if (item != m_elementTypes.cend())
-  {
-    std::string relIdtf = params.size() == 3 ? params.at(1) : "";
-    std::string const & subject = params.size() == 3 ? params.at(2) : params.at(1);
+  auto const & item = m_elementTypes.find(relationType);
+  if (item == m_elementTypes.cend())
+    return "";
 
-    return SCsStream()
-      .SetCurrentCommand(relationSetType)
-      .Row([this, &relationSetType, &item, &tree, &relIdtf, &subject](SCsStream & stream) {
-        std::string const & edge = item->second[0];
+  return SCsStream()
+    .SetCurrentCommand(relationType)
+    .Row([&](SCsStream & stream) {
+      auto const attrs = item->second;
 
+      auto const GetEdgeType = [&]() -> std::string {
+        return attrs.at(EDGE_ATTR_POS);
+      };
+
+      auto const GetRelIdtf = [&]() -> std::string {
+        std::string const relIdtf =
+          params.size() == MAX_PARAMS
+          ? SCsHelper::NoRole(params.at(REL_PARAM_POS))
+          : attrs.size() == MAX_REL_ATTRS
+            ? attrs.at(REL_ATTR_POS)
+            : "";
+
+        return relIdtf.empty()
+          ? relIdtf
+          : tree.Add(relIdtf, SCsHelper::scNodeNoRoleRelation);
+      };
+
+      auto const GetRelModifierSign = [&]() -> std::string {
+        return attrs.size() == MAX_REL_ATTRS_WITH_REl_MODIFIER
+          ? attrs.at(REL_MODIFIER_ATTR_POS)
+          : ":";
+      };
+
+      auto const GetObject = [&]() -> std::string {
+        std::string const & object
+          = params.size() == MAX_PARAMS
+            ? params.at(MAX_OBJECT_PARAM_POS)
+            : params.at(MIN_OBJECT_PARAM_POS);
+
+        auto const & fileItem = m_fileTypes.find(relationType);
+        auto const & urlItem = m_urlTypes.find(relationType);
+        return fileItem == m_fileTypes.cend()
+          ? urlItem == m_urlTypes.cend()
+            ? SCsHelper::IsURL(object) || SCsHelper::IsFile(object)
+              ? object
+              : tree.Add(object, SCsHelper::GetNodeTypeByIdtf(object))
+            : SCsHelper::Url(object)
+          : SCsHelper::File(object);
+      };
+
+      std::string const object = GetObject();
+
+      stream
+      .Formatted([&]() -> SCsStream {
+        std::string const relIdtf = GetRelIdtf();
         if (relIdtf.empty())
-          relIdtf = item->second.size() == 2 ? item->second[1] : "";
-
-        if (relIdtf.empty())
-          relIdtf = "";
+          return { GetEdgeType(), " ", object };
         else
-          relIdtf = tree.Add(relIdtf) + ": ";
+          return { GetEdgeType(), " ", relIdtf, GetRelModifierSign(), " ", object };
+      });
 
-        auto const & fileItem = m_fileTypes.find(relationSetType);
-        std::string const target = (fileItem == m_fileTypes.cend()) ? tree.Add(subject) : "[<p>" + subject + "</p>]";
-
-        stream
-        .Formatted([&edge, &relIdtf, &target]() -> SCsStream {
-          return { edge, " ", relIdtf, target };
-        });
-        if (target.at(0) == '[')
-          stream.Attached("<- lang_ru", "=> nrel_format: format_html");
-    });
-  }
-
-  return "";
+      if (SCsHelper::IsFile(object))
+        stream.Attached("<- lang_ru", "=> nrel_format: format_html");
+      else if (SCsHelper::IsURL(object))
+        stream.Attached("<- concept_file", SCsHelper::GetFormat(object));
+  });
 }
