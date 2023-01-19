@@ -79,7 +79,7 @@ protected:
   };
 
   std::unordered_set<std::string> m_fileTypes = {
-    "scnfileimage", "scnfileitem", "scnfilelong", "scnfilescgitem",
+    "scnfileimage", "scnfileitem", "scnfilelong", "scnfilescgitem", "scnfileclass",
     "scnidtftext", "scntext",
     "scnnote", "scnidtf", "scnexplanation", "scnidtfdef"
   };

@@ -44,12 +44,17 @@ public:
 
   static bool IsFile(std::string const & string)
   {
-    return string.at(0) == '[';
+    return (string.rfind('[') == 0) || (string.rfind("![") == 0);
   }
 
   static std::string Url(std::string const & idtf)
   {
     return "\"file://" + idtf + "\"";
+  }
+
+  static std::string FileClass(std::string const & idtf)
+  {
+    return "![" + idtf + "]!";
   }
 
   static bool IsURL(std::string const & string)
