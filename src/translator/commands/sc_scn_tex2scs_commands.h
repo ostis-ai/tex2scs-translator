@@ -22,6 +22,7 @@ static ScSCnTexCommands const commands = {
     { "cite", new ScSCnTexCiteCommand() },
     { "nameref", new ScSCnTexRefCommand() },
 
+    { "scnfileclass", new ScSCnTexFileClassCommand() },
     { "scnfileimage", new ScSCnTexFileImageCommand() },
     { "scnfileitem", new ScSCnTexFileItemCommand() },
     { "scnfilelong", new ScSCnTexFileLongCommand() },

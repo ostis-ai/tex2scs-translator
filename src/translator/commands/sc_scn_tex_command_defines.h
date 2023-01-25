@@ -7,6 +7,7 @@
 #include "format/sc_scn_tex_cite_command.h"
 #include "format/sc_scn_tex_ref_command.h"
 
+#include "file/sc_scn_tex_file_class_command.h"
 #include "file/sc_scn_tex_file_image_command.h"
 #include "file/sc_scn_tex_file_item_command.h"
 #include "file/sc_scn_tex_file_long_command.h"
