@@ -10,8 +10,8 @@
 
 #include "commands/sc_scn_tex_command.h"
 
-#include "../grammar/SCnTexLexer.h"
-#include "../grammar/SCnTexParser.h"
+#include "SCnTexLexer.h"
+#include "SCnTexParser.h"
 
 using ScSCnTexCommands = std::unordered_map<std::string, ScSCnTexCommand *>;
 
