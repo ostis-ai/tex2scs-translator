@@ -19,4 +19,4 @@ jobs:
       - name: Run the Docker image
         run: |
           DOCKER_BUILDKIT=1 docker build . -t tex2scs:latest
-          docker run --rm -ti -v ${PWD}/kb/docs/sc-network:/kb -v ${PWD}/kb-translated:/kb/kb.bin tex2scs:latest
+          docker run --rm -ti -v ${PWD}/kb/docs/sc-network:/kb -v ${PWD}/kb-translated:/kb/kb.bin tex2scs:latest > /dev/null
