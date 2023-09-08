@@ -1,5 +1,5 @@
 
-// Generated from src/grammar/SCnTex.g4 by ANTLR 4.7.2
+// Generated from src/grammar/SCnTex.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -12,8 +12,8 @@
 class  SCnTexLexer : public antlr4::Lexer {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, TEXT = 7, 
-    NAME = 8, WS = 9
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, TEXT = 6, NAME = 7, 
+    WS = 8, COMMENT = 9
   };
 
   SCnTexLexer(antlr4::CharStream *input);

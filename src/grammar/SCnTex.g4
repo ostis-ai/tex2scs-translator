@@ -28,7 +28,7 @@ scnTexText
     {
     resultStream << $result.resultText;
     }
-  | lineComment WS
+  | COMMENT | WS
   )* EOF?
   {
   resultStream << ";;\n";
@@ -114,7 +114,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     $resultText = $command->Complete(*history, *prefixTree, params);
   }
   $command == nullptr;
-  }
+  } COMMENT?
   ;
 
 scnTexCommandContent
@@ -140,6 +140,6 @@ WS
   : [ \t\r\n\u2028\u2029]+
   ;
 
-lineComment
-  : '%' (NAME | TEXT | '{' | '}')*
+COMMENT
+  : [ ]* '%' (~[\\])*
   ;

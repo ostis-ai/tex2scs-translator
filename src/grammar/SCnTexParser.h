@@ -3,7 +3,7 @@
 #include "../translator/commands/sc_scn_tex2scs_commands.h"
 
 
-// Generated from src/grammar/SCnTex.g4 by ANTLR 4.7.2
+// Generated from src/grammar/SCnTex.g4 by ANTLR 4.7.1
 
 #pragma once
 
@@ -16,13 +16,13 @@
 class  SCnTexParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, TEXT = 7, 
-    NAME = 8, WS = 9
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, TEXT = 6, NAME = 7, 
+    WS = 8, COMMENT = 9
   };
 
   enum {
     RuleScnTexText = 0, RuleScnTexCommand = 1, RuleScnTexCommandContent = 2, 
-    RuleScnTexCommandName = 3, RuleLineComment = 4
+    RuleScnTexCommandName = 3
   };
 
   SCnTexParser(antlr4::TokenStream *input);
@@ -38,8 +38,7 @@ public:
   class ScnTexTextContext;
   class ScnTexCommandContext;
   class ScnTexCommandContentContext;
-  class ScnTexCommandNameContext;
-  class LineCommentContext; 
+  class ScnTexCommandNameContext; 
 
   class  ScnTexTextContext : public antlr4::ParserRuleContext {
   public:
@@ -50,8 +49,8 @@ public:
     SCnTexParser::ScnTexCommandContext *result = nullptr;;
     ScnTexTextContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<LineCommentContext *> lineComment();
-    LineCommentContext* lineComment(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> COMMENT();
+    antlr4::tree::TerminalNode* COMMENT(size_t i);
     std::vector<antlr4::tree::TerminalNode *> WS();
     antlr4::tree::TerminalNode* WS(size_t i);
     antlr4::tree::TerminalNode *EOF();
@@ -80,6 +79,7 @@ public:
     ScnTexCommandNameContext *scnTexCommandName();
     std::vector<antlr4::tree::TerminalNode *> WS();
     antlr4::tree::TerminalNode* WS(size_t i);
+    antlr4::tree::TerminalNode *COMMENT();
     std::vector<ScnTexCommandContentContext *> scnTexCommandContent();
     ScnTexCommandContentContext* scnTexCommandContent(size_t i);
     std::vector<ScnTexCommandContext *> scnTexCommand();
@@ -111,20 +111,6 @@ public:
   };
 
   ScnTexCommandNameContext* scnTexCommandName();
-
-  class  LineCommentContext : public antlr4::ParserRuleContext {
-  public:
-    LineCommentContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> NAME();
-    antlr4::tree::TerminalNode* NAME(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> TEXT();
-    antlr4::tree::TerminalNode* TEXT(size_t i);
-
-   
-  };
-
-  LineCommentContext* lineComment();
 
 
 private:
