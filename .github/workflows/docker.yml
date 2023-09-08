@@ -1,9 +1,9 @@
 name: Docker
 
 on:
-  push:
+  pull_request:
     branches:
-      - '**'        # matches every branch
+      - '**'
 
 jobs:
   build:
