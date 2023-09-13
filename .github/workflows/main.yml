@@ -1,0 +1,33 @@
+name: Native build
+
+on:
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Run
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          ./scripts/install_deps_ubuntu.sh --dev
+
+      - name: Compile
+        run: |
+          ./scripts/make_all.sh
+          
+      - name: Try translation
+        run: |
+          ./bin/scn-tex2scs -s ./kb/docs/sc-network -t ./kb-translated
+          # check if directory exists and is not empty
+          [ -d ./kb-translated ] && [ "$(ls -A ./kb-translated)" ]
