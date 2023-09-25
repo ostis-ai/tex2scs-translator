@@ -20,6 +20,7 @@ static ScSCnTexCommands const commands = {
     { "scnqqi", new ScSCnTexQQICommand() },
     { "scnitem", new ScSCnTexScnitemCommand() },
     { "cite", new ScSCnTexCiteCommand() },
+    { "scncite", new ScSCnTexCiteCommand() },
     { "nameref", new ScSCnTexRefCommand() },
 
     { "scnfileclass", new ScSCnTexFileClassCommand() },

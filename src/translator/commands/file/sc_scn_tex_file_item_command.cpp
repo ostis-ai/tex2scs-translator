@@ -7,9 +7,16 @@ ScScnTexCommandResult ScSCnTexFileItemCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
+  std::string const & name = params.at(0);
   std::string const & content = params.at(params.size() - 1);
 
-  return SCsStream().Row([&content]() -> SCsStream {
-    return { SCsHelper::File(content) };
-  });
+  return SCsStream()
+    .SetCurrentCommand(name)
+    .Row([&](SCsStream & stream) {
+      stream
+      .Formatted([&content]() -> SCsStream {
+          return { SCsHelper::File(content) };
+      });
+      stream.Attached("<- lang_ru", "=> nrel_format: format_html");
+    });
 }
