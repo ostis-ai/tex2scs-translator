@@ -220,7 +220,7 @@ private:
     if (m_lastCommand.empty() && IsCommandHeader(m_currentCommand) || m_currentCommand.empty())
       return "";
 
-    if ((m_lastCommand == "scnitem" || m_formats.find(m_lastCommand) != m_formats.cend()) && m_currentCommand == "scnitem")
+    if ((m_lastCommand.find("item") != -1 || m_formats.find(m_lastCommand) != m_formats.cend()) && m_currentCommand.find("item") != -1)
       return ";";
 
     return m_semicolons;
