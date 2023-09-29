@@ -187,10 +187,13 @@ private:
     if (IsCommandHeader(m_lastCommand))
       return "";
 
+    if (IsCommandListHeader(m_lastCommand))
+      return "";
+
     if (m_begins.find(m_lastCommand) != m_begins.cend())
       return "";
 
-    if (!m_lastCommand.empty() && IsCommandHeader(m_currentCommand))
+    if (!m_lastCommand.empty() && (IsCommandHeader(m_currentCommand) || IsCommandListHeader(m_currentCommand)))
       return ";;";
 
     auto const & item = m_formats.find(m_currentCommand);
@@ -259,6 +262,9 @@ private:
     if (m_lastCommand.empty() && IsCommandHeader(m_currentCommand))
       return "";
 
+    if (IsCommandListHeader(m_currentCommand))
+      return "\n";
+
     if (IsCommandHeader(m_currentCommand))
       return "\n\n";
 
@@ -276,5 +282,10 @@ private:
   static bool IsCommandHeader(std::string const & name)
   {
     return name.find("header") != std::string::npos;
+  }
+
+  static bool IsCommandListHeader(std::string const & name)
+  {
+    return name == "scnset";
   }
 };

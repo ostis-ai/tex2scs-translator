@@ -28,6 +28,11 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
     return SCsStream()
       .SetCurrentCommand("(*")
       .Formatted([]() -> SCsStream { return { "(*" }; });
+  else if (relationSetType == "scnset")
+    return SCsStream()
+      .SetCurrentCommand("scnset")
+      .Formatted([]() -> SCsStream { return { "{" }; })
+      .AddTab();
 
   auto const & item = m_setTypes.find(relationSetType);
   if (item == m_setTypes.cend())

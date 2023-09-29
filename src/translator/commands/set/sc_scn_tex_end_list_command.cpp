@@ -22,6 +22,11 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
     return SCsStream()
       .SetCurrentCommand("*)")
       .Formatted([]() -> SCsStream { return { "*)" }; });
+  else if (relationSetType == "scnset")
+    return SCsStream()
+      .SetCurrentCommand("scnset")
+      .RemoveTab()
+      .Offset([]() -> SCsStream { return { "}" }; });
 
   auto const & item = m_setTypes.find(relationSetType);
   if (item == m_setTypes.cend())
