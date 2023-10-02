@@ -3,7 +3,7 @@
 #include "../translator/commands/sc_scn_tex2scs_commands.h"
 
 
-// Generated from src/grammar/SCnTex.g4 by ANTLR 4.7.1
+// Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.1
 
 
 
@@ -581,7 +581,7 @@ std::vector<std::string> SCnTexParser::_ruleNames = {
 };
 
 std::vector<std::string> SCnTexParser::_literalNames = {
-  "", "'{'", "'['", "';'", "'}'", "']'"
+  "", "'{'", "'['", "'\\and'", "'}'", "']'"
 };
 
 std::vector<std::string> SCnTexParser::_symbolicNames = {

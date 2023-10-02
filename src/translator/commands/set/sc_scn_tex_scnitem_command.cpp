@@ -14,6 +14,7 @@ ScScnTexCommandResult ScSCnTexScnitemCommand::Complete(
     object = tree.Add(object, SCsHelper::GetNodeTypeByIdtf(object));
 
   return SCsStream()
+    .PreFormatted()
     .SetCurrentCommand(name)
     .Row([&](SCsStream & stream) {
       stream

@@ -14,6 +14,7 @@ ScScnTexCommandResult ScSCnTexHeaderCommand::Complete(
   lastHeader = idtf;
 
   return SCsStream()
+    .PreFormatted()
     .SetCurrentCommand(params.at(0))
     .Formatted([&systemIdtf]() -> SCsStream {
       return { systemIdtf };

@@ -27,9 +27,10 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
   else if (relationSetType == "scnindent")
     return SCsStream()
       .SetCurrentCommand("(*")
-      .Formatted([]() -> SCsStream { return { "(*" }; });
+      .PreFormatted();
   else if (relationSetType == "scnset")
     return SCsStream()
+      .PreFormatted()
       .SetCurrentCommand("listbegin")
       .Formatted([]() -> SCsStream { return { "{" }; })
       .AddTab();
@@ -39,6 +40,7 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
     return "";
 
   return SCsStream()
+    .PreFormatted()
     .Row([&](SCsStream & stream) {
       auto const attrs = item->second;
 

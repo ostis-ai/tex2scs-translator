@@ -86,7 +86,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     if ($ctx->b->getText() == "{")
       params.push_back(argStream.str());
     }
-    (WS? ';' WS?
+    (WS? '\\and' WS?
       {
       std::stringstream argStream;
       }

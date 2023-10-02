@@ -5,7 +5,8 @@ ScScnTexCommandResult ScSCnTexStartSubstructCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  return SCsStream().Formatted([](SCsStream & stream) -> SCsStream {
+  return SCsStream()
+  .Formatted([](SCsStream & stream) -> SCsStream {
     return { "= [*" };
   });
 }

@@ -15,6 +15,7 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
     return "";
 
   return SCsStream()
+    .PreFormatted()
     .SetCurrentCommand(relationType)
     .Row([&](SCsStream & stream) {
       auto const attrs = item->second;
@@ -44,7 +45,7 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
 
       auto const GetObject = [&]() -> std::string {
         std::string const & object
-          = params.size() == MAX_PARAMS
+          = params.size() >= MAX_PARAMS
             ? params.at(MAX_OBJECT_PARAM_POS)
             : params.at(MIN_OBJECT_PARAM_POS);
 
