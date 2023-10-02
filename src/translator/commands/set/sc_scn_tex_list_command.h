@@ -41,6 +41,7 @@ protected:
     { "scnhassubstruct",     { "->", "[*", "*]", ":" } },
     { "scnhassubset",        { "->", "{", "}", ":" } },
 
+    { "scnstruct",           { "=", "[*", "*]" } },
     { "scnsubstruct",        { "=>", "[*", "*]", ":", "включение*" } },
 
     { "scnsubdividing",      { "=>", "{", "}", ":", "разбиение*" } },
@@ -57,6 +58,7 @@ protected:
     { "scnrelto",            { "<=", ":" } },
     { "scnsuperset",         { "=>", ":", "включение*" } },
     { "scnsubset",           { "<=", ":", "включение*" } },
+    { "scnrelsuperset",       { "=>", ":" } },
     { "scnvarrelfrom",       { "_=>", "::" } },
     { "scnvarrelto",         { "_<=", "::" } },
     { "scnrelboth",          { "<=>", ":" } },

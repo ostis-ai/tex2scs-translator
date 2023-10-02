@@ -28,7 +28,7 @@ static ScSCnTexCommands const commands = {
     { "scnfileitem", new ScSCnTexFileItemCommand() },
     { "scnfilelong", new ScSCnTexFileLongCommand() },
     { "scnfilescgitem", new ScSCnTexFileSCgItemCommand() },
-    { "scnincludegraphics", new ScSCnTexIncludeGraphicsCommand() },
+    { "includegraphics", new ScSCnTexIncludeGraphicsCommand() },
 
     { "scnheader", new ScSCnTexHeaderCommand() },
     { "scnheaderlocal", new ScSCnTexHeaderLocalCommand() },
@@ -57,5 +57,5 @@ static ScSCnTexCommands const commands = {
 using ScSCnTexIgnoreCommands = std::unordered_set<std::string>;
 
 static ScSCnTexIgnoreCommands const ignoreCommands = {
-    "scsection", "bigskip", "mbox", "label", "linewidth"
+    "scsection", "bigskip", "mbox", "label", "linewidth", "scnendsegmentcomment", "scnendcurrentsectioncomment"
 };
