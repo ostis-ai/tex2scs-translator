@@ -63,6 +63,13 @@ public:
     return *this;
   }
 
+  SCsStream & PreFormatted(std::function<void(SCsStream &)> const & formatted)
+  {
+    PreFormat([]() {});
+    formatted(*this);
+    return *this;
+  }
+
   SCsStream & Formatted(std::function<SCsStream()> const & formatted)
   {
     PreFormat([this, &formatted]() {
@@ -140,7 +147,6 @@ private:
   static std::string m_currentCommand;
   static std::string m_lastCommand;
 
-  static bool m_savedTab;
   static std::vector<std::string> m_attached;
 
   static std::unordered_map<std::string, std::vector<std::string>> m_formats;
@@ -184,16 +190,19 @@ private:
 
   static std::string DefineSemicolons()
   {
-    if (IsCommandHeader(m_lastCommand))
+    if (m_lastCommand.empty())
       return "";
 
-    if (IsCommandListHeader(m_lastCommand))
+    if (IsCommandHeader(m_lastCommand) || IsCommandListHeaderBegin(m_lastCommand))
       return "";
 
     if (m_begins.find(m_lastCommand) != m_begins.cend())
       return "";
 
-    if (!m_lastCommand.empty() && (IsCommandHeader(m_currentCommand) || IsCommandListHeader(m_currentCommand)))
+    if (IsCommandListHeaderEnd(m_lastCommand) || IsCommandListHeaderEnd(m_currentCommand))
+      return "";
+
+    if (IsCommandHeader(m_currentCommand) || IsCommandListHeaderBegin(m_currentCommand))
       return ";;";
 
     auto const & item = m_formats.find(m_currentCommand);
@@ -201,29 +210,27 @@ private:
     {
       std::string const oldSemicolons = m_semicolons;
 
-      auto const formats = item->second;
-      if (formats.size() == 2)
+      auto const semicolonsTypes = item->second;
+      if (semicolonsTypes.size() == 2)
       {
-        auto const endStringType = formats.at(1);
-        if (endStringType == "++")
+        auto const endSemicolonsType = semicolonsTypes.at(1);
+        if (endSemicolonsType == "++")
           SetDoubleSemicolons();
-        else if (endStringType == "--")
+        else if (endSemicolonsType == "--")
           UnsetDoubleSemicolons();
         else
-          m_semicolons = endStringType;
+          m_semicolons = endSemicolonsType;
       }
 
-      auto const & begStringType = formats.at(0);
-      if (begStringType == "cur")
+      auto const & beginSemicolonsType = semicolonsTypes.at(0);
+      if (beginSemicolonsType == "cur")
         return oldSemicolons;
 
-      return formats.at(0);
+      return semicolonsTypes.at(0);
     }
 
-    if (m_lastCommand.empty() && IsCommandHeader(m_currentCommand) || m_currentCommand.empty())
-      return "";
-
-    if ((m_lastCommand.find("item") != -1 || m_formats.find(m_lastCommand) != m_formats.cend()) && m_currentCommand.find("item") != -1)
+    if ((m_lastCommand.find("item") != std::string::npos || m_formats.find(m_lastCommand) != m_formats.cend())
+        && m_currentCommand.find("item") != std::string::npos)
       return ";";
 
     return m_semicolons;
@@ -262,8 +269,8 @@ private:
     if (m_lastCommand.empty() && IsCommandHeader(m_currentCommand))
       return "";
 
-    if (IsCommandListHeader(m_currentCommand))
-      return "\n";
+    if (IsCommandListHeaderBegin(m_currentCommand))
+      return "\n\n";
 
     if (IsCommandHeader(m_currentCommand))
       return "\n\n";
@@ -284,8 +291,13 @@ private:
     return name.find("header") != std::string::npos;
   }
 
-  static bool IsCommandListHeader(std::string const & name)
+  static bool IsCommandListHeaderBegin(std::string const & name)
   {
-    return name == "scnset";
+    return name.find("listbegin") != std::string::npos;
+  }
+
+  static bool IsCommandListHeaderEnd(std::string const & name)
+  {
+    return name.find("listend") != std::string::npos;
   }
 };

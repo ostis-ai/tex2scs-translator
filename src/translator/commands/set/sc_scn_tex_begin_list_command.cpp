@@ -14,7 +14,7 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
   if (ignItem != m_ignoredTypes.cend())
     return "";
 
-  if (relationSetType == "scnitemize")
+  if (relationSetType.find("scnitemize") != std::string::npos)
     return SCsStream()
       .Offset([]() -> SCsStream { return { "<ul>" }; })
       .AddTab()
@@ -30,7 +30,7 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
       .Formatted([]() -> SCsStream { return { "(*" }; });
   else if (relationSetType == "scnset")
     return SCsStream()
-      .SetCurrentCommand("scnset")
+      .SetCurrentCommand("listbegin")
       .Formatted([]() -> SCsStream { return { "{" }; })
       .AddTab();
 

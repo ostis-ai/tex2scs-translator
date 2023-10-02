@@ -8,7 +8,7 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
 {
   std::string const & relationSetType = params.at(COMMAND_TYPE_POS);
 
-  if (relationSetType == "scnitemize")
+  if (relationSetType.find("scnitemize") != std::string::npos)
     return SCsStream()
       .Row([]() -> SCsStream { return { "</li>" };})
       .RemoveTab()
@@ -24,17 +24,16 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
       .Formatted([]() -> SCsStream { return { "*)" }; });
   else if (relationSetType == "scnset")
     return SCsStream()
-      .SetCurrentCommand("scnset")
+      .SetCurrentCommand("listend")
       .RemoveTab()
-      .Offset([]() -> SCsStream { return { "}" }; });
+      .Formatted([]() -> SCsStream { return { "}" }; });
 
   auto const & item = m_setTypes.find(relationSetType);
   if (item == m_setTypes.cend())
     return "";
 
   return SCsStream()
-    .RemoveTab()
-    .Row([&](SCsStream & stream) {
+    .PreFormatted([&](SCsStream & stream) {
       auto const attrs = item->second;
 
       auto const GetEndBracket = [&]() -> std::string {
@@ -44,6 +43,7 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
       std::string const endBracket = GetEndBracket();
 
       stream
+      .RemoveTab()
       .SetCurrentCommand(endBracket.empty() ? "le" : endBracket)
       .Formatted([&]() -> SCsStream {
         return { endBracket };

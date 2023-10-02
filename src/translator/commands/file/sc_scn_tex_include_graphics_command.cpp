@@ -5,5 +5,5 @@ ScScnTexCommandResult ScSCnTexIncludeGraphicsCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  return params.at(3);
+  return params.at(1);
 }
