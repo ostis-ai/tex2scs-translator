@@ -10,10 +10,7 @@ ScScnTexCommandResult ScSCnTexFileLongCommand::Complete(
   std::string content = params.at(params.size() - 1);
 
   return SCsStream()
-  .PreFormatted()
-  .Formatted([&content](SCsStream & stream) {
-    stream.Row([&content]() -> SCsStream {
-      return { SCsHelper::File(content) };
-    });
+  .Row([&content]() -> SCsStream {
+    return { SCsHelper::File(content) };
   });
 }

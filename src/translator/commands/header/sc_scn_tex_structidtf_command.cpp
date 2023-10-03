@@ -8,6 +8,6 @@ ScScnTexCommandResult ScSCnTexStructIdtfCommand::Complete(
   std::string const & idtf = params.at(1);
 
   return SCsStream().Row([&idtf]() -> SCsStream {
-    return { "<b><em>", idtf, "</b></em>]" };
+    return { "<b><em>", idtf, "</b></em>" };
   });
 }

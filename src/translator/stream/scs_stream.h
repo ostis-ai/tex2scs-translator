@@ -151,10 +151,10 @@ private:
 
   void PreFormat()
   {
-    if (m_begins.find(m_lastCommand) != m_begins.cend())
+    if (m_lastCommand == "(*")
       return;
 
-    if (m_lastCommand == "(*")
+    if (m_formats.find(m_currentCommand) != m_formats.cend())
       return;
 
     std::string const savedCurrentCommand = m_currentCommand;

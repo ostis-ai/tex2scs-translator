@@ -44,7 +44,7 @@ public:
 
   static bool IsFile(std::string const & string)
   {
-    return (string.rfind('[') == 0) || (string.rfind("![") == 0);
+    return (string.find('[') != std::string::npos) || (string.rfind("![") != std::string::npos);
   }
 
   static std::string Url(std::string const & idtf)
