@@ -57,24 +57,21 @@ public:
 
   SCsStream & Formatted(std::function<void(SCsStream &)> const & formatted)
   {
-    PreFormat([this, &formatted]() {
-      formatted(*this << DefineSemicolons() << DefineEndline() << DefineOffset());
-    });
+    formatted(*this << DefineSemicolons() << DefineEndline() << DefineOffset());
     return *this;
   }
 
-  SCsStream & PreFormatted(std::function<void(SCsStream &)> const & formatted)
+  SCsStream & PreFormatted(std::function<void(SCsStream &)> const & formatted = {})
   {
-    PreFormat([]() {});
-    formatted(*this);
+    PreFormat();
+    if (formatted)
+      formatted(*this);
     return *this;
   }
 
   SCsStream & Formatted(std::function<SCsStream()> const & formatted)
   {
-    PreFormat([this, &formatted]() {
-      *this << DefineSemicolons() << DefineEndline() << DefineOffset() << formatted();
-    });
+    *this << DefineSemicolons() << DefineEndline() << DefineOffset() << formatted();
     return *this;
   }
 
@@ -152,18 +149,35 @@ private:
   static std::unordered_map<std::string, std::vector<std::string>> m_formats;
   static std::unordered_set<std::string> m_begins;
 
-  void PreFormat(std::function<void()> const & format)
+  void PreFormat()
   {
-    std::string const savedSemicolons = m_semicolons;
-    std::string const savedLastCommand = m_lastCommand;
+    if (m_lastCommand == "(*")
+      return;
+
+    if (m_formats.find(m_currentCommand) != m_formats.cend())
+      return;
+
     std::string const savedCurrentCommand = m_currentCommand;
 
-    bool const noOtherAttached = m_currentCommand != "(*";
-    if (!m_attached.empty())
-    {
+    auto const & BeginIndent = [this]() {
       SetCurrentCommand("(*");
-      m_lastCommand = savedLastCommand;
-      *this << DefineSemicolons() << DefineEndline() << DefineOffset() << "(*";
+      SetCurrentCommand("(*");
+      *this << DefineEndline() << DefineOffset() << "(*";
+      SetDoubleSemicolons();
+    };
+
+    auto const & EndIndent = [this](std::string const & savedCurrentCommand) {
+      SetCurrentCommand("*)");
+      *this << DefineSemicolons() << DefineEndline();
+      UnsetDoubleSemicolons();
+      *this << DefineOffset() << "*)";
+      m_currentCommand = savedCurrentCommand;
+    };
+
+    bool const noOtherAttached = savedCurrentCommand != "(*";
+    if (!m_attached.empty() || !noOtherAttached)
+    {
+      BeginIndent();
 
       std::for_each(m_attached.begin(), m_attached.end(), [this](std::string const & element) {
         SetCurrentCommand("any");
@@ -171,19 +185,11 @@ private:
       });
 
       if (noOtherAttached)
-      {
-        SetCurrentCommand("*)");
-        *this << DefineSemicolons() << DefineEndline() << DefineOffset() << "*)";
-        m_semicolons = savedSemicolons;
-      }
-      else
-        *this << ";;";
-
-      SetCurrentCommand(savedCurrentCommand);
+        EndIndent(savedCurrentCommand);
     }
 
-    if (m_attached.empty() || noOtherAttached)
-      format();
+    if (savedCurrentCommand == "*)")
+      EndIndent("any");
 
     m_attached.clear();
   }
@@ -211,17 +217,6 @@ private:
       std::string const oldSemicolons = m_semicolons;
 
       auto const semicolonsTypes = item->second;
-      if (semicolonsTypes.size() == 2)
-      {
-        auto const endSemicolonsType = semicolonsTypes.at(1);
-        if (endSemicolonsType == "++")
-          SetDoubleSemicolons();
-        else if (endSemicolonsType == "--")
-          UnsetDoubleSemicolons();
-        else
-          m_semicolons = endSemicolonsType;
-      }
-
       auto const & beginSemicolonsType = semicolonsTypes.at(0);
       if (beginSemicolonsType == "cur")
         return oldSemicolons;
@@ -229,7 +224,8 @@ private:
       return semicolonsTypes.at(0);
     }
 
-    if ((m_lastCommand.find("item") != std::string::npos || m_formats.find(m_lastCommand) != m_formats.cend())
+    if ((m_lastCommand.find("item") != std::string::npos
+      || m_begins.find(m_lastCommand) != m_begins.cend() || m_lastCommand == "any")
         && m_currentCommand.find("item") != std::string::npos)
       return ";";
 
@@ -280,9 +276,6 @@ private:
 
   static std::string DefineOffset()
   {
-    if (m_currentCommand == "(*")
-      return SCsStream::m_offset.substr(0, m_offset.size() - 1);
-
     return m_offset;
   }
 

@@ -15,6 +15,7 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
     return "";
 
   return SCsStream()
+    .PreFormatted()
     .SetCurrentCommand(relationType)
     .Row([&](SCsStream & stream) {
       auto const attrs = item->second;

@@ -21,7 +21,7 @@ ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
   else if (relationSetType == "scnindent")
     return SCsStream()
       .SetCurrentCommand("*)")
-      .Formatted([]() -> SCsStream { return { "*)" }; });
+      .PreFormatted([](SCsStream & stream) {});
   else if (relationSetType == "scnset")
     return SCsStream()
       .SetCurrentCommand("listend")

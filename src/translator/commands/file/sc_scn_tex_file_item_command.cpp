@@ -11,6 +11,7 @@ ScScnTexCommandResult ScSCnTexFileItemCommand::Complete(
   std::string const & content = params.at(params.size() - 1);
 
   return SCsStream()
+    .PreFormatted()
     .SetCurrentCommand(name)
     .Row([&](SCsStream & stream) {
       stream

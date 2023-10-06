@@ -9,6 +9,7 @@ ScScnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
   std::string const & systemIdtf = tree.Add(idtf, "sc_node_struct");
 
   return SCsStream()
+    .PreFormatted()
     .SetCurrentCommand(params.at(0))
     .Formatted([&systemIdtf]() -> SCsStream {
       return { systemIdtf };

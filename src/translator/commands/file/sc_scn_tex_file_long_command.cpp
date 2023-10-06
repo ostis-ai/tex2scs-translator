@@ -9,9 +9,8 @@ ScScnTexCommandResult ScSCnTexFileLongCommand::Complete(
 {
   std::string content = params.at(params.size() - 1);
 
-  return SCsStream().Tabulated([&content](SCsStream & stream) {
-    stream.Row([&content]() -> SCsStream {
-      return { SCsHelper::File(content) };
-    });
+  return SCsStream()
+  .Row([&content]() -> SCsStream {
+    return { SCsHelper::File(content) };
   });
 }

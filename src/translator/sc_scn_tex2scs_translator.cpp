@@ -32,6 +32,9 @@ void ScSCnTex2SCsTranslator::TranslateFiles(
         TranslateFiles(directory.GetPath(), startDirectory, startTargetDirectory);
       },
       [this, &targetDirectory](ScFile const & file) {
+        if (!file.HasExtension(m_extensions))
+          return;
+
         SCsStream::Clear();
         bool result = TranslateFile(file.GetPath(), targetDirectory);
         std::cout << "[" << ++m_fileNumber << "/" << m_filesCount << "]: " << file.GetPath()

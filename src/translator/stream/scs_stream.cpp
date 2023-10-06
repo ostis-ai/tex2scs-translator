@@ -9,10 +9,8 @@ std::string SCsStream::m_currentCommand;
 std::vector<std::string> SCsStream::m_attached;
 
 std::unordered_map<std::string, std::vector<std::string>> SCsStream::m_formats = {
-  { "(*", { "", "++" } },
-  { "*)", { ";;", "--" } },
-  { "[*", { "cur", ";;" } },
-  { "*]", { ";;", ";" } },
+  { "[*", { "cur" } },
+  { "*]", { ";;" } },
   { "{",  { "cur" } },
   { "}",  { "" } },
   { "<",  { "cur" } },

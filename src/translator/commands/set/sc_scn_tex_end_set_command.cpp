@@ -5,7 +5,9 @@ ScScnTexCommandResult ScSCnTexEndSetCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  return SCsStream().Formatted([](SCsStream & stream) -> SCsStream {
+  return SCsStream()
+  .PreFormatted()
+  .Formatted([](SCsStream & stream) -> SCsStream {
     return { ")" };
   });
 }
