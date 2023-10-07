@@ -1,7 +1,35 @@
 #include "sc_scn_tex2scs_translator.h"
+#include "log/sc_log.hpp"
 
-bool ScSCnTex2SCsTranslator::Run(std::string const & workDirectoryPath, std::string const & targetDirectoryPath)
+ScSCnTex2SCsTranslator::ScSCnTex2SCsTranslator(bool debugMode, bool clearMode)
 {
+  m_debugMode = debugMode;
+  m_clearMode = clearMode;
+}
+
+bool ScSCnTex2SCsTranslator::Run(
+    std::string const & workDirectoryPath, std::string const & targetDirectoryPath, size_t elementSysId = 0)
+{
+  if (!ScDirectory::IsDirectory(workDirectoryPath))
+  {
+    SC_LOG_ERROR("Source path is not directory");
+    return false;
+  }
+
+  SC_LOG_INFO("Start translate scn-tex sources:");
+
+  if (m_debugMode)
+  {
+    SC_LOG_INFO("Set debug mode");
+    utils::ScLog::SetDebugMode();
+  }
+  else
+    SC_LOG_INFO("Set release mode");
+
+  ScSCnPrefixTree::GetInstance()->SetNewElementNumber(elementSysId);
+  SC_LOG_WARNING("First element system identifier: "
+    << ScSCnPrefixTree::GetInstance()->GetFreeElementSystemIdentifier());
+
   ScDirectory const & workDirectory{workDirectoryPath};
   m_filesCount = workDirectory.CountFiles(m_extensions);
   ScDirectory const & targetDirectory{targetDirectoryPath};
@@ -9,14 +37,22 @@ bool ScSCnTex2SCsTranslator::Run(std::string const & workDirectoryPath, std::str
   std::string const & startDirectoryPath = workDirectory.GetPath();
   m_fileNumber = 0;
 
-  std::cout << "SCn-tex sources directory: " << workDirectory.GetPath() << std::endl;
-  std::cout << "Target SCs sources directory: " << targetDirectory.GetPath() << std::endl;
+  SC_LOG_INFO("SCn-tex sources directory: " << workDirectory.GetPath());
+  SC_LOG_INFO("Target SCs sources directory: " << targetDirectory.GetPath());
 
-  std::cout << "Start translate scn-tex sources:" << std::endl;
+  if (m_clearMode)
+  {
+    SC_LOG_INFO("Clear target SCs sources directory");
+    ScDirectory{targetDirectory}.RemoveDirectory();
+  }
+
   TranslateFiles(startDirectoryPath, workDirectory, targetDirectory);
   DumpIdentifiers(targetDirectory);
   DumpFileStructs(targetDirectory);
-  std::cout << "Translation finished" << std::endl;
+
+  SC_LOG_WARNING("Free element system identifier: "
+    << ScSCnPrefixTree::GetInstance()->GetFreeElementSystemIdentifier());
+  SC_LOG_INFO("Translation finished");
 
   return true;
 }
@@ -38,8 +74,8 @@ void ScSCnTex2SCsTranslator::TranslateFiles(
 
         SCsStream::Clear();
         bool result = TranslateFile(file.GetPath(), targetDirectory);
-        std::cout << "[" << ++m_fileNumber << "/" << m_filesCount << "]: " << file.GetPath()
-                  << " - " << (result ? "OK" : "ERROR") << std::endl;
+        SC_LOG_INFO("[" << ++m_fileNumber << "/" << m_filesCount << "]: " << file.GetPath()
+                  << " - " << (result ? "OK" : "ERROR"));
       });
 }
 
@@ -56,8 +92,8 @@ bool ScSCnTex2SCsTranslator::TranslateFile(
   }
   catch (std::exception const & e)
   {
-    std::cout << e.what() << std::endl;
     targetFile.Write(e.what());
+    SC_LOG_ERROR(e.what());
     return false;
   }
 

@@ -15,6 +15,10 @@ public:
 
   std::string Get(std::string const & key);
 
+  void SetNewElementNumber(size_t elementSysId);
+
+  std::string GetFreeElementSystemIdentifier();
+
   std::string Dump() const;
 
 protected:

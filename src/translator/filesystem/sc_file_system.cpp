@@ -13,6 +13,16 @@ std::string ScDirectory::GetPath() const
   return m_path;
 }
 
+bool ScDirectory::IsDirectory(std::string const & path)
+{
+  return std::filesystem::is_directory(path);
+}
+
+void ScDirectory::RemoveDirectory()
+{
+  std::filesystem::remove_all(m_path);
+}
+
 ScFile ScDirectory::CopyFile(std::string const & filePath, std::string const & newExtension) const
 {
   std::string const & fileNameWithExt = filePath.substr(filePath.rfind('/') + 1, filePath.size());

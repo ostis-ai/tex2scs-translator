@@ -27,7 +27,7 @@ Tex2SCs-translator is a tool for translating SCn-represented *.tex files into SC
   1. Native
   ```sh
   # translate files
-  ./bin/scn-tex2scs -s <path to folder with scn-tex sources> -t <target folder for translated scs sources>
+  ./bin/scn-tex2scs -d -c -s <path to folder with scn-tex sources> -t <target folder for translated scs sources>
   ```
   
   2. Docker
