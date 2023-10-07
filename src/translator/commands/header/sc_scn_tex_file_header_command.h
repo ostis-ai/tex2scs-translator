@@ -2,7 +2,7 @@
 
 #include "../sc_scn_tex_command.h"
 
-class ScSCnTexRoleSignCommand : public ScSCnTexCommand
+class ScSCnTexFileHeaderCommand : public ScSCnTexCommand
 {
 public:
   ScScnTexCommandResult Complete(

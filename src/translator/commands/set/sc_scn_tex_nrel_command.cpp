@@ -12,7 +12,13 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
 
   auto const & item = m_elementTypes.find(relationType);
   if (item == m_elementTypes.cend())
-    return "";
+  {
+    auto const & symbolItem = m_symbolTypes.find(relationType);
+    if (symbolItem == m_symbolTypes.cend())
+      return "";
+    else
+      return symbolItem->second.at(0);
+  }
 
   return SCsStream()
     .PreFormatted()
@@ -50,13 +56,16 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
             : params.at(MIN_OBJECT_PARAM_POS);
 
         auto const & fileItem = m_fileTypes.find(relationType);
+        auto const & fileClassItem = m_fileClassTypes.find(relationType);
         auto const & urlItem = m_urlTypes.find(relationType);
         return fileItem == m_fileTypes.cend()
-          ? urlItem == m_urlTypes.cend()
-            ? SCsHelper::IsURL(object) || SCsHelper::IsFile(object)
-              ? object
-              : tree.Add(object, SCsHelper::GetNodeTypeByIdtf(object))
-            : SCsHelper::Url(object)
+          ? fileClassItem == m_fileClassTypes.cend()
+            ? urlItem == m_urlTypes.cend()
+              ? SCsHelper::IsURL(object) || SCsHelper::IsFile(object)
+                ? object
+                : tree.Add(object, SCsHelper::GetNodeTypeByIdtf(object))
+              : SCsHelper::Url(object)
+            : SCsHelper::FileClass(object)
           : SCsHelper::File(object);
       };
 

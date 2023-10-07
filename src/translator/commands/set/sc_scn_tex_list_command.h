@@ -73,6 +73,7 @@ protected:
     { "scnhasvarelementrole",{ "_->", "::" } },
 
     { "scneqfile",           { "<=>", ":", "семантическая эквивалентность*" } },
+    { "scneqfileclass",      { "<=>", ":", "семантическая эквивалентность*" } },
     { "scneqimage",          { "<=>", ":", "семантическая эквивалентность*" } },
     { "scnidtftext",         { "=>", ":", "идентификатор*" } },
     { "scntext",             { "=>", ":" } },
@@ -81,13 +82,67 @@ protected:
     { "scnexplanation",      { "=>", ":", "пояснение*" } },
     { "scnidtfdef",          { "=>", ":", "пояснение*" } },
 
+    { "scncomment",          { "=>", ":", "комментарий*" } },
+    { "scnsourcecomment",    { "=>", ":", "комментарий*" } },
+    { "scnciteannotation",   { "=>", ":", "аннотация*" } },
+
     { "scnsdmainclasssingle",{ "->", ":", "максимальный класс объектов исследования'" } },
   };
 
+  std::unordered_map<std::string, std::vector<std::string>> m_symbolTypes = {
+    { "scnnonamednode",      { "..." } },
+
+    { "scnsupergroupsign",   { "^" } },
+    { "scnrolesign",         { "'" } },
+
+    { "newpage",             { "\n" } },
+    { "newline",             { "\n" } },
+    { "\\",                  { "\n" } },
+
+    { "scnleftcurlbrace",    { "{" } },
+    { "scnrightcurlbrace",   { "}" } },
+    { "scnleftsquarebrace",  { "\\[" } },
+    { "scnrightsquarebrace", { "\\]" } },
+    { "scnslash",            { "/" } },
+    { "scnhyphen",           { "-" } },
+
+    { "in",                  { "∈" } },
+    { "notin",               { "∉" } },
+    { "ni",                  { "∋" } },
+    { "subseteq",            { "⊆" } },
+    { "subset",              { "⊂" } },
+    { "supseteq",            { "⊇" } },
+    { "supset",              { "⊃" } },
+    { "cup",                 { "⋃" } },
+    { "cap",                 { "⋂" } },
+    { "setminus",            { "\\" } },
+    { "Rightarrow",          { "⇒" } },
+    { "rightarrow",          { "→" } },
+    { "Leftrightarrow",      { "⇔" } },
+    { "wedge",               { "∧" } },
+    { "vee",                 { "∨" } },
+    { "neg",                 { "¬" } },
+    { "forall",              { "∀" } },
+    { "exists",              { "∃" } },
+    { "to",                  { "→" } },
+    { "mapsto",              { "↦" } },
+    { "bullet",              { "•" } },
+    { "ldots",               { "..." } },
+    { "eq",                  { "=" } },
+    { "neq",                 { "≠" } },
+
+    { "textunderscore",      { "_" } },
+  };
+
   std::unordered_set<std::string> m_fileTypes = {
-    "scnfileimage", "scnfileitem", "scnfilelong", "scnfilescgitem", "scnfileclass",
+    "scnfileimage", "scnfileitem", "scnfilelong", "scnfilescgitem",
     "scnidtftext", "scntext",
-    "scnnote", "scnidtf", "scnexplanation", "scnidtfdef"
+    "scnnote", "scnidtf", "scnexplanation", "scnidtfdef", "scncomment",
+    "scnsourcecomment", "scnciteannotation",
+  };
+
+  std::unordered_set<std::string> m_fileClassTypes = {
+    "scnfileclass", "scneqfileclass"
   };
 
   std::unordered_set<std::string> m_urlTypes = {
