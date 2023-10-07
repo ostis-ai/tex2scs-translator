@@ -37,7 +37,7 @@ int main(int argc, const char * argv[]) try
 
   bool debugMode = vm.count("debug");
   bool clearMode = vm.count("clear");
-  size_t elementSysId = vm.count("id") && (vm["id"].as<int>() > 0) ? vm["id"].as<size_t>() : 0;
+  size_t elementSysId = vm.count("id") && (vm["id"].as<int>() > 0) ? vm["id"].as<int>() : 0;
 
   auto translator = ScSCnTex2SCsTranslatorBuilder::BuildDefaultTranslator(debugMode, clearMode);
   return translator->Run(workDirectory, targetDirectory, elementSysId) ? EXIT_SUCCESS : EXIT_FAILURE;

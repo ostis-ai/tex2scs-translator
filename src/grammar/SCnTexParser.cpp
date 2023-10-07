@@ -242,7 +242,7 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
           }
           else
           {
-            std::cout << "Ignore command: " << _localctx->commandName << std::endl;
+            SC_LOG_WARNING("Ignore command: " << _localctx->commandName);
             dynamic_cast<ScnTexCommandContext *>(_localctx)->command =  nullptr;
           }
         
@@ -427,7 +427,7 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
 
           if (_localctx->command != nullptr)
           {
-            std::cout << "Interpreter command: " << _localctx->commandName << std::endl;
+            SC_LOG_DEBUG("Interpreter command: " << _localctx->commandName);
             history->push_back(_localctx->commandName);
             dynamic_cast<ScnTexCommandContext *>(_localctx)->resultText =  _localctx->command->Complete(*history, *prefixTree, params);
           }

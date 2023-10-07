@@ -60,7 +60,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
       }
       else
       {
-        std::cout << "Ignore command: " << $commandName << std::endl;
+        SC_LOG_WARNING("Ignore command: " << $commandName);
         $command = nullptr;
       }
     }
@@ -95,7 +95,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     {
       if ($command != nullptr)
       {
-        std::cout << "Interpreter command: " << $commandName << std::endl;
+        SC_LOG_DEBUG("Interpreter command: " << $commandName);
         history->push_back($commandName);
         $resultText = $command->Complete(*history, *prefixTree, params);
       }
