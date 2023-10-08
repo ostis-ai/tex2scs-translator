@@ -51,7 +51,7 @@ void SCsStream::PreFormat()
     *this << DefineSemicolons() << DefineEndline();
     UnsetDoubleSemicolons();
     *this << DefineOffset() << "*)";
-    m_currentCommand = savedCurrentCommand;
+    SetCurrentCommand(savedCurrentCommand);
   };
 
   bool const noOtherAttached = savedCurrentCommand != "(*";

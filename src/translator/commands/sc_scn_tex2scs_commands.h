@@ -31,10 +31,11 @@ static ScSCnTexCommands const commands = {
     { "scnfilescgitem", new ScSCnTexFileSCgItemCommand() },
     { "includegraphics", new ScSCnTexIncludeGraphicsCommand() },
 
+    { "currentname", new ScSCnTexCurrentNameCommand() },
+    { "input", new ScSCnTexInputCommand() },
     { "scnheader", new ScSCnTexHeaderCommand() },
     { "scnfilelongheader", new ScSCnTexFileHeaderCommand() },
     { "scnheaderlocal", new ScSCnTexHeaderLocalCommand() },
-    { "currentname", new ScSCnTexCurrentNameCommand() },
     { "scnstructheader", new ScSCnTexStructHeaderCommand() },
     { "scnstructheaderlocal", new ScSCnTexStructHeaderLocalCommand() },
     { "scnsectionheader", new ScSCnTexSectionHeaderCommand() },

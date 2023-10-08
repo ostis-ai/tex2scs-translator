@@ -14,6 +14,7 @@
 #include "file/sc_scn_tex_include_graphics_command.h"
 
 #include "header/sc_scn_tex_current_name_command.h"
+#include "header/sc_scn_tex_input_command.h"
 #include "header/sc_scn_tex_header_command.h"
 #include "header/sc_scn_tex_file_header_command.h"
 #include "header/sc_scn_tex_header_local_command.h"

@@ -1,5 +1,6 @@
 
-#include "../translator/tree/sc_scn_prefix_tree.h"
+#include "../translator/identifiers-tree/sc_scn_prefix_tree.h"
+#include "../translator/file-structs/sc_scn_file_structs_tree.h"
 #include "../translator/commands/sc_scn_tex2scs_commands.h"
 
 
@@ -46,6 +47,7 @@ public:
     using ScSCnCommandsHistory = std::vector<std::string>;
     ScSCnCommandsHistory * history = new ScSCnCommandsHistory();
     ScSCnPrefixTree * prefixTree = ScSCnPrefixTree::GetInstance();
+    ScSCnFileStructsTree * fileStructsTree = ScSCnFileStructsTree::GetInstance();
     SCnTexParser::ScnTexCommandContext *result = nullptr;;
     ScnTexTextContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
