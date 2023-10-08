@@ -105,6 +105,7 @@ protected:
     { "scnrightsquarebrace", { "\\]" } },
     { "scnslash",            { "/" } },
     { "scnhyphen",           { "-" } },
+    { "colon",               { ":" } },
     { "scnstar",             { "\\*" } },
 
     { "in",                  { "∈" } },
