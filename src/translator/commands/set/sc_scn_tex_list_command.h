@@ -143,6 +143,7 @@ protected:
     { "reg",                 { "<=" } },
     { "langle",              { "<" } },
     { "rangle",              { ">" } },
+    { "log",                 { "log" } },
 
     { "textunderscore",      { "_" } },
   };

@@ -9,6 +9,7 @@ using ScSCnTexCommands = std::unordered_map<std::string, ScSCnTexCommand *>;
 
 static ScSCnTexCommands const commands = {
     { "textit", new ScSCnTexTextitCommand() },
+    { "mathbb", new ScSCnTexTextitCommand() },
     { "textbf", new ScSCnTexTextbfCommand() },
     { "bm", new ScSCnTexTextbfCommand() },
     { "mbox", new ScSCnTexTextbfCommand() },
