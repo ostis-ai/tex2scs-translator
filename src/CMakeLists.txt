@@ -7,7 +7,7 @@ add_custom_command(OUTPUT
     "${TRANSLATOR_DIR}/SCnTexParser.cpp"
     "${TRANSLATOR_DIR}/SCnTexParser.h"
     COMMAND "${Java_JAVA_EXECUTABLE}" -jar "${ANTLR_DIR}/antlr-4.7.1-complete.jar"
-        ${GRAMMAR_DIR}/SCnTex.g4 -no-listener -package translator
+        ${GRAMMAR_DIR}/SCnTex.g4 -no-listener
     WORKING_DIRECTORY "${TRANSLATOR_DIR}"
     DEPENDS ${GRAMMAR_DIR}/SCnTex.g4
 )

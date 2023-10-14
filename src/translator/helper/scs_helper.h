@@ -73,7 +73,9 @@ public:
     if (pos == std::string::npos)
       return "=> nrel_format: format_png";
 
-    std::string const fileExt = string.substr(pos + 1, string.size() - pos - 2);
+    std::string fileExt = string.substr(pos + 1, string.size() - pos - 2);
+    if (fileExt.at(fileExt.size() - 1) == '\"')
+      fileExt = fileExt.substr(0, fileExt.size() - 1);
     return "=> nrel_format: format_" + fileExt;
   }
 

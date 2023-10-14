@@ -42,79 +42,63 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   returns [std::string resultText]
   locals [ScSCnTexCommand * command, std::string commandName]
   :
-  (name=scnTexCommandName
-  {
-  $commandName = $name.text.substr(1);
-  auto const & it = commands.find($commandName);
+  ('$'? name=scnTexCommandName
+    {
+      $commandName = $name.text.substr(1);
+      auto const & it = commands.find($commandName);
 
-  auto const & ignoreIt = ignoreCommands.find($commandName);
-  if (ignoreIt == ignoreCommands.cend())
-  {
-    if (it != commands.cend())
-      $command = it->second;
-    else
-      $command = commands.find("relation")->second;
-  }
-  else
-  {
-    std::cout << "Ignore command: " << $commandName << std::endl;
-    $command = nullptr;
-  }
-  })
+      auto const & ignoreIt = ignoreCommands.find($commandName);
+      if (ignoreIt == ignoreCommands.cend())
+      {
+        if (it != commands.cend())
+          $command = it->second;
+        else
+          $command = commands.find("relation")->second;
+      }
+      else
+      {
+        std::cout << "Ignore command: " << $commandName << std::endl;
+        $command = nullptr;
+      }
+    }
+  )
   WS?
   {
-  ScScnTexCommandParams params;
-  params.push_back($commandName);
+    ScScnTexCommandParams params;
+    params.push_back($commandName);
   }
-  (
-    WS? b=('{' | '[') WS?
+  (WS? b=('{' | '[') WS?
     {
-    std::stringstream argStream;
-    }
-    (
-      WS? sent=scnTexCommandContent
-      {
-      if ($ctx->b->getText() == "{")
-        argStream << $sent.text;
-      }
-      | WS? result=scnTexCommand[$history, $prefixTree]
-      {
-      argStream << $result.resultText;
-      }
-    )*
-    {
-    if ($ctx->b->getText() == "{")
-      params.push_back(argStream.str());
-    }
-    (WS? '\\and' WS?
-      {
       std::stringstream argStream;
-      }
-      (
-        WS? sent=scnTexCommandContent
-        {
-        argStream << $sent.text;
-        }
-        | WS? result=scnTexCommand[$history, $prefixTree]
-        {
-        argStream << $result.resultText;
-        }
-      )*
+    }
+    (WS? result=scnTexCommand[$history, $prefixTree]
       {
-        params.push_back(argStream.str());
+        argStream << $result.resultText;
       }
+      | WS? '$'? sent=scnTexCommandContent '$'?
+      {
+        if ($ctx->b->getText() == "{")
+          argStream << $sent.text;
+      }
+      | '~'
     )*
-    WS? ('}' | ']') WS?
+    {
+      if ($ctx->b->getText() == "{")
+        params.push_back(argStream.str());
+    }
+  WS? ('}' | ']') WS?
   )*
-  {
-  if ($command != nullptr)
-  {
-    std::cout << "Interpreter command: " << $commandName << std::endl;
-    history->push_back($commandName);
-    $resultText = $command->Complete(*history, *prefixTree, params);
-  }
-  $command == nullptr;
-  } COMMENT?
+  '$'?
+    {
+      if ($command != nullptr)
+      {
+        std::cout << "Interpreter command: " << $commandName << std::endl;
+        history->push_back($commandName);
+        $resultText = $command->Complete(*history, *prefixTree, params);
+      }
+      $command == nullptr;
+    }
+  COMMENT?
   ;
 
 scnTexCommandContent
@@ -127,13 +111,13 @@ scnTexCommandName
 
 TEXT
   : ([а-яёЁА-Яa-zA-Z0-9]
-  | '!' | '@' | '#' | '$' | '%' | '^' | '&' | '(' | ')'
-  | '_' | '+' | '-' | '=' | '/' | '*' | '.' | '~' | '`'
+  | '!' | '@' | '#' | '%' | '^' | '&' | '(' | ')'
+  | '_' | '+' | '-' | '=' | '/' | '*' | '.' | '`'
   | ',' | '|' | ' ' | ':' | ';' | '<' | '>' | '?')+
   ;
 
 NAME
-  : '\\' ([a-zA-Z0-9\\])*
+  : '\\' ([a-zA-Z0-9_])*
   ;
 
 WS

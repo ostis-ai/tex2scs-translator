@@ -16,8 +16,8 @@
 class  SCnTexParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, TEXT = 6, NAME = 7, 
-    WS = 8, COMMENT = 9
+    T__0 = 1, T__1 = 2, T__2 = 3, T__3 = 4, T__4 = 5, T__5 = 6, TEXT = 7, 
+    NAME = 8, WS = 9, COMMENT = 10
   };
 
   enum {
@@ -71,8 +71,8 @@ public:
     std::string commandName;
     SCnTexParser::ScnTexCommandNameContext *name = nullptr;;
     antlr4::Token *b = nullptr;;
-    SCnTexParser::ScnTexCommandContentContext *sent = nullptr;;
     SCnTexParser::ScnTexCommandContext *result = nullptr;;
+    SCnTexParser::ScnTexCommandContentContext *sent = nullptr;;
     ScnTexCommandContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     ScnTexCommandContext(antlr4::ParserRuleContext *parent, size_t invokingState, ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree);
     virtual size_t getRuleIndex() const override;
@@ -80,10 +80,10 @@ public:
     std::vector<antlr4::tree::TerminalNode *> WS();
     antlr4::tree::TerminalNode* WS(size_t i);
     antlr4::tree::TerminalNode *COMMENT();
-    std::vector<ScnTexCommandContentContext *> scnTexCommandContent();
-    ScnTexCommandContentContext* scnTexCommandContent(size_t i);
     std::vector<ScnTexCommandContext *> scnTexCommand();
     ScnTexCommandContext* scnTexCommand(size_t i);
+    std::vector<ScnTexCommandContentContext *> scnTexCommandContent();
+    ScnTexCommandContentContext* scnTexCommandContent(size_t i);
 
    
   };
