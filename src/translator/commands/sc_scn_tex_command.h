@@ -7,7 +7,7 @@
 
 #include "../stream/scs_stream.h"
 
-#include "../tree/sc_scn_prefix_tree.h"
+#include "../identifiers-tree/sc_scn_prefix_tree.h"
 
 using ScScnTexCommandParams = std::vector<std::string>;
 using ScScnTexCommandResult = std::string;

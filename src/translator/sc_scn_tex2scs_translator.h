@@ -35,4 +35,6 @@ private:
   std::string TranslateText(std::string const & filePath);
 
   void DumpIdentifiers(ScDirectory const & targetDirectory);
+
+  void DumpFileStructs(ScDirectory const & targetDirectory);
 };

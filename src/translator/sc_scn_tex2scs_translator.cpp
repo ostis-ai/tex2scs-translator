@@ -15,6 +15,7 @@ bool ScSCnTex2SCsTranslator::Run(std::string const & workDirectoryPath, std::str
   std::cout << "Start translate scn-tex sources:" << std::endl;
   TranslateFiles(startDirectoryPath, workDirectory, targetDirectory);
   DumpIdentifiers(targetDirectory);
+  DumpFileStructs(targetDirectory);
   std::cout << "Translation finished" << std::endl;
 
   return true;
@@ -56,11 +57,11 @@ bool ScSCnTex2SCsTranslator::TranslateFile(
   catch (std::exception const & e)
   {
     std::cout << e.what() << std::endl;
+    targetFile.Write(e.what());
     return false;
   }
 
   targetFile.Write(scsText);
-
   return true;
 }
 
@@ -86,4 +87,9 @@ void ScSCnTex2SCsTranslator::DumpIdentifiers(ScDirectory const & targetDirectory
 
   std::string const scsText = ScSCnPrefixTree::GetInstance()->Dump();
   dumpFile.Write(scsText);
+}
+
+void ScSCnTex2SCsTranslator::DumpFileStructs(ScDirectory const & targetDirectory)
+{
+  ScSCnFileStructsTree::GetInstance()->Dump(targetDirectory);
 }

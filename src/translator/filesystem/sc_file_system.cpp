@@ -15,14 +15,14 @@ std::string ScDirectory::GetPath() const
 
 ScFile ScDirectory::CopyFile(std::string const & filePath, std::string const & newExtension) const
 {
-  std::string const & fileName = filePath.substr(filePath.rfind('/') + 1, filePath.size());
-  std::string const & fileNameWithoutExtension = fileName.substr(0, fileName.rfind('.'));
+  std::string const & fileNameWithExt = filePath.substr(filePath.rfind('/') + 1, filePath.size());
+  std::string const & fileName = fileNameWithExt.substr(0, fileNameWithExt.rfind('.'));
 
   ScStringStream stream;
   (m_path.at(m_path.size() - 1) == '/'
    ? stream << m_path
    : stream << m_path << "/")
-      << fileNameWithoutExtension << (newExtension.at(0) == '.' ? newExtension : "." + newExtension);
+      << fileName << (newExtension.at(0) == '.' ? newExtension : "." + newExtension);
 
   return ScFile{stream};
 }
@@ -60,6 +60,11 @@ size_t ScDirectory::CountFiles(std::unordered_set<std::string> const & extension
   return count;
 }
 
+ScFile ScDirectory::GetFileByName(std::string const & fileName) const
+{
+  return ScFile{PathFiles(m_path, fileName)};
+}
+
 void ScDirectory::ForEach(
     std::function<void(ScDirectory const & directory)> const & directoryCallback,
     std::function<void(ScFile const & file)> const & fileCallback)
@@ -68,14 +73,32 @@ void ScDirectory::ForEach(
   for (auto const & item : it)
   {
     if (item.is_directory() && directoryCallback)
-    {
       directoryCallback(ScDirectory(item.path()));
-    }
     else if (fileCallback)
-    {
       fileCallback(ScFile(item.path()));
-    }
   }
+}
+
+std::string ScDirectory::PathFiles(
+    std::string const & workDirectory, std::string const & fileName) const
+{
+  std::string foundPath;
+
+  auto const & it = std::filesystem::directory_iterator{workDirectory};
+  for (auto & item : it)
+  {
+    auto const & path = item.path();
+
+    if (item.is_directory())
+      foundPath = PathFiles(path, fileName);
+    else if (item.is_regular_file() && path.filename() == fileName)
+      foundPath = path;
+
+    if (!foundPath.empty())
+      return foundPath;
+  }
+
+  return "";
 }
 
 void ScDirectory::PathFiles(
@@ -87,12 +110,8 @@ void ScDirectory::PathFiles(
     std::string const & path = item.path();
 
     if (item.is_directory())
-    {
       PathFiles(path, count, extensions);
-    }
     else if (ScFile{path}.HasExtension(extensions))
-    {
       ++count;
-    }
   }
 }
