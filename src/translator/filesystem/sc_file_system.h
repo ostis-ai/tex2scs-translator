@@ -26,7 +26,7 @@ public:
   void Write(std::string const & text)
   {
     std::ofstream file;
-    file.open(m_path);
+    file.open(m_path, std::ios::app);
 
     file << text;
 
@@ -67,6 +67,10 @@ public:
   ScDirectory(std::string path);
 
   [[nodiscard]] std::string GetPath() const;
+
+  static bool IsDirectory(std::string const & path);
+
+  void RemoveDirectory();
 
   [[nodiscard]] ScFile CopyFile(std::string const & filePath, std::string const & newExtension) const;
 

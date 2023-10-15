@@ -2,6 +2,7 @@
 #include "../translator/identifiers-tree/sc_scn_prefix_tree.h"
 #include "../translator/file-structs/sc_scn_file_structs_tree.h"
 #include "../translator/commands/sc_scn_tex2scs_commands.h"
+#include "../translator/log/sc_log.hpp"
 
 
 // Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.1
@@ -241,7 +242,7 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
           }
           else
           {
-            std::cout << "Ignore command: " << _localctx->commandName << std::endl;
+            SC_LOG_WARNING("Ignore command: " << _localctx->commandName);
             dynamic_cast<ScnTexCommandContext *>(_localctx)->command =  nullptr;
           }
         
@@ -426,7 +427,7 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
 
           if (_localctx->command != nullptr)
           {
-            std::cout << "Interpreter command: " << _localctx->commandName << std::endl;
+            SC_LOG_DEBUG("Interpreter command: " << _localctx->commandName);
             history->push_back(_localctx->commandName);
             dynamic_cast<ScnTexCommandContext *>(_localctx)->resultText =  _localctx->command->Complete(*history, *prefixTree, params);
           }

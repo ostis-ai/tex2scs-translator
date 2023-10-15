@@ -32,4 +32,4 @@ USER user
 
 COPY --from=buildenv /tex2scs-translator /tex2scs-translator
 
-ENTRYPOINT ["/bin/bash", "-c", "./tex2scs-translator/bin/scn-tex2scs -s /kb -t /kb-translated"]
+ENTRYPOINT ["/bin/bash", "-c", "./tex2scs-translator/bin/scn-tex2scs -d -c -s /kb -t /kb-translated"]

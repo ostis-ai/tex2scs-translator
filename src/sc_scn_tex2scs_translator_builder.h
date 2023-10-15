@@ -7,8 +7,8 @@
 class ScSCnTex2SCsTranslatorBuilder
 {
 public:
-  static std::unique_ptr<ScSCnTex2SCsTranslator> BuildDefaultTranslator()
+  static std::unique_ptr<ScSCnTex2SCsTranslator> BuildDefaultTranslator(bool debugMode = false, bool clearMode = false)
   {
-    return std::make_unique<ScSCnTex2SCsTranslator>();
+    return std::make_unique<ScSCnTex2SCsTranslator>(debugMode, clearMode);
   }
 };

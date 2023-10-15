@@ -28,6 +28,6 @@ jobs:
           
       - name: Try translation
         run: |
-          ./bin/scn-tex2scs -s ./kb/docs/sc-network -t ./kb-translated
+          ./bin/scn-tex2scs -d -c -s ./kb/docs/sc-network -t ./kb-translated
           # check if directory exists and is not empty
           [ -d ./kb-translated ] && [ "$(ls -A ./kb-translated)" ]

@@ -33,6 +33,16 @@ std::string ScSCnPrefixTree::Get(std::string const & key)
   return "";
 }
 
+void ScSCnPrefixTree::SetNewElementNumber(size_t elementSysId)
+{
+  m_instance->index = elementSysId;
+}
+
+std::string ScSCnPrefixTree::GetFreeElementSystemIdentifier()
+{
+  return ".system_element_" + std::to_string(m_instance->index);
+}
+
 std::string ScSCnPrefixTree::Dump() const
 {
   SCsStream stream;

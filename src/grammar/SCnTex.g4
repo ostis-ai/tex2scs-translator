@@ -10,6 +10,7 @@ options
 #include "../translator/identifiers-tree/sc_scn_prefix_tree.h"
 #include "../translator/file-structs/sc_scn_file_structs_tree.h"
 #include "../translator/commands/sc_scn_tex2scs_commands.h"
+#include "../translator/log/sc_log.hpp"
 }
 
 scnTexText
@@ -59,7 +60,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
       }
       else
       {
-        std::cout << "Ignore command: " << $commandName << std::endl;
+        SC_LOG_WARNING("Ignore command: " << $commandName);
         $command = nullptr;
       }
     }
@@ -94,7 +95,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
     {
       if ($command != nullptr)
       {
-        std::cout << "Interpreter command: " << $commandName << std::endl;
+        SC_LOG_DEBUG("Interpreter command: " << $commandName);
         history->push_back($commandName);
         $resultText = $command->Complete(*history, *prefixTree, params);
       }
