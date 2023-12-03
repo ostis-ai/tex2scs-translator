@@ -26,14 +26,14 @@ public:
   void Write(std::string const & text)
   {
     std::ofstream file;
-    file.open(m_path, std::ios::app);
+    file.open(m_path, std::ios::trunc);
 
     file << text;
 
     file.close();
   }
 
-  void Read(std::stringstream & text)
+  void Read(std::stringstream & text) const
   {
     std::ifstream file;
     file.open(m_path);
@@ -47,14 +47,21 @@ public:
 
   [[nodiscard]] std::string GetName() const
   {
-    std::string const & fileNameWithExt = m_path.substr(m_path.rfind('/') + 1, m_path.size());
+    std::string const & fileNameWithExt = m_path.substr(m_path.rfind('/') + 1);
     std::string const & fileName = fileNameWithExt.substr(0, fileNameWithExt.rfind('.'));
     return fileName;
   }
 
+  [[nodiscard]] std::string GetExtension() const
+  {
+    std::string const & fileNameWithExt = m_path.substr(m_path.rfind('/') + 1);
+    std::string const & fileExt = fileNameWithExt.substr(fileNameWithExt.rfind('.'));
+    return fileExt;
+  }
+
   [[nodiscard]] bool HasExtension(std::unordered_set<std::string> const & extensions) const
   {
-    return extensions.find(m_path.substr(m_path.rfind('.'))) != extensions.cend();
+    return extensions.find(GetExtension()) != extensions.cend();
   }
 
 private:
@@ -72,9 +79,7 @@ public:
 
   void RemoveDirectory();
 
-  [[nodiscard]] ScFile CopyFile(std::string const & filePath, std::string const & newExtension) const;
-
-  [[nodiscard]] ScFile CopyFile(ScFile const & file, std::string const & newExtension) const;
+  [[nodiscard]] ScFile CopyFile(ScFile const & file, std::string newExtension = "", bool copyContent = false) const;
 
   [[nodiscard]] ScDirectory CopyDirectory(std::string nestedDirectoryPath, std::string const & targetDirectoryPath) const;
 

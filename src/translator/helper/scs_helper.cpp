@@ -6,6 +6,9 @@ std::string SCsHelper::scNodeRoleRelation{"sc_node_role_relation"};
 std::string SCsHelper::scNodeClass{"sc_node_class"};
 std::string SCsHelper::scNodeStruct{"sc_node_struct"};
 
+std::string SCsHelper::m_currentFilePath;
+std::string SCsHelper::m_currentFileDirectoryName;
+
 std::string SCsHelper::GetNodeTypeByIdtf(std::string const & idtf)
 {
   char lastSymb = idtf.at(idtf.size() - 1);
@@ -43,9 +46,20 @@ bool SCsHelper::IsFile(std::string const & string)
   return (string.find('[') != std::string::npos) || (string.rfind("![") != std::string::npos);
 }
 
-std::string SCsHelper::Url(std::string const & idtf)
+void SCsHelper::SetCurrentFile(std::string const & filePath)
 {
-  return "\"file://" + idtf + "\"";
+  m_currentFilePath = filePath;
+  std::string const & directoryPath = m_currentFilePath.substr(0, m_currentFilePath.rfind('/'));
+  m_currentFileDirectoryName = directoryPath.substr(directoryPath.rfind('/') + 1);
+}
+
+std::string SCsHelper::Url(std::string const & path)
+{
+  std::string const & relativePath = path.find(m_currentFileDirectoryName) == std::string::npos
+      ? path
+      : path.substr(path.find(m_currentFileDirectoryName) + m_currentFileDirectoryName.size() + 1);
+
+  return "\"file://" + relativePath + "\"";
 }
 
 std::string SCsHelper::FileClass(std::string const & idtf)

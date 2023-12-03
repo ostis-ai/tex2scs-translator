@@ -1,5 +1,6 @@
 #include "sc_scn_tex2scs_translator.h"
 #include "log/sc_log.hpp"
+#include "helper/scs_helper.h"
 
 ScSCnTex2SCsTranslator::ScSCnTex2SCsTranslator(bool debugMode, bool clearMode)
 {
@@ -69,26 +70,31 @@ void ScSCnTex2SCsTranslator::TranslateFiles(
         TranslateFiles(directory.GetPath(), startDirectory, startTargetDirectory);
       },
       [this, &targetDirectory](ScFile const & file) {
-        if (!file.HasExtension(m_extensions))
-          return;
-
-        SCsStream::Clear();
-        bool result = TranslateFile(file.GetPath(), targetDirectory);
-        SC_LOG_INFO("[" << ++m_fileNumber << "/" << m_filesCount << "]: " << file.GetPath()
-                  << " - " << (result ? "OK" : "ERROR"));
+        if (file.HasExtension(m_extensions))
+        {
+          SCsStream::Clear();
+          bool result = TranslateFile(file, targetDirectory);
+          SC_LOG_INFO("[" << ++m_fileNumber << "/" << m_filesCount << "]: " << file.GetPath()
+                            << " - " << (result ? "OK" : "ERROR"));
+        }
+        else
+        {
+          ScFile copiedFile = targetDirectory.CopyFile(file, "", true);
+          SC_LOG_INFO("Generated file: " << copiedFile.GetPath());
+        }
       });
 }
 
 
 bool ScSCnTex2SCsTranslator::TranslateFile(
-    std::string const & filePath, ScDirectory const & targetDirectory)
+    ScFile const & file, ScDirectory const & targetDirectory)
 {
-  ScFile targetFile = targetDirectory.CopyFile(filePath, ".scs");
+  ScFile targetFile = targetDirectory.CopyFile(file, ".scs");
 
   std::string scsText;
   try
   {
-    scsText = TranslateText(filePath);
+    scsText = TranslateText(file.GetPath());
   }
   catch (std::exception const & e)
   {
@@ -110,6 +116,7 @@ std::string ScSCnTex2SCsTranslator::TranslateText(std::string const & filePath)
   antlr4::CommonTokenStream tokens(&lexer);
   SCnTexParser parser(&tokens);
 
+  SCsHelper::SetCurrentFile(filePath);
   SCnTexParser::ScnTexTextContext * ctx = parser.scnTexText();
   file.close();
   return ctx->resultText;

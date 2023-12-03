@@ -35,7 +35,7 @@ private:
       ScDirectory startDirectory,
       ScDirectory const & startTargetDirectory);
 
-  bool TranslateFile(std::string const & filePath, ScDirectory const & targetDirectory);
+  bool TranslateFile(ScFile const & file, ScDirectory const & targetDirectory);
 
   std::string TranslateText(std::string const & filePath);
 

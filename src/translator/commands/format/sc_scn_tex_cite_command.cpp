@@ -5,6 +5,5 @@ ScScnTexCommandResult ScSCnTexCiteCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::cout << params.at(1);
   return params.at(1);
 }

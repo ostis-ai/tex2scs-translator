@@ -26,7 +26,9 @@ public:
 
   static bool IsFile(std::string const & string);
 
-  static std::string Url(std::string const & idtf);
+  static void SetCurrentFile(std::string const & filePath);
+
+  static std::string Url(std::string const & path);
 
   static std::string FileClass(std::string const & idtf);
 
@@ -35,6 +37,8 @@ public:
   static bool IsNoNamed(std::string const & string);
 
   static std::string GetFormat(std::string const & string);
+private:
+  static std::string m_currentFilePath;
+  static std::string m_currentFileDirectoryName;
 };
-
 
