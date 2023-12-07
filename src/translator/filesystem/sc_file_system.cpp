@@ -23,23 +23,28 @@ void ScDirectory::RemoveDirectory()
   std::filesystem::remove_all(m_path);
 }
 
-ScFile ScDirectory::CopyFile(std::string const & filePath, std::string const & newExtension) const
+ScFile ScDirectory::CopyFile(ScFile const & file, std::string newExtension, bool copyContent) const
 {
-  std::string const & fileNameWithExt = filePath.substr(filePath.rfind('/') + 1, filePath.size());
-  std::string const & fileName = fileNameWithExt.substr(0, fileNameWithExt.rfind('.'));
+  std::string const & fileName = file.GetName();
 
-  ScStringStream stream;
-  (m_path.at(m_path.size() - 1) == '/'
-   ? stream << m_path
-   : stream << m_path << "/")
-      << fileName << (newExtension.at(0) == '.' ? newExtension : "." + newExtension);
+  if (newExtension.empty())
+    newExtension = file.GetExtension();
 
-  return ScFile{stream};
-}
+  ScStringStream pathStream;
+  pathStream << m_path;
+  if (m_path.back() != '/')
+    pathStream << "/";
+  pathStream << fileName << (newExtension.front() == '.' ? newExtension : "." + newExtension);
 
-ScFile ScDirectory::CopyFile(ScFile const & file, std::string const & newExtension) const
-{
-  return CopyFile(file.GetPath(), newExtension);
+  ScFile copiedFile{pathStream};
+  if (copyContent)
+  {
+    std::stringstream contentStream;
+    file.Read(contentStream);
+    copiedFile.Write(contentStream.str());
+  }
+
+  return copiedFile;
 }
 
 ScDirectory ScDirectory::CopyDirectory(std::string nestedDirectoryPath, std::string const & targetDirectoryPath) const
