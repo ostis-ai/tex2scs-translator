@@ -1,0 +1,603 @@
+.system_element_199 => nrel_main_idtf: [изображение в базовом алфавите sc.s-коннекторов*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_199 <- sc_node_norole_relation;;
+
+.system_element_198 => nrel_main_idtf: [константная постоянная позитивная sc.s-дуга принадлежности] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_198 <- sc_node;;
+
+.system_element_197 => nrel_main_idtf: [функция отмены подписки sc-события на sc-элемент] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_197 <- sc_node;;
+
+.system_element_192 => nrel_main_idtf: [Множество всех sc-структур] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_192 <- sc_node;;
+
+.system_element_191 => nrel_main_idtf: [Множество всех идентификаторов sc-элементов, хранящихся в файловом хранилище] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_191 <- sc_node;;
+
+.system_element_190 => nrel_main_idtf: [Множество внешних знаков, являющихся содержимым файлов ostis-системы, хранящиеся в файловом хранилище] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_190 <- sc_node;;
+
+.system_element_188 => nrel_main_idtf: [Множество всех системных идентификаторов sc-элементов, хранящихся в файловом хранилище] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_188 <- sc_node;;
+
+.system_element_186 => nrel_main_idtf: [объединение*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_186 <- sc_node_norole_relation;;
+
+.system_element_183 => nrel_main_idtf: [Множество всех sc-элементов, хранящихся в sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_183 <- sc_node;;
+
+.system_element_180 => nrel_main_idtf: [эквивалентность*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_180 <- sc_node_norole_relation;;
+
+.system_element_173 => nrel_main_idtf: [функция установки содержимого в файл ostis-системы*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_173 <- sc_node_norole_relation;;
+
+.system_element_172 => nrel_main_idtf: [функция разрешения ключевого sc-элемента по системному идентификатору*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_172 <- sc_node_norole_relation;;
+
+.system_element_171 => nrel_main_idtf: [функция получения ключевого sc-элемента по системному идентификатору*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_171 <- sc_node_norole_relation;;
+
+.system_element_187 => nrel_main_idtf: [Множество всех ключевых sc-элементов, хранящихся в sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_187 <- sc_node;;
+
+.system_element_169 => nrel_main_idtf: [функция получения соответствующих синтаксических типов sc-элементов*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_169 <- sc_node_norole_relation;;
+
+.system_element_168 => nrel_main_idtf: [функция создания sc-элементов по их описаниям: типам и инцидентным sc-элементам*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_168 <- sc_node_norole_relation;;
+
+.system_element_167 => nrel_main_idtf: [характеристика*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_167 <- sc_node_norole_relation;;
+
+.system_element_163 => nrel_main_idtf: [Программная модель sc-памяти версии 0.6.1] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_163 <- sc_node;;
+
+.system_element_162 => nrel_main_idtf: [Хорошавин В. Д.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_162 <- sc_node;;
+
+.system_element_161 => nrel_main_idtf: [Насевич П. Е.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_161 <- sc_node;;
+
+.system_element_160 => nrel_main_idtf: [Программный компонент настройки программных компонентов ostis-систем] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_160 <- sc_node;;
+
+.system_element_159 => nrel_main_idtf: [Программный компонент настройки программных компонентов ostis-систем версии 0.1.0] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_159 <- sc_node;;
+
+.system_element_157 => nrel_main_idtf: [Библиотека кросс-платформенных программных компонентов для реализации серверных приложений на основе Websocket WebSocket++ версии 0.8.2] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_157 <- sc_node;;
+
+.system_element_156 => nrel_main_idtf: [скрипт на языке Bash, поддерживаемый семейством операционных систем MaсOS] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_156 <- sc_node;;
+
+.system_element_179 => nrel_main_idtf: [функция отмены подписки sc-события на sc-элемент*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_179 <- sc_node_norole_relation;;
+
+.system_element_154 => nrel_main_idtf: [скрипт на языке Bash] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_154 <- sc_node;;
+
+.system_element_153 => nrel_main_idtf: [скрипт установки*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_153 <- sc_node_norole_relation;;
+
+.system_element_152 => nrel_main_idtf: [адрес хранилища на GitHub] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_152 <- sc_node;;
+
+.system_element_182 => nrel_main_idtf: [Множество всех sc-элементов, имеющих инцидентные sc-элементы в sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_182 <- sc_node;;
+
+.system_element_150 => nrel_main_idtf: [версия компонента*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_150 <- sc_node_norole_relation;;
+
+.system_element_149 => nrel_main_idtf: [Библиотека программных компонентов для обработки и, задающее синтаксис json-текстов JSON for Modern C++] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_149 <- sc_node;;
+
+.system_element_196 => nrel_main_idtf: [Множество всех sc-событий, зарегистрированных в sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_196 <- sc_node;;
+
+.system_element_144 => nrel_main_idtf: [Программный вариант реализации платформы интерпретации sc-моделей компьютерных систем] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_144 <- sc_node;;
+
+.system_element_142 => nrel_main_idtf: [Пример ответа инициализации sc-события] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_142 <- sc_node;;
+
+.system_element_141 => nrel_main_idtf: [Пример ответа на команду обработки sc-событий] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_141 <- sc_node;;
+
+.system_element_137 => nrel_main_idtf: [Пример ответа на команду поиска sc-конструкций, изоморфных заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_137 <- sc_node;;
+
+.system_element_135 => nrel_main_idtf: [Пример ответа на команду обработки содержимого файлов ostis-системы] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_135 <- sc_node;;
+
+.system_element_194 => nrel_main_idtf: [Множество всех sc-элементов, храняшихся в sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_194 <- sc_node;;
+
+.system_element_134 => nrel_main_idtf: [Пример команды обработки содержимого файлов ostis-системы] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_134 <- sc_node;;
+
+.system_element_131 => nrel_main_idtf: [Пример ответа на команду удаления sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_131 <- sc_node;;
+
+.system_element_175 => nrel_main_idtf: [функция получения файлов ostis-системы по содержимому*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_175 <- sc_node_norole_relation;;
+
+.system_element_130 => nrel_main_idtf: [Пример команды удаления sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_130 <- sc_node;;
+
+.system_element_129 => nrel_main_idtf: [Пример ответа на команду получения соответствующих типов sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_129 <- sc_node;;
+
+.system_element_126 => nrel_main_idtf: [ответ*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_126 <- sc_node_norole_relation;;
+
+.system_element_50 => nrel_main_idtf: [Синтаксическая классификация элементов SC-JSON-кода] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_50 <- sc_node_struct;;
+
+.system_element_195 => nrel_main_idtf: [Множество всех возможных типов sc-событий в sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_195 <- sc_node;;
+
+.system_element_46 => nrel_main_idtf: [Тексты <i><b>SC-JSON-кода</b></i> представляют собой sc-json-команды. Каждая команда представляет собой json-объект, в котором указываются уникальный идентификатор команды, тип этой команды и ее аргументы. C каждой командой ассоциируется ответ на эту команду. Ответ на команду представляет собой команду, в котором указываются идентификатор команды, ее статус (выполнена успешно/безуспешно) и результаты. Структура аргументов и результатов команды определяется типом команды. Для каждого ответа существует запрос.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_46 <- sc_node;;
+
+.system_element_136 => nrel_main_idtf: [Пример команды поиска sc-конструкций, изоморфных заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_136 <- sc_node;;
+
+.system_element_65 => nrel_main_idtf: [Алфавит SC-JSON-кода^] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_65 <- sc_node;;
+
+.system_element_128 => nrel_main_idtf: [Пример команды получения соответствующих типов sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_128 <- sc_node;;
+
+.system_element_42 => nrel_main_idtf: [линейный язык] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_42 <- sc_node;;
+
+.system_element_40 => nrel_main_idtf: [имя нарицательное] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_40 <- sc_node;;
+
+.system_element_155 => nrel_main_idtf: [скрипт на языке Bash, поддерживаемый семейством операционных систем UNIX] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_155 <- sc_node;;
+
+.system_element_81 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды создания sc-элементов по фрагменту SCs-текста</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_81 <- sc_node;;
+
+.system_element_32 => nrel_main_idtf: [декомпозиция программной системы*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_32 <- sc_node_norole_relation;;
+
+.system_element_70 => nrel_main_idtf: [Правило, задающее синтаксис <i>команд на SC-JSON-коде</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_70 <- sc_node;;
+
+.system_element_178 => nrel_main_idtf: [функция подписки sc-события на sc-элемент*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_178 <- sc_node_norole_relation;;
+
+.system_element_73 => nrel_main_idtf: [Язык описания грамматики языков ANTLR] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_73 <- sc_node;;
+
+.system_element_29 => nrel_main_idtf: [Шункевич Д. В.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_29 <- sc_node;;
+
+.system_element_28 => nrel_main_idtf: [Корончик Д. Н.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_28 <- sc_node;;
+
+.system_element_53 => nrel_main_idtf: [json-список json-пар] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_53 <- sc_node_class;;
+
+.system_element_102 => nrel_main_idtf: [Правило, задающее синтаксис сообщения <i>команды поиска sc-конструкций, изоморфных заданному sc-шаблону</i>, и <i>команды генерации sc-конструкции, изоморфной заданному sc-шаблону</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_102 <- sc_node;;
+
+.system_element_36 => nrel_main_idtf: [Клиентская система, подключаемая и взаимодействующая с <i>SC-сервером</i>, реализованная на языке программирования TypeScript] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_36 <- sc_node;;
+
+.system_element_18 => nrel_main_idtf: [используемый язык*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_18 <- sc_node_norole_relation;;
+
+.system_element_165 => nrel_main_idtf: [Модель <i>Серверной системы на основе Websocket, обеспечивающая доступ к sc-памяти платформы интерпретации sc-моделей при помощи команд SC-JSON-кода</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_165 <- sc_node;;
+
+.system_element_99 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду обработки содержимого файлов ostis-системы</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_99 <- sc_node;;
+
+.system_element_145 => nrel_main_idtf: [компонент системы*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_145 <- sc_node_norole_relation;;
+
+.system_element_105 => nrel_main_idtf: [ответ на команду поиска sc-конструкций, изоморфных заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_105 <- sc_node;;
+
+.system_element_44 => nrel_main_idtf: [принципы, лежащие в основе*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_44 <- sc_node_norole_relation;;
+
+.system_element_92 => nrel_main_idtf: [ответ на команду удаления sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_92 <- sc_node;;
+
+.system_element_34 => nrel_main_idtf: [Множество клиентских систем, подключаемых и взаимодействующих с <i>Серверной системой на основе Websocket, обеспечивающей доступ к sc-памяти платформы интерпретации sc-моделей при помощи команд SC-JSON-кода</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_34 <- sc_node;;
+
+.system_element_45 => nrel_main_idtf: [Тексты, описываемые на языке внешнего представления знаний <i><b>SC-JSON-код</b></i> представляют собой линейную структуру, представляемую в виде линейного строкового текста и состоящую из набора корректных осмысленных команд, записанных в виде <i>sc-json-пар</i> вида , где отношением выступает знак квазибинарного отношения, состоящего из пар вида , где объектом выступает знак, обозначаемый предложением, включающее такие пары, а субъектом - sc-json-объекты: sc-json-литерал, sc-json-списки sc-json-объектов, sc-json-предложения, состоящие из sc-json-списков sc-json-объектов.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_45 <- sc_node;;
+
+.system_element_38 => nrel_main_idtf: [Клиентская система, подключаемая и взаимодействующая с <i>SC-сервером</i>, реализованная на языке программирования Java] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_38 <- sc_node;;
+
+.system_element_52 => nrel_main_idtf: [семейство подмножеств*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_52 <- sc_node_norole_relation;;
+
+.system_element_24 => nrel_main_idtf: [многократно используемый компонент ostis-систем] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_24 <- sc_node;;
+
+.system_element_43 => nrel_main_idtf: [JSON] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_43 <- sc_node;;
+
+.system_element_118 => nrel_main_idtf: [ответ инициализации sc-события] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_118 <- sc_node;;
+
+.system_element_15 => nrel_main_idtf: [TypeScript] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_15 <- sc_node;;
+
+.system_element_88 => nrel_main_idtf: [ответ на команду получения соответствующих типов sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_88 <- sc_node;;
+
+.system_element_57 => nrel_main_idtf: [sc-json-объект] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_57 <- sc_node_class;;
+
+nrel_epigraph => nrel_main_idtf: [эпиграф*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+nrel_epigraph <- sc_node_norole_relation;;
+
+.system_element_9 => nrel_main_idtf: [Описание подсистемы взаимодействия c sc-памятью на основе языка JSON] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_9 <- sc_node_struct;;
+
+.system_element_27 => nrel_main_idtf: [автор*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_27 <- sc_node_norole_relation;;
+
+.system_element_181 => nrel_main_idtf: [Множество всех синтаксических типов sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_181 <- sc_node;;
+
+.system_element_64 => nrel_main_idtf: [комментарий*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_64 <- sc_node_norole_relation;;
+
+.system_element_17 => nrel_main_idtf: [Java] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_17 <- sc_node;;
+
+.system_element_77 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды создания sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_77 <- sc_node;;
+
+rrel_maximum_studied_object_class => nrel_main_idtf: [максимальный класс объектов исследования*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+rrel_maximum_studied_object_class <- sc_node_role_relation;;
+
+.system_element_170 => nrel_main_idtf: [функция проверки существования sc-элементов в sc-памяти*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_170 <- sc_node_norole_relation;;
+
+.system_element_117 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа инициализации sc-события</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_117 <- sc_node;;
+
+.system_element_109 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду создания sc-конструкции, изоморфной заданному sc-шаблону</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_109 <- sc_node;;
+
+nrel_note => nrel_main_idtf: [примечание*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+nrel_note <- sc_node_norole_relation;;
+
+.system_element_56 => nrel_main_idtf: [sc-json-строка] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_56 <- sc_node_class;;
+
+.system_element_21 => nrel_main_idtf: [архитектура*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_21 <- sc_node_norole_relation;;
+
+.system_element_158 => nrel_main_idtf: [Библиотека кросс-платформенных программных компонентов для реализации серверных приложений на основе Websocket WebSocket++] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_158 <- sc_node;;
+
+.system_element_11 => nrel_main_idtf: [используемый язык программирования*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_11 <- sc_node_norole_relation;;
+
+.system_element_10 => nrel_main_idtf: [Реализация подсистемы взаимодействия c sc-памятью на основе языка JSON] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_10 <- sc_node;;
+
+.system_element_87 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду получения соответствующих типов sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_87 <- sc_node;;
+
+.system_element_114 => nrel_main_idtf: [команда обработки sc-событий] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_114 <- sc_node;;
+
+.system_element_12 => nrel_main_idtf: [C] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_12 <- sc_node;;
+
+.system_element_151 => nrel_main_idtf: [адрес хранилища*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_151 <- sc_node_norole_relation;;
+
+.system_element_139 => nrel_main_idtf: [Пример ответа на команду создания sc-конструкции, изоморфной заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_139 <- sc_node;;
+
+.system_element_67 => nrel_main_idtf: [синтаксические правила*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_67 <- sc_node_norole_relation;;
+
+.system_element_147 => nrel_main_idtf: [зависимости компонента*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_147 <- sc_node_norole_relation;;
+
+.system_element_76 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду на SC-JSON-коде</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_76 <- sc_node;;
+
+.system_element_63 => nrel_main_idtf: [ответ на команду на SC-JSON-коде] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_63 <- sc_node;;
+
+nrel_summary => nrel_main_idtf: [аннотация*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+nrel_summary <- sc_node_norole_relation;;
+
+.system_element_146 => nrel_main_idtf: [С] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_146 <- sc_node;;
+
+.system_element_68 => nrel_main_idtf: [Грамматика SC-JSON-кода] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_68 <- sc_node;;
+
+.system_element_26 => nrel_main_idtf: [зависимый многократно используемый компонент ostis-систем] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_26 <- sc_node;;
+
+.system_element_51 => nrel_main_idtf: [sc-json-предложение] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_51 <- sc_node_class;;
+
+nrel_inclusion => nrel_main_idtf: [включение*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+nrel_inclusion <- sc_node_norole_relation;;
+
+.system_element_185 => nrel_main_idtf: [разность множеств*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_185 <- sc_node_norole_relation;;
+
+.system_element_71 => nrel_main_idtf: [ключевой sc-элемент*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_71 <- sc_node_norole_relation;;
+
+.system_element_111 => nrel_main_idtf: [Правило, задающее синтаксис сообщения <i>команды поиска sc-конструкций, изоморфных заданному sc-шаблону,</i> и <i>команды создания sc-конструкции, изоморфной заданному sc-шаблону</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_111 <- sc_node;;
+
+.system_element_54 => nrel_main_idtf: [sc-json-пара*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_54 <- sc_node_norole_relation;;
+
+.system_element_14 => nrel_main_idtf: [Python] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_14 <- sc_node;;
+
+.system_element_94 => nrel_main_idtf: [команда обработки ключевых sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_94 <- sc_node;;
+
+.system_element_55 => nrel_main_idtf: [декартово произведение*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_55 <- sc_node_norole_relation;;
+
+.system_element_184 => nrel_main_idtf: [Множество, состоящее из знаков истины и лжи] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_184 <- sc_node;;
+
+.system_element_23 => nrel_main_idtf: [реализация*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_23 <- sc_node_norole_relation;;
+
+.system_element_13 => nrel_main_idtf: [C++] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_13 <- sc_node;;
+
+.system_element_25 => nrel_main_idtf: [неатомарный многократно используемый компонент ostis-систем] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_25 <- sc_node;;
+
+.system_element_121 => nrel_main_idtf: [Правило, задающее синтаксис <i>синтаксических типов sc-дуг</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_121 <- sc_node;;
+
+.system_element_16 => nrel_main_idtf: [C#] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_16 <- sc_node;;
+
+.system_element_193 => nrel_main_idtf: [функция подписки sc-события на sc-элемент] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_193 <- sc_node;;
+
+.system_element_41 => nrel_main_idtf: [абстрактный язык] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_41 <- sc_node;;
+
+.system_element_127 => nrel_main_idtf: [класс команд*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_127 <- sc_node_norole_relation;;
+
+.system_element_31 => nrel_main_idtf: [Загорский А. Г.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_31 <- sc_node;;
+
+.system_element_116 => nrel_main_idtf: [ответ на команду обработки sc-событий] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_116 <- sc_node;;
+
+rrel_studied_object_class => nrel_main_idtf: [класс объектов исследования*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+rrel_studied_object_class <- sc_node_role_relation;;
+
+.system_element_37 => nrel_main_idtf: [Клиентская система, подключаемая и взаимодействующая с <i>SC-сервером</i>, реализованная на языке программирования C#] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_37 <- sc_node;;
+
+.system_element_19 => nrel_main_idtf: [SC-JSON-код] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_19 <- sc_node;;
+
+.system_element_39 => nrel_main_idtf: [часто используемый неосновной внешний идентификатор sc-элемента*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_39 <- sc_node_norole_relation;;
+
+.system_element_90 => nrel_main_idtf: [команда удаления sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_90 <- sc_node;;
+
+nrel_subdividing => nrel_main_idtf: [разбиение*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+nrel_subdividing <- sc_node_norole_relation;;
+
+.system_element_33 => nrel_main_idtf: [Серверная система на основе Websocket, обеспечивающая доступ к sc-памяти платформы интерпретации sc-моделей при помощи команд SC-JSON-кода] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_33 <- sc_node;;
+
+.system_element_98 => nrel_main_idtf: [команда обработки содержимого файлов ostis-системы] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_98 <- sc_node;;
+
+.system_element_166 => nrel_main_idtf: [формальная модель*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_166 <- sc_node_norole_relation;;
+
+.system_element_20 => nrel_main_idtf: [Клиент-серверная архитектура] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_20 <- sc_node;;
+
+.system_element_174 => nrel_main_idtf: [функция получения содержимого из файлов ostis-системы*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_174 <- sc_node_norole_relation;;
+
+.system_element_49 => nrel_main_idtf: [синтаксис*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_49 <- sc_node_norole_relation;;
+
+.system_element_112 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды обработки sc-событий</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_112 <- sc_node;;
+
+nrel_explanation => nrel_main_idtf: [пояснение*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+nrel_explanation <- sc_node_norole_relation;;
+
+.system_element_22 => nrel_main_idtf: [Подсистема взаимодействия с sc-памятью на основе языка JSON] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_22 <- sc_node;;
+
+.system_element_58 => nrel_main_idtf: [sc-json-cписок] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_58 <- sc_node_class;;
+
+.system_element_60 => nrel_main_idtf: [sc-json-литерал] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_60 <- sc_node_class;;
+
+.system_element_176 => nrel_main_idtf: [функция поиска sc-конструкций, изоморфных заданному sc-шаблону, состоящего из троек, специфицированных инцидентными sc-элементами и/или синтаксическими типами и/или идентификаторами и/или псевдонимами их sc-элементов*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_176 <- sc_node_norole_relation;;
+
+.system_element_61 => nrel_main_idtf: [sc-json-число] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_61 <- sc_node_class;;
+
+.system_element_48 => nrel_main_idtf: [Синтаксис SC-JSON-кода] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_48 <- sc_node_struct;;
+
+.system_element_123 => nrel_main_idtf: [Пример команды создания sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_123 <- sc_node;;
+
+.system_element_62 => nrel_main_idtf: [команда на SC-JSON-коде] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_62 <- sc_node;;
+
+.system_element_66 => nrel_main_idtf: [алфавит*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_66 <- sc_node_norole_relation;;
+
+.system_element_69 => nrel_main_idtf: [грамматика*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_69 <- sc_node_norole_relation;;
+
+.system_element_72 => nrel_main_idtf: [семантическая эквивалентность*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_72 <- sc_node_norole_relation;;
+
+.system_element_84 => nrel_main_idtf: [ответ на команду создания sc-элементов по фрагменту SCs-текста] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_84 <- sc_node;;
+
+.system_element_177 => nrel_main_idtf: [функция создания sc-конструкции, изоморфной заданному sc-шаблону, состоящего из троек, специфицированных инцидентными sc-элементами и/или синтаксическими типами и/или идентификаторами и/или псевдонимами их sc-элементов*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_177 <- sc_node_norole_relation;;
+
+.system_element_91 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду удаления sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_91 <- sc_node;;
+
+.system_element_93 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды обработки ключевых sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_93 <- sc_node;;
+
+.system_element_75 => nrel_main_idtf: [синтаксическое правило*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_75 <- sc_node_norole_relation;;
+
+.system_element_148 => nrel_main_idtf: [Библиотека программных компонентов для обработки и, задающее синтаксис json-текстов JSON for Modern C++ версии 3.10.5] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_148 <- sc_node;;
+
+.system_element_78 => nrel_main_idtf: [команда создания sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_78 <- sc_node;;
+
+.system_element_143 => nrel_main_idtf: [атомарный многократно используемый компонент ostis-систем] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_143 <- sc_node;;
+
+.system_element_47 => nrel_main_idtf: [достоинство*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_47 <- sc_node_norole_relation;;
+
+.system_element_103 => nrel_main_idtf: [команда поиска sc-конструкций, изоморфных заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_103 <- sc_node;;
+
+.system_element_79 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду создания sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_79 <- sc_node;;
+
+.system_element_35 => nrel_main_idtf: [Клиентская система, подключаемая и взаимодействующая с <i>SC-сервером</i>, реализованная на языке программирования Python] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_35 <- sc_node;;
+
+.system_element_80 => nrel_main_idtf: [ответ на команду создания sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_80 <- sc_node;;
+
+.system_element_82 => nrel_main_idtf: [команда создания sc-элементов по фрагменту SCs-текста] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_82 <- sc_node;;
+
+.system_element_96 => nrel_main_idtf: [ответ на команду обработки ключевых sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_96 <- sc_node;;
+
+.system_element_83 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду создания sc-элементов по фрагменту SCs-текста</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_83 <- sc_node;;
+
+.system_element_122 => nrel_main_idtf: [Правило, задающее синтаксис <i>синтаксических типов файлов ostis-системы</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_122 <- sc_node;;
+
+.system_element_85 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды получения соответствующих типов sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_85 <- sc_node;;
+
+.system_element_86 => nrel_main_idtf: [команда получения соответствующих типов sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_86 <- sc_node;;
+
+.system_element_132 => nrel_main_idtf: [Пример команды обработки ключевых sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_132 <- sc_node;;
+
+.system_element_30 => nrel_main_idtf: [Зотов Н. В.] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_30 <- sc_node;;
+
+.system_element_89 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды удаления sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_89 <- sc_node;;
+
+.system_element_133 => nrel_main_idtf: [Пример ответа на команду обработки ключевых sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_133 <- sc_node;;
+
+.system_element_101 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды поиска sc-конструкций, изоморфных заданному sc-шаблону</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_101 <- sc_node;;
+
+.system_element_95 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду обработки ключевых sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_95 <- sc_node;;
+
+.system_element_189 => nrel_main_idtf: [Множество всех файлов ostis-системы, хранящихся в sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_189 <- sc_node;;
+
+.system_element_164 => nrel_main_idtf: [Программная модель sc-памяти] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_164 <- sc_node;;
+
+.system_element_97 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды обработки содержимого файлов ostis-системы</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_97 <- sc_node;;
+
+.system_element_100 => nrel_main_idtf: [ответ на команду обработки содержимого файлов ostis-системы] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_100 <- sc_node;;
+
+nrel_idtf => nrel_main_idtf: [идентификатор*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+nrel_idtf <- sc_node_norole_relation;;
+
+.system_element_74 => nrel_main_idtf: [интерпретация*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_74 <- sc_node_norole_relation;;
+
+.system_element_104 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду поиска sc-конструкций, изоморфных заданному sc-шаблону</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_104 <- sc_node;;
+
+.system_element_59 => nrel_main_idtf: [sc-json-пара] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_59 <- sc_node_class;;
+
+.system_element_106 => nrel_main_idtf: [Правило, задающее синтаксис <i>команды создания sc-конструкции, изоморфной заданному sc-шаблону</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_106 <- sc_node;;
+
+.system_element_107 => nrel_main_idtf: [Правило, задающее синтаксис сообщения <i>команды поиска sc-конструкций, изоморфных заданному sc-шаблону,</i> и <i>команды генерации sc-конструкции, изоморфной заданному sc-шаблону</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_107 <- sc_node;;
+
+.system_element_140 => nrel_main_idtf: [Пример команды обработки sc-событий] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_140 <- sc_node;;
+
+.system_element_138 => nrel_main_idtf: [Пример команды создания sc-конструкции, изоморфной заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_138 <- sc_node;;
+
+.system_element_108 => nrel_main_idtf: [команда создания sc-конструкции, изоморфной заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_108 <- sc_node;;
+
+.system_element_110 => nrel_main_idtf: [ответ на команду создания sc-конструкции, изоморфной заданному sc-шаблону] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_110 <- sc_node;;
+
+.system_element_119 => nrel_main_idtf: [Правило, задающее синтаксис <i>синтаксических типов sc-элементов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_119 <- sc_node;;
+
+.system_element_113 => nrel_main_idtf: [Правило, задающее синтаксис типов sc-событий] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_113 <- sc_node;;
+
+.system_element_120 => nrel_main_idtf: [Правило, задающее синтаксис <i>синтаксических типов sc-узлов</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_120 <- sc_node;;
+
+.system_element_115 => nrel_main_idtf: [Правило, задающее синтаксис <i>ответа на команду обработки sc-событий</i>] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_115 <- sc_node;;
+
+rrel_explored_relation => nrel_main_idtf: [исследуемое отношение*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+rrel_explored_relation <- sc_node_role_relation;;
+
+.system_element_125 => nrel_main_idtf: [Пример ответа на команду создания sc-элементов] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_125 <- sc_node;;
+
+.system_element_124 => nrel_main_idtf: [пример*] (* <- lang_ru;; => nrel_format: format_html;; *);;
+.system_element_124 <- sc_node_norole_relation;;
+
