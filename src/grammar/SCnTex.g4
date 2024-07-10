@@ -55,8 +55,10 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
       {
         if (it != commands.cend())
           $command = it->second;
-        else
+        else if (commands.find("relation") != commands.cend() && $commandName.find("scn") == 0)
           $command = commands.find("relation")->second;
+        else
+          $command = commands.find("math")->second;
       }
       else
       {

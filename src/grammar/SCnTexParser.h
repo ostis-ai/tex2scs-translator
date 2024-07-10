@@ -5,7 +5,7 @@
 #include "../translator/log/sc_log.hpp"
 
 
-// Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.1
+// Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.2
 
 #pragma once
 

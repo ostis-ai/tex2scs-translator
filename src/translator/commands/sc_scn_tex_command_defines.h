@@ -36,3 +36,5 @@
 #include "set/sc_scn_tex_start_set_local_command.h"
 #include "set/sc_scn_tex_start_substruct_command.h"
 #include "set/sc_scn_tex_end_substruct_command.h"
+
+#include "math/sc_scn_tex_math_command.h"

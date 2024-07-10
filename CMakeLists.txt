@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.11)
 project(sc-scn-tex2scs-translator)
 cmake_policy(SET CMP0048 NEW)
 set(TRANSLATOR_ROOT ${CMAKE_CURRENT_LIST_DIR})
