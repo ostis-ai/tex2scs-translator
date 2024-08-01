@@ -1,13 +1,15 @@
 set(GRAMMAR_DIR "${CMAKE_CURRENT_LIST_DIR}/grammar")
 set(TRANSLATOR_DIR "${CMAKE_CURRENT_LIST_DIR}/translator")
 
+find_package(Java)
+
 add_custom_command(OUTPUT
-    "${TRANSLATOR_DIR}/SCnTexLexer.cpp"
-    "${TRANSLATOR_DIR}/SCnTexLexer.h"
-    "${TRANSLATOR_DIR}/SCnTexParser.cpp"
-    "${TRANSLATOR_DIR}/SCnTexParser.h"
-    COMMAND "${Java_JAVA_EXECUTABLE}" -jar "${ANTLR_DIR}/antlr-4.7.1-complete.jar"
-        ${GRAMMAR_DIR}/SCnTex.g4 -no-listener
+    "${GRAMMAR_DIR}/SCnTexLexer.cpp"
+    "${GRAMMAR_DIR}/SCnTexLexer.h"
+    "${GRAMMAR_DIR}/SCnTexParser.cpp"
+    "${GRAMMAR_DIR}/SCnTexParser.h"
+    COMMAND "${Java_JAVA_EXECUTABLE}" -jar "${ANTLR_DIR}/antlr4-4.7.2-complete.jar"
+        ${GRAMMAR_DIR}/SCnTex.g4 -no-listener -no-visitor
     WORKING_DIRECTORY "${TRANSLATOR_DIR}"
     DEPENDS ${GRAMMAR_DIR}/SCnTex.g4
 )

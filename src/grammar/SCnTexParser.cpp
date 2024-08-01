@@ -5,7 +5,7 @@
 #include "../translator/log/sc_log.hpp"
 
 
-// Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.1
+// Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.2
 
 
 
@@ -237,8 +237,10 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
           {
             if (it != commands.cend())
               dynamic_cast<ScnTexCommandContext *>(_localctx)->command =  it->second;
-            else
+            else if (commands.find("relation") != commands.cend() && _localctx->commandName.find("scn") == 0)
               dynamic_cast<ScnTexCommandContext *>(_localctx)->command =  commands.find("relation")->second;
+            else
+              dynamic_cast<ScnTexCommandContext *>(_localctx)->command =  commands.find("math")->second;
           }
           else
           {

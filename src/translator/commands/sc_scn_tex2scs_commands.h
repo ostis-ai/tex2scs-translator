@@ -51,6 +51,7 @@ static ScSCnTexCommands const commands = {
     { "scnendsubstruct", new ScSCnTexEndSubstructCommand() },
 
     { "relation", new ScSCnTexNRelCommand() },
+    { "math", new ScSCnTexMathCommand() },
 };
 
 using ScSCnTexIgnoreCommands = std::unordered_set<std::string>;
