@@ -1,5 +1,5 @@
 
-// Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.2
+// Generated from /Users/nikitazotov/Development/apps/ostis/ostis-ai/tex2scs-translator/src/grammar/SCnTex.g4 by ANTLR 4.7.2
 
 #pragma once
 
