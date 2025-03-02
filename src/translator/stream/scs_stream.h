@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <cstdint>
 
 #include <functional>
 #include <unordered_set>

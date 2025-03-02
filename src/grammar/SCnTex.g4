@@ -101,7 +101,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
         history->push_back($commandName);
         $resultText = $command->Complete(*history, *prefixTree, params);
       }
-      $command == nullptr;
+      $command = nullptr;
     }
   COMMENT?
   ;

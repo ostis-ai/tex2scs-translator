@@ -1,6 +1,6 @@
 #pragma once
 
-#include "memory"
+#include <memory>
 #include "translator/sc_scn_tex2scs_translator.h"
 #include "translator/commands/sc_scn_tex_command_defines.h"
 

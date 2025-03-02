@@ -5,7 +5,7 @@
 #include "../translator/log/sc_log.hpp"
 
 
-// Generated from ./src/grammar/SCnTex.g4 by ANTLR 4.7.2
+// Generated from /Users/nikitazotov/Development/apps/ostis/ostis-ai/tex2scs-translator/src/grammar/SCnTex.g4 by ANTLR 4.7.2
 
 
 
@@ -433,7 +433,7 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
             history->push_back(_localctx->commandName);
             dynamic_cast<ScnTexCommandContext *>(_localctx)->resultText =  _localctx->command->Complete(*history, *prefixTree, params);
           }
-          _localctx->command == nullptr;
+          _localctx->command = nullptr;
         
     setState(84);
     _errHandler->sync(this);
