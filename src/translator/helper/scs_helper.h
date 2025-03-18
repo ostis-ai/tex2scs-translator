@@ -37,6 +37,8 @@ public:
   static bool IsNoNamed(std::string const & string);
 
   static std::string GetFormat(std::string const & string);
+
+  static std::string RemoveHtmlTags(std::string const & string);
 private:
   static std::string m_currentFilePath;
   static std::string m_currentFileDirectoryName;
