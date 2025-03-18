@@ -9,7 +9,7 @@ ScScnTexCommandResult ScSCnTexHeaderCommand::Complete(
     ScSCnPrefixTree & tree,
     ScScnTexCommandParams const & params)
 {
-  std::string const & idtf = params.at(1);
+  std::string const & idtf = SCsHelper::RemoveHtmlTags(params.at(1));
   std::string const & systemIdtf = tree.Add(idtf, SCsHelper::GetNodeTypeByIdtf(idtf));
   lastHeader = idtf;
 
