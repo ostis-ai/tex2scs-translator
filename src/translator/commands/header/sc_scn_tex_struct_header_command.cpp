@@ -6,7 +6,7 @@ ScScnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
     ScScnTexCommandParams const & params)
 {
   std::string const & idtf = params.at(1);
-  std::string const & systemIdtf = tree.Add(idtf, "sc_node_struct");
+  std::string const & systemIdtf = tree.Add(idtf, "sc_node_structure");
 
   return SCsStream()
     .PreFormatted()
