@@ -9,6 +9,7 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
     ScScnTexCommandParams const & params)
 {
   std::string const & relationType = params.at(COMMAND_TYPE);
+  bool isRoleRelation = relationType.find("role") != std::string::npos;
 
   auto const & item = m_elementTypes.find(relationType);
   if (item == m_elementTypes.cend())
@@ -33,14 +34,18 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
       auto const GetRelIdtf = [&]() -> std::string {
         std::string const relIdtf =
           params.size() == MAX_PARAMS
-          ? SCsHelper::NoRole(params.at(REL_PARAM_POS))
-          : attrs.size() == MAX_REL_ATTRS
+          ? (isRoleRelation
+            ? SCsHelper::Role(params.at(REL_PARAM_POS))
+            : SCsHelper::NoRole(params.at(REL_PARAM_POS)))
+          : (attrs.size() == MAX_REL_ATTRS
             ? attrs.at(REL_ATTR_POS)
-            : "";
+            : "");
 
         return relIdtf.empty()
           ? relIdtf
-          : tree.Add(relIdtf, SCsHelper::scNodeNoRoleRelation);
+          : (isRoleRelation
+            ? tree.Add(relIdtf, SCsHelper::scNodeRoleRelation)
+            : tree.Add(relIdtf, SCsHelper::scNodeNoRoleRelation));
       };
 
       auto const GetRelModifierSign = [&]() -> std::string {

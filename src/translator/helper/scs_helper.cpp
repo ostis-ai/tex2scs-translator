@@ -1,10 +1,12 @@
 #include "scs_helper.h"
 
+#include <regex>
+
 std::string SCsHelper::scNode{"sc_node"};
-std::string SCsHelper::scNodeNoRoleRelation{"sc_node_norole_relation"};
+std::string SCsHelper::scNodeNoRoleRelation{"sc_node_non_role_relation"};
 std::string SCsHelper::scNodeRoleRelation{"sc_node_role_relation"};
 std::string SCsHelper::scNodeClass{"sc_node_class"};
-std::string SCsHelper::scNodeStruct{"sc_node_struct"};
+std::string SCsHelper::scNodeStruct{"sc_node_structure"};
 
 std::string SCsHelper::m_currentFilePath;
 std::string SCsHelper::m_currentFileDirectoryName;
@@ -87,4 +89,10 @@ std::string SCsHelper::GetFormat(std::string const & string)
   if (fileExt.at(fileExt.size() - 1) == '\"')
     fileExt = fileExt.substr(0, fileExt.size() - 1);
   return "=> nrel_format: format_" + fileExt;
+}
+
+std::string SCsHelper::RemoveHtmlTags(std::string const & string)
+{
+  std::regex htmlTagPattern("<[^>]*>");
+  return std::regex_replace(string, htmlTagPattern, "");
 }
