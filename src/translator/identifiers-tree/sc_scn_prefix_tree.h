@@ -13,6 +13,8 @@ public:
 
   std::string Add(std::string const & key, std::string const & nodeType);
 
+  std::string Add(std::string const & key, std::list<std::string> const & nodeTypeWithAdditionalClasses);
+
   std::string Get(std::string const & key);
 
   void SetNewElementNumber(size_t elementSysId);
