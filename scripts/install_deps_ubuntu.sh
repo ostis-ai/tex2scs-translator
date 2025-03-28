@@ -23,6 +23,7 @@ packagelist_dev=(
     cmake
     antlr4
     ccache
+    default-jre
 )
 
 packages=() 
