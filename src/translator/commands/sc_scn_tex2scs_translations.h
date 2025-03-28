@@ -9,9 +9,9 @@ using ScSCnTexTranslations = std::unordered_map<std::string, std::pair<std::stri
 static ScSCnTexTranslations const translations = {
     {"Метасистема OSTIS", {"myself", {"sc_node"}}},
     {"Стандарт OSTIS", {"ostis_standard", {"sc_node"}}},
-    {"База знаний Метасистемы OSTIS", {"metasystem_knowledge_base", {"sc_node_non_role_relation"}}},
-    {"Решатель задач Метасистемы OSTIS", {"metasystem_problem_solver", {"sc_node_non_role_relation"}}},
-    {"Пользовательский интерфейс Метасистемы OSTIS", {"metasystem_user_interface", {"sc_node_non_role_relation"}}},
+    {"База знаний Метасистемы OSTIS", {"metasystem_knowledge_base", {"sc_node"}}},
+    {"Решатель задач Метасистемы OSTIS", {"metasystem_problem_solver", {"sc_node"}}},
+    {"Пользовательский интерфейс Метасистемы OSTIS", {"metasystem_user_interface", {"sc_node"}}},
 
     {"класс объектов исследования'", {"rrel_studied_object_class", {"sc_node_role_relation"}}},
 
