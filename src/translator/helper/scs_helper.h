@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <list>
 #include <sstream>
 #include <iostream>
 
@@ -16,7 +17,13 @@ public:
   static std::string scNodeClass;
   static std::string scNodeStruct;
 
+  static std::string entityClass;
+
   static std::string GetNodeTypeByIdtf(std::string const & idtf);
+
+  static std::list<std::string> GetNodeAdditionalClassesByType(std::string const & type);
+
+  static std::list<std::string> GetNodeTypeWithAdditionalClasses(std::string const & idtf);
 
   static std::string NoRole(std::string const & idtf);
 
