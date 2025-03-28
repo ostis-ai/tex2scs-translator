@@ -11,7 +11,7 @@ ScSCnTexCommandResult ScSCnTexSCnItemCommand::Complete(
   std::string object = SCsHelper::RemoveHtmlTags(params.at(1));
 
   if (!SCsHelper::IsFile(object) && !SCsHelper::IsURL(object) && !SCsHelper::IsNoNamed(object))
-    object = tree.Add(object, SCsHelper::GetNodeTypeByIdentifier(object));
+    object = tree.Add(object, SCsHelper::GetNodeTypeWithAdditionalClasses(object));
 
   return SCsStream()
     .PreFormatted()

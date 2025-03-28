@@ -22,7 +22,7 @@ ScSCnPrefixTree & ScSCnPrefixTree::GetInstance()
   return *m_instance;
 }
 
-std::string ScSCnPrefixTree::Add(std::string const & key, std::string const & nodeType)
+std::string ScSCnPrefixTree::Add(std::string const & key, std::list<std::string> const & nodeTypeWithAdditionalClasses)
 {
   auto const & it = m_translations.find(key);
   if (it != m_translations.end())
@@ -30,12 +30,12 @@ std::string ScSCnPrefixTree::Add(std::string const & key, std::string const & no
     std::string const & identifier = it->second.first;
     std::string const & type = it->second.second;
     if (type == "sc_node")
-      m_translations[it->first] = {identifier, nodeType};
+      m_translations[it->first] = {identifier, nodeTypeWithAdditionalClasses[0]};
     return identifier;
   }
-  
+
   std::string const & value = ".system_element_" + std::to_string(index);
-  m_translations.insert({ key, { value, nodeType } });
+  m_translations.insert({ key, { value, nodeTypeWithAdditionalClasses } });
 
   ++index;
 
@@ -67,9 +67,22 @@ std::string ScSCnPrefixTree::Dump() const
   for (auto const & item : m_translations)
   {
     stream.Row([&item]() -> SCsStream {
+      std::list<std::string> const & classesWithAdditionalTypes = item.second.second;
+
+      std::string classesWithAdditionalTypesStr = item.second.first + " <- ";
+      for (auto const & typeOrClass : classesWithAdditionalTypes)
+        classesWithAdditionalTypesStr += typeOrClass + "; ";
+      classesWithAdditionalTypesStr.pop_back();// we want ";;" after last element, not a "; ;"
+      classesWithAdditionalTypesStr += ";\n";
+
       return { item.second.first, " => nrel_main_idtf: [", item.first, "] "
+<<<<<<< HEAD
                "(* <- lang_ru;; => nrel_format: format_html;; *);;\n",
                item.second.first, " <- ", item.second.second, ";;\n\n" };
+=======
+                                                                       "(* <- lang_ru;; => nrel_format: format_html;; *);;\n",
+               classesWithAdditionalTypesStr, "\n" };
+>>>>>>> 041af40 (feat: introduce logic to add additinal classes on all elemnts with specific type)
     });
   }
   return stream;
