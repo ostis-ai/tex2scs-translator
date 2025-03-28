@@ -12,10 +12,16 @@ ScSCnPrefixTree * ScSCnPrefixTree::GetInstance()
 
 std::string ScSCnPrefixTree::Add(std::string const & key, std::string const & nodeType)
 {
-  auto const & item = m_translations.find(key);
-  if (item != m_translations.end())
-    return item->second.first;
-
+  auto const & it = m_translations.find(key);
+  if (it != m_translations.end())
+  {
+    std::string const & identifier = it->second.first;
+    std::string const & type = it->second.second;
+    if (type == "sc_node")
+      m_translations[it->first] = {identifier, nodeType};
+    return identifier;
+  }
+  
   std::string const & value = ".system_element_" + std::to_string(index);
   m_translations.insert({ key, { value, nodeType } });
 
