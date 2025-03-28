@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../sc_scn_tex_command.h"
+#include "translator/commands/sc_scn_tex_command.h"
 
 class ScSCnTexFileClassCommand : public ScSCnTexCommand
 {

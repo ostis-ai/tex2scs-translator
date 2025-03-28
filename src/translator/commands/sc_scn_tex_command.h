@@ -2,17 +2,14 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
-#include <stack>
 
-#include "../stream/scs_stream.h"
+#include "translator/stream/scs_stream.h"
+#include "translator/identifiers-tree/sc_scn_prefix_tree.h"
 
-#include "../identifiers-tree/sc_scn_prefix_tree.h"
+using ScSCnCommandsHistory = std::vector<std::string>;
 
 using ScScnTexCommandParams = std::vector<std::string>;
 using ScScnTexCommandResult = std::string;
-
-using ScSCnCommandsHistory = std::vector<std::string>;
 
 class ScSCnTexCommand
 {

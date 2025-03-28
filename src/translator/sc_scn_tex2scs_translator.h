@@ -1,17 +1,13 @@
 #pragma once
 
-#include <utility>
+#include <unordered_set>
 #include <unordered_map>
 #include <fstream>
 #include <filesystem>
-#include <iostream>
 
-#include "filesystem/sc_file_system.h"
-
-#include "commands/sc_scn_tex_command.h"
-
-#include "../grammar/SCnTexLexer.h"
-#include "../grammar/SCnTexParser.h"
+class ScSCnTexCommand;
+class ScFile;
+class ScDirectory;
 
 using ScSCnTexCommands = std::unordered_map<std::string, ScSCnTexCommand *>;
 

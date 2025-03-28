@@ -1,8 +1,21 @@
-#include "sc_scn_file_structs_tree.h"
+#include "translator/file-structs/sc_scn_file_structs_tree.h"
 
-#include "../stream/scs_stream.h"
+#include "translator/stream/scs_stream.h"
+#include "translator/filesystem/sc_file.h"
+#include "translator/filesystem/sc_directory.h"
 
 ScSCnFileStructsTree * ScSCnFileStructsTree::m_instance;
+
+ScSCnFileStructsTree::ScSCnFileStructsTree()
+{
+  m_instance = nullptr;
+}
+
+ScSCnFileStructsTree::~ScSCnFileStructsTree()
+{
+  delete m_instance;
+  m_instance = nullptr;
+}
 
 ScSCnFileStructsTree * ScSCnFileStructsTree::GetInstance()
 {

@@ -1,6 +1,6 @@
 #include "sc_scn_tex_file_header_command.h"
 
-#include "../../helper/scs_helper.h"
+#include "translator/helper/scs_helper.h"
 
 ScScnTexCommandResult ScSCnTexFileHeaderCommand::Complete(
     ScSCnCommandsHistory & history,

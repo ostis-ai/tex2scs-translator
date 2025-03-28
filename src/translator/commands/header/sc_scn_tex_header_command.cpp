@@ -1,6 +1,6 @@
 #include "sc_scn_tex_header_command.h"
 
-#include "../../helper/scs_helper.h"
+#include "translator/helper/scs_helper.h"
 
 std::string ScSCnTexHeaderCommand::lastHeader;
 

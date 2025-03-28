@@ -1,11 +1,11 @@
 
-#include "../translator/identifiers-tree/sc_scn_prefix_tree.h"
-#include "../translator/file-structs/sc_scn_file_structs_tree.h"
-#include "../translator/commands/sc_scn_tex2scs_commands.h"
-#include "../translator/log/sc_log.hpp"
+#include "translator/identifiers-tree/sc_scn_prefix_tree.h"
+#include "translator/file-structs/sc_scn_file_structs_tree.h"
+#include "translator/commands/sc_scn_tex2scs_commands.h"
+#include "translator/log/sc_log.hpp"
 
 
-// Generated from /Users/nikitazotov/Development/apps/ostis/ostis-ai/tex2scs-translator/src/grammar/SCnTex.g4 by ANTLR 4.7.2
+// Generated from /Users/nikitazotov/Development/apps/ostis/ostis-ai/ostis-metasystem/sc-models/knowledge-base/install/ostis-standard/tex2scs-translator/src/grammar/SCnTex.g4 by ANTLR 4.7.1
 
 
 
@@ -433,7 +433,7 @@ SCnTexParser::ScnTexCommandContext* SCnTexParser::scnTexCommand(ScSCnCommandsHis
             history->push_back(_localctx->commandName);
             dynamic_cast<ScnTexCommandContext *>(_localctx)->resultText =  _localctx->command->Complete(*history, *prefixTree, params);
           }
-          _localctx->command = nullptr;
+          dynamic_cast<ScnTexCommandContext *>(_localctx)->command =  nullptr;
         
     setState(84);
     _errHandler->sync(this);

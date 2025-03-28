@@ -1,8 +1,8 @@
 #include "sc_scn_tex_input_command.h"
 
-#include "../../helper/scs_helper.h"
-#include "../../filesystem/sc_file_system.h"
-#include "../../file-structs/sc_scn_file_structs_tree.h"
+#include "translator/helper/scs_helper.h"
+#include "translator/filesystem/sc_file.h"
+#include "translator/file-structs/sc_scn_file_structs_tree.h"
 
 ScScnTexCommandResult ScSCnTexInputCommand::Complete(
     ScSCnCommandsHistory & history,

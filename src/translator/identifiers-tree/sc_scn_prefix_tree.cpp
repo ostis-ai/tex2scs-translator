@@ -1,6 +1,23 @@
 #include "sc_scn_prefix_tree.h"
 
+#include <unordered_map>
+
+#include "translator/stream/scs_stream.h"
+
 ScSCnPrefixTree * ScSCnPrefixTree::m_instance;
+
+ScSCnPrefixTree::ScSCnPrefixTree()
+{
+  m_instance = nullptr;
+  index = 0;
+  m_translations = translations;
+}
+
+ScSCnPrefixTree::~ScSCnPrefixTree()
+{
+  delete m_instance;
+  m_instance = nullptr;
+}
 
 ScSCnPrefixTree * ScSCnPrefixTree::GetInstance()
 {
@@ -56,7 +73,7 @@ std::string ScSCnPrefixTree::Dump() const
   {
     stream.Row([&item]() -> SCsStream {
       return { item.second.first, " => nrel_main_idtf: [", item.first, "] "
-                                                                       "(* <- lang_ru;; => nrel_format: format_html;; *);;\n",
+               "(* <- lang_ru;; => nrel_format: format_html;; *);;\n",
                item.second.first, " <- ", item.second.second, ";;\n\n" };
     });
   }

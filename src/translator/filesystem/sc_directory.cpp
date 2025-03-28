@@ -1,4 +1,10 @@
-#include "sc_file_system.h"
+#include "translator/filesystem/sc_directory.h"
+
+#include <utility>
+#include <fstream>
+
+#include "translator/stream/scs_stream.h"
+#include "translator/filesystem/sc_file.h"
 
 ScDirectory::ScDirectory(std::string path)
   : m_path(std::move(path))

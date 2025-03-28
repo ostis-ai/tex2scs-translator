@@ -57,7 +57,7 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
 
           return relIdtf.empty()
             ? relIdtf
-            : tree.Add(relIdtf, SCsHelper::scNodeNoRoleRelation);
+            : tree.Add(relIdtf, SCsHelper::scNodeNonRoleRelation);
       };
 
       auto const GetRelModifierSign = [&]() -> std::string {

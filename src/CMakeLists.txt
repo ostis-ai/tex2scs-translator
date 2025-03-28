@@ -28,7 +28,13 @@ add_executable(scn-tex2scs
     "${ANTLR_DIR}/runtime/src"
 )
 
-target_include_directories(scn-tex2scs PRIVATE ${ANTLR_DIR}/runtime/src)
-target_link_libraries(scn-tex2scs antlr4_static ${Boost_LIBRARIES} ${LIBCURL_LIBRARIES})
+target_link_libraries(scn-tex2scs
+    LINK_PRIVATE antlr4_static
+    LINK_PRIVATE ${Boost_LIBRARIES}
+)
+target_include_directories(scn-tex2scs
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+    PRIVATE ${ANTLR_DIR}/runtime/src
+)
 
 add_dependencies(scn-tex2scs antlr4_static)

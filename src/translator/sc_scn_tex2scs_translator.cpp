@@ -1,6 +1,15 @@
 #include "sc_scn_tex2scs_translator.h"
-#include "log/sc_log.hpp"
-#include "helper/scs_helper.h"
+
+#include <utility>
+
+#include "translator/log/sc_log.hpp"
+#include "translator/helper/scs_helper.h"
+#include "translator/filesystem/sc_file.h"
+#include "translator/filesystem/sc_directory.h"
+#include "translator/commands/sc_scn_tex_command.h"
+
+#include "grammar/SCnTexLexer.h"
+#include "grammar/SCnTexParser.h"
 
 ScSCnTex2SCsTranslator::ScSCnTex2SCsTranslator(bool debugMode, bool clearMode)
 {

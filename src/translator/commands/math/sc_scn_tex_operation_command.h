@@ -4,7 +4,7 @@
 #include <vector>
 #include <unordered_map>
 
-#include "../sc_scn_tex_command.h"
+#include "translator/commands/sc_scn_tex_command.h"
 
 class ScSCnTexOperationCommand : public ScSCnTexCommand
 {

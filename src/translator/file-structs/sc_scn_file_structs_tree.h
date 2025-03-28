@@ -2,7 +2,8 @@
 
 #include <string>
 #include <unordered_set>
-#include "../filesystem/sc_file_system.h"
+
+class ScDirectory;
 
 class ScSCnFileStructsTree
 {
@@ -17,14 +18,7 @@ protected:
   static ScSCnFileStructsTree * m_instance;
   std::unordered_set<std::string> m_file_structs;
 
-  ScSCnFileStructsTree()
-  {
-    m_instance = nullptr;
-  }
+  ScSCnFileStructsTree();
 
-  ~ScSCnFileStructsTree()
-  {
-    delete m_instance;
-    m_instance = nullptr;
-  }
+  ~ScSCnFileStructsTree();
 };

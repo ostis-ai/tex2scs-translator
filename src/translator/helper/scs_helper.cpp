@@ -1,12 +1,15 @@
 #include "scs_helper.h"
 
 #include <regex>
+#include <sstream>
+#include <functional>
+#include <unordered_set>
 
 std::string SCsHelper::scNode{"sc_node"};
-std::string SCsHelper::scNodeNoRoleRelation{"sc_node_non_role_relation"};
+std::string SCsHelper::scNodeNonRoleRelation{"sc_node_non_role_relation"};
 std::string SCsHelper::scNodeRoleRelation{"sc_node_role_relation"};
 std::string SCsHelper::scNodeClass{"sc_node_class"};
-std::string SCsHelper::scNodeStruct{"sc_node_structure"};
+std::string SCsHelper::scNodeStructure{"sc_node_structure"};
 
 std::string SCsHelper::m_currentFilePath;
 std::string SCsHelper::m_currentFileDirectoryName;
@@ -16,7 +19,7 @@ std::string SCsHelper::GetNodeTypeByIdtf(std::string const & idtf)
   char lastSymb = idtf.at(idtf.size() - 1);
 
   if (lastSymb == '*')
-    return scNodeNoRoleRelation;
+    return scNodeNonRoleRelation;
   else if (lastSymb == '\'')
     return scNodeRoleRelation;
 

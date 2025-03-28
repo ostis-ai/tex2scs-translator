@@ -1,10 +1,8 @@
 #pragma once
 
 #include <string>
-#include <unordered_map>
 
-#include "../commands/sc_scn_tex2scs_translations.h"
-#include "../stream/scs_stream.h"
+#include "translator/commands/sc_scn_tex2scs_translations.h"
 
 class ScSCnPrefixTree
 {
@@ -24,18 +22,9 @@ public:
 protected:
   static ScSCnPrefixTree * m_instance;
 
-  ScSCnPrefixTree()
-  {
-    m_instance = nullptr;
-    index = 0;
-    m_translations = translations;
-  }
+  ScSCnPrefixTree();
 
-  ~ScSCnPrefixTree()
-  {
-    delete m_instance;
-    m_instance = nullptr;
-  }
+  ~ScSCnPrefixTree();
 
 private:
   long long index;

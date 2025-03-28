@@ -1,6 +1,6 @@
 #include "sc_scn_tex_file_item_command.h"
 
-#include "../../helper/scs_helper.h"
+#include "translator/helper/scs_helper.h"
 
 ScScnTexCommandResult ScSCnTexFileItemCommand::Complete(
     ScSCnCommandsHistory & history,
