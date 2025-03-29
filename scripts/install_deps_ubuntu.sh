@@ -55,8 +55,10 @@ Please install the following packages by yourself:
   exit 1
 fi
 
-
 sudo apt-get update
 
 sudo apt-get install -y --no-install-recommends "${packages[@]}"
 sudo apt autoremove
+
+echo "Java installed at: $JAVA_HOME"
+java -version # Verify installation.

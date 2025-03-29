@@ -15,6 +15,10 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 COPY ./scripts/install_deps_ubuntu.sh /tmp/install_deps_ubuntu.sh
 RUN /tmp/install_deps_ubuntu.sh --dev
 
+# Set JAVA_HOME and add it to PATH
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH=$PATH:$JAVA_HOME/bin
+
 FROM base as buildenv
 
 COPY . /tex2scs-translator
@@ -22,9 +26,6 @@ RUN chown -R "${UID}:${GID}" /tex2scs-translator
 WORKDIR /tex2scs-translator/scripts
 
 ENV CCACHE_DIR=/ccache
-
-# Explicitly set JAVA_HOME and add java to PATH
-RUN export JAVA_HOME=$(/usr/lib/jvm/default-java) && export PATH=$PATH:$JAVA_HOME/bin
 
 RUN --mount=type=cache,target=/ccache/ ./make_all.sh
 
