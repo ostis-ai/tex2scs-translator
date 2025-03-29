@@ -39,14 +39,18 @@ void ScFile::Read(std::stringstream & text) const
 std::string ScFile::GetName() const
 {
   std::string const & fileNameWithExt = std::filesystem::path(m_path).filename().string();
-  std::string const & fileName = fileNameWithExt.substr(0, fileNameWithExt.rfind('.'));
+  size_t const extPosition = fileNameWithExt.rfind('.');
+  std::string const & fileName = fileNameWithExt.substr(0, 
+    extPosition != std::string::npos ? extPosition : fileNameWithExt.size());;
   return fileName;
 }
 
 std::string ScFile::GetExtension() const
 {
   std::string const & fileNameWithExt = std::filesystem::path(m_path).filename().string();
-  std::string const & fileExt = fileNameWithExt.substr(fileNameWithExt.rfind('.'));
+  size_t const extPosition = fileNameWithExt.rfind('.');
+  std::string const & fileExt = fileNameWithExt.substr(
+    extPosition != std::string::npos ? extPosition : fileNameWithExt.size());
   return fileExt;
 }
 
