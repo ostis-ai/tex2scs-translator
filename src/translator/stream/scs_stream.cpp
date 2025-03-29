@@ -47,7 +47,7 @@ SCsStream & SCsStream::Row(std::function<SCsStream()> const & row)
 
 SCsStream & SCsStream::Offset(std::function<void(SCsStream &)> const & formatted)
 {
-  formatted(*this << DefineEndline() <<  DefineOffset());
+  formatted(*this << DefineEndline() << DefineOffset());
   return *this;
 }
 
