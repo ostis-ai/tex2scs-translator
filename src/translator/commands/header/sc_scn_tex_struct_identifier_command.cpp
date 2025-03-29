@@ -8,6 +8,6 @@ ScSCnTexCommandResult ScSCnTexStructIdentifierCommand::Complete(
   std::string const & identifier = params.at(1);
 
   return SCsStream().Row([&identifier]() -> SCsStream {
-    return { "<b><em>", identifier, "</b></em>" };
+    return { "<b><em>", identifier, "</em></b>" };
   });
 }
