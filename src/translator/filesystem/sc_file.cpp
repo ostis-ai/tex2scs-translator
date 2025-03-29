@@ -41,7 +41,7 @@ std::string ScFile::GetName() const
   std::string const & fileNameWithExt = std::filesystem::path(m_path).filename().string();
   size_t const extPosition = fileNameWithExt.rfind('.');
   std::string const & fileName = fileNameWithExt.substr(0, 
-    extPosition != std::string::npos ? extPosition : fileNameWithExt.size());;
+    extPosition != std::string::npos ? extPosition : fileNameWithExt.size());
   return fileName;
 }
 
