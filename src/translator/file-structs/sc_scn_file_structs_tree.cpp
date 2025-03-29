@@ -8,7 +8,6 @@ ScSCnFileStructsTree * ScSCnFileStructsTree::m_instance;
 
 ScSCnFileStructsTree::ScSCnFileStructsTree()
 {
-  m_instance = nullptr;
 }
 
 ScSCnFileStructsTree::~ScSCnFileStructsTree()
