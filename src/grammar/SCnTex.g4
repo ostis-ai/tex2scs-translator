@@ -69,7 +69,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   )
   WS?
   {
-    ScScnTexCommandParams params;
+    ScSCnTexCommandParams params;
     params.push_back($commandName);
   }
   (WS? b=('{' | '[') WS?
