@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 ScFile::ScFile(std::string path)
   : m_path(std::move(path))
