@@ -1,4 +1,4 @@
-#include "sc_scn_tex_structidtf_command.h"
+#include "sc_scn_tex_struct_identifier_command.h"
 
 ScSCnTexCommandResult ScSCnTexStructIdentifierCommand::Complete(
     ScSCnCommandsHistory & history,

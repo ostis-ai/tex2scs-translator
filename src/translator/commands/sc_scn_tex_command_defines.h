@@ -23,7 +23,7 @@
 #include "translator/commands/header/sc_scn_tex_segment_header_command.h"
 #include "translator/commands/header/sc_scn_tex_struct_header_command.h"
 #include "translator/commands/header/sc_scn_tex_struct_header_local_command.h"
-#include "translator/commands/header/sc_scn_tex_structidtf_command.h"
+#include "translator/commands/header/sc_scn_tex_struct_identifier_command.h"
 
 #include "translator/commands/set/sc_scn_tex_nrel_command.h"
 
