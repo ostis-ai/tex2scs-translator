@@ -13,11 +13,9 @@ RUN groupadd -g "${GID}" user && \
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 COPY ./scripts/install_deps_ubuntu.sh /tmp/install_deps_ubuntu.sh
-RUN /tmp/install_deps_ubuntu.sh
+RUN /tmp/install_deps_ubuntu.sh --dev
 
 FROM base as buildenv
-
-RUN /tmp/install_deps_ubuntu.sh --dev
 
 COPY . /tex2scs-translator
 RUN chown -R "${UID}:${GID}" /tex2scs-translator
