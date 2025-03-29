@@ -19,7 +19,7 @@ static ScSCnTexCommands const commands = {
     { "end", new ScSCnTexEndListCommand() },
     { "scnqq", new ScSCnTexQQCommand() },
     { "scnqqi", new ScSCnTexQQICommand() },
-    { "scnitem", new ScSCnTexScnitemCommand() },
+    { "scnitem", new ScSCnTexSCnItemCommand() },
     { "cite", new ScSCnTexCiteCommand() },
     { "scncite", new ScSCnTexCiteCommand() },
     { "nameref", new ScSCnTexRefCommand() },
@@ -41,7 +41,7 @@ static ScSCnTexCommands const commands = {
     { "scnsectionheader", new ScSCnTexSectionHeaderCommand() },
     { "scnsegmentheader", new ScSCnTexSegmentHeaderCommand() },
 
-    { "scnstructidtf", new ScSCnTexStructIdtfCommand() },
+    { "scnstructidtf", new ScSCnTexStructIdentifierCommand() },
     { "scnkeyword", new ScSCnTexKeywordCommand() },
 
     { "scnstartset", new ScSCnTexStartSetCommand() },

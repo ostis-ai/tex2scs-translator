@@ -3,10 +3,10 @@
 #include "../../helper/scs_helper.h"
 
 /// 0: <command_name> 1: <relation>? 2: <subject>
-ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
+ScSCnTexCommandResult ScSCnTexNRelCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & relationType = params.at(COMMAND_TYPE);
   bool isRoleRelation = relationType.find("role") != std::string::npos;
@@ -27,30 +27,30 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
     .Row([&](SCsStream & stream) {
       auto const attrs = item->second;
 
-      auto const GetEdgeType = [&]() -> std::string {
-        return attrs.at(EDGE_ATTR_POS);
+      auto const GetConnectorType = [&]() -> std::string {
+        return attrs.at(CONNECTOR_ATTR_POS);
       };
 
-      auto const GetRelIdtf = [&]() -> std::string {
-        std::string const relIdtf =
+      auto const GetRelationIdentifier = [&]() -> std::string {
+        std::string const relationIdentifier =
           params.size() == MAX_PARAMS
           ? (isRoleRelation
-            ? SCsHelper::Role(params.at(REL_PARAM_POS))
-            : SCsHelper::NoRole(params.at(REL_PARAM_POS)))
-          : (attrs.size() == MAX_REL_ATTRS
-            ? attrs.at(REL_ATTR_POS)
+            ? SCsHelper::Role(params.at(RELATION_PARAM_POS))
+            : SCsHelper::NoRole(params.at(RELATION_PARAM_POS)))
+          : (attrs.size() == MAX_RELATION_ATTRS
+            ? attrs.at(RELATION_ATTR_POS)
             : "");
 
-        return relIdtf.empty()
-          ? relIdtf
+        return relationIdentifier.empty()
+          ? relationIdentifier
           : (isRoleRelation
-            ? tree.Add(relIdtf, SCsHelper::scNodeRoleRelation)
-            : tree.Add(relIdtf, SCsHelper::scNodeNonRoleRelation));
+            ? tree.Add(relationIdentifier, SCsHelper::scNodeRoleRelation)
+            : tree.Add(relationIdentifier, SCsHelper::scNodeNonRoleRelation));
       };
 
       auto const GetRelModifierSign = [&]() -> std::string {
-        return attrs.size() == MAX_REL_ATTRS_WITH_REl_MODIFIER
-          ? attrs.at(REL_MODIFIER_ATTR_POS)
+        return attrs.size() == MAX_RELATION_ATTRS_WITH_RELATION_MODIFIER
+          ? attrs.at(RELATION_MODIFIER_ATTR_POS)
           : ":";
       };
 
@@ -68,7 +68,7 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
             ? urlItem == m_urlTypes.cend()
               ? SCsHelper::IsURL(object) || SCsHelper::IsFile(object)
                 ? object
-                : tree.Add(object, SCsHelper::GetNodeTypeByIdtf(object))
+                : tree.Add(object, SCsHelper::GetNodeTypeByIdentifier(object))
               : SCsHelper::Url(object)
             : SCsHelper::FileClass(object)
           : SCsHelper::File(object);
@@ -78,11 +78,11 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
 
       stream
       .Formatted([&]() -> SCsStream {
-        std::string const relIdtf = GetRelIdtf();
-        if (relIdtf.empty())
-          return { GetEdgeType(), " ", object };
+        std::string const relationIdentifier = GetRelationIdentifier();
+        if (relationIdentifier.empty())
+          return { GetConnectorType(), " ", object };
         else
-          return { GetEdgeType(), " ", relIdtf, GetRelModifierSign(), " ", object };
+          return { GetConnectorType(), " ", relationIdentifier, GetRelModifierSign(), " ", object };
       });
 
       if (SCsHelper::IsFile(object))

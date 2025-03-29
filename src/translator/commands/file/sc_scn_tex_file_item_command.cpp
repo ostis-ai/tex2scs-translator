@@ -2,10 +2,10 @@
 
 #include "translator/helper/scs_helper.h"
 
-ScScnTexCommandResult ScSCnTexFileItemCommand::Complete(
+ScSCnTexCommandResult ScSCnTexFileItemCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & name = params.at(0);
   std::string const & content = params.at(params.size() - 1);

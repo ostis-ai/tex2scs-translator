@@ -2,9 +2,9 @@
 
 #include "translator/commands/sc_scn_tex_command.h"
 
-class ScSCnTexStructIdtfCommand : public ScSCnTexCommand
+class ScSCnTexStructIdentifierCommand : public ScSCnTexCommand
 {
 public:
-  ScScnTexCommandResult Complete(
-      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) override;
+  ScSCnTexCommandResult Complete(
+      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScSCnTexCommandParams const & params) override;
 };

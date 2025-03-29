@@ -1,17 +1,17 @@
 #include "sc_scn_tex_struct_header_command.h"
 
-ScScnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
+ScSCnTexCommandResult ScSCnTexStructHeaderCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
-  std::string const & idtf = params.at(1);
-  std::string const & systemIdtf = tree.Add(idtf, "sc_node_structure");
+  std::string const & identifier = params.at(1);
+  std::string const & systemIdentifier = tree.Add(identifier, "sc_node_structure");
 
   return SCsStream()
     .PreFormatted()
     .SetCurrentCommand(params.at(0))
-    .Formatted([&systemIdtf]() -> SCsStream {
-      return { systemIdtf };
+    .Formatted([&systemIdentifier]() -> SCsStream {
+      return { systemIdentifier };
     });
 }

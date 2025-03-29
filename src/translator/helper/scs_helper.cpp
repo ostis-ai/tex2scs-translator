@@ -14,36 +14,36 @@ std::string SCsHelper::scNodeStructure{"sc_node_structure"};
 std::string SCsHelper::m_currentFilePath;
 std::string SCsHelper::m_currentFileDirectoryName;
 
-std::string SCsHelper::GetNodeTypeByIdtf(std::string const & idtf)
+std::string SCsHelper::GetNodeTypeByIdentifier(std::string const & identifier)
 {
-  char lastSymb = idtf.at(idtf.size() - 1);
+  char lastSymbol = identifier.at(identifier.size() - 1);
 
-  if (lastSymb == '*')
+  if (lastSymbol == '*')
     return scNodeNonRoleRelation;
-  else if (lastSymb == '\'')
+  else if (lastSymbol == '\'')
     return scNodeRoleRelation;
 
-  char firstSymb = idtf.at(0);
+  char firstSymbol = identifier.at(0);
 
-  if (std::islower(firstSymb))
+  if (std::islower(firstSymbol))
     return scNodeClass;
   else
     return scNode;
 }
 
-std::string SCsHelper::NoRole(std::string const & idtf)
+std::string SCsHelper::NoRole(std::string const & identifier)
 {
-  return idtf + "*";
+  return identifier + "*";
 }
 
-std::string SCsHelper::Role(std::string const & idtf)
+std::string SCsHelper::Role(std::string const & identifier)
 {
-  return idtf + "'";
+  return identifier + "'";
 }
 
-std::string SCsHelper::File(std::string const & idtf)
+std::string SCsHelper::File(std::string const & identifier)
 {
-  return "[<p>" + idtf + "</p>]";
+  return "[<p>" + identifier + "</p>]";
 }
 
 bool SCsHelper::IsFile(std::string const & string)
@@ -67,9 +67,9 @@ std::string SCsHelper::Url(std::string const & path)
   return "\"file://" + relativePath + "\"";
 }
 
-std::string SCsHelper::FileClass(std::string const & idtf)
+std::string SCsHelper::FileClass(std::string const & identifier)
 {
-  return "![" + idtf + "]!";
+  return "![" + identifier + "]!";
 }
 
 bool SCsHelper::IsURL(std::string const & string)

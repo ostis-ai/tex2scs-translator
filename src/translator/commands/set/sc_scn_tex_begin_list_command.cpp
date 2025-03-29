@@ -3,10 +3,10 @@
 #include "../../helper/scs_helper.h"
 
 /// 0: begin 1: <command_name> 2: <relation>?
-ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
+ScSCnTexCommandResult ScSCnTexBeginListCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & relationSetType = params.at(COMMAND_TYPE_POS);
 
@@ -44,25 +44,25 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
     .Row([&](SCsStream & stream) {
       auto const attrs = item->second;
 
-      auto const GetEdgeType = [&]() -> std::string {
-        return attrs[EDGE_ATTR_POS];
+      auto const GetConnectorType = [&]() -> std::string {
+        return attrs[CONNECTOR_ATTR_POS];
       };
 
-      auto const GetRelIdtf = [&]() -> std::string {
-        std::string const relIdtf = params.size() == MAX_PARAMS
-          ? SCsHelper::NoRole(params.at(REL_PARAM_POS))
-          : attrs.size() == MAX_REL_ATTRS
-            ? attrs.at(REL_ATTR_POS)
+      auto const GetRelationIdentifier = [&]() -> std::string {
+        std::string const relationIdentifier = params.size() == MAX_PARAMS
+          ? SCsHelper::NoRole(params.at(RELATION_PARAM_POS))
+          : attrs.size() == MAX_RELATION_ATTRS
+            ? attrs.at(RELATION_ATTR_POS)
             : "";
 
-          return relIdtf.empty()
-            ? relIdtf
-            : tree.Add(relIdtf, SCsHelper::scNodeNonRoleRelation);
+          return relationIdentifier.empty()
+            ? relationIdentifier
+            : tree.Add(relationIdentifier, SCsHelper::scNodeNonRoleRelation);
       };
 
       auto const GetRelModifierSign = [&]() -> std::string {
-        return attrs.size() == MAX_REL_ATTRS_WITH_REl_MODIFIER
-         ? attrs.at(REL_MODIFIER_ATTR_POS)
+        return attrs.size() == MAX_RELATION_ATTRS_WITH_RELATION_MODIFIER
+         ? attrs.at(RELATION_MODIFIER_ATTR_POS)
          : ":";
       };
 
@@ -75,11 +75,11 @@ ScScnTexCommandResult ScSCnTexBeginListCommand::Complete(
       stream
       .SetCurrentCommand(beginBracket.empty() ? "lb" : beginBracket)
       .Formatted([&]() -> SCsStream {
-        std::string const relIdtf = GetRelIdtf();
-        if (relIdtf.empty())
-          return { GetEdgeType(), " ", beginBracket };
+        std::string const relationIdentifier = GetRelationIdentifier();
+        if (relationIdentifier.empty())
+          return { GetConnectorType(), " ", beginBracket };
         else
-          return { GetEdgeType(), " ", relIdtf, GetRelModifierSign(), " ", beginBracket };
+          return { GetConnectorType(), " ", relationIdentifier, GetRelModifierSign(), " ", beginBracket };
       });
     })
     .AddTab();

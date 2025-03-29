@@ -7,6 +7,6 @@ class ScSCnTexHeaderCommand : public ScSCnTexCommand
 public:
   static std::string lastHeader;
 
-  ScScnTexCommandResult Complete(
-      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) override;
+  ScSCnTexCommandResult Complete(
+      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScSCnTexCommandParams const & params) override;
 };

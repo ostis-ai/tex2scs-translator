@@ -1,13 +1,13 @@
 #include "sc_scn_tex_keyword_command.h"
 
-ScScnTexCommandResult ScSCnTexKeywordCommand::Complete(
+ScSCnTexCommandResult ScSCnTexKeywordCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
-  std::string const & idtf = params.at(1);
+  std::string const & identifier = params.at(1);
 
-  return SCsStream().Row([&idtf]() -> SCsStream {
-    return { idtf };
+  return SCsStream().Row([&identifier]() -> SCsStream {
+    return { identifier };
   });
 }

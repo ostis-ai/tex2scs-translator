@@ -8,14 +8,14 @@
 
 using ScSCnCommandsHistory = std::vector<std::string>;
 
-using ScScnTexCommandParams = std::vector<std::string>;
-using ScScnTexCommandResult = std::string;
+using ScSCnTexCommandParams = std::vector<std::string>;
+using ScSCnTexCommandResult = std::string;
 
 class ScSCnTexCommand
 {
 public:
-  virtual ScScnTexCommandResult Complete(
-      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) = 0;
+  virtual ScSCnTexCommandResult Complete(
+      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScSCnTexCommandParams const & params) = 0;
 
   virtual ~ScSCnTexCommand() = default;
 

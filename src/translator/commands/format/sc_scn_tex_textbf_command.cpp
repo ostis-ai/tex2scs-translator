@@ -1,9 +1,9 @@
 #include "sc_scn_tex_textbf_command.h"
 
-ScScnTexCommandResult ScSCnTexTextbfCommand::Complete(
+ScSCnTexCommandResult ScSCnTexTextbfCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & text = params.at(1);
 

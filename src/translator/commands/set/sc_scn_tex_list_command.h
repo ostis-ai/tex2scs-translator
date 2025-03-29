@@ -12,15 +12,15 @@ class ScSCnTexListCommand : public ScSCnTexCommand
 protected:
   uint8_t const MAX_PARAMS = 3;
   uint8_t const COMMAND_TYPE_POS = 1;
-  uint8_t const REL_PARAM_POS = 2;
+  uint8_t const RELATION_PARAM_POS = 2;
 
-  uint8_t const MAX_REL_ATTRS = 5;
-  uint8_t const EDGE_ATTR_POS = 0;
+  uint8_t const MAX_RELATION_ATTRS = 5;
+  uint8_t const CONNECTOR_ATTR_POS = 0;
   uint8_t const BEGIN_BRACKET_POS = 1;
   uint8_t const END_BRACKET_POS = 2;
-  uint8_t const REL_MODIFIER_ATTR_POS = 3;
-  uint8_t const REL_ATTR_POS = 4;
-  uint8_t const MAX_REL_ATTRS_WITH_REl_MODIFIER = 4;
+  uint8_t const RELATION_MODIFIER_ATTR_POS = 3;
+  uint8_t const RELATION_ATTR_POS = 4;
+  uint8_t const MAX_RELATION_ATTRS_WITH_RELATION_MODIFIER = 4;
 
   std::unordered_map<std::string, std::vector<std::string>> m_setTypes = {
     { "scnrelfromlist",      { "=>", "", "", ":" } },

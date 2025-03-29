@@ -4,10 +4,10 @@
 #include "translator/filesystem/sc_file.h"
 #include "translator/file-structs/sc_scn_file_structs_tree.h"
 
-ScScnTexCommandResult ScSCnTexInputCommand::Complete(
+ScSCnTexCommandResult ScSCnTexInputCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & sourcePath = params.at(1);
   ScFile source{sourcePath};

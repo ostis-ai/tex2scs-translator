@@ -11,7 +11,7 @@ public:
   static std::string scNodeClass;
   static std::string scNodeStructure;
 
-  static std::string GetNodeTypeByIdtf(std::string const & idtf);
+  static std::string GetNodeTypeByIdentifier(std::string const & idtf);
 
   static std::string NoRole(std::string const & idtf);
 

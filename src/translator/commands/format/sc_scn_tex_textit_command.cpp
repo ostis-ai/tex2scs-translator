@@ -1,9 +1,9 @@
 #include "sc_scn_tex_textit_command.h"
 
-ScScnTexCommandResult ScSCnTexTextitCommand::Complete(
+ScSCnTexCommandResult ScSCnTexTextitCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & text = params.at(1);
 
