@@ -89,5 +89,6 @@ ScScnTexCommandResult ScSCnTexNRelCommand::Complete(
         stream.Attached("<- lang_ru", "=> nrel_format: format_html");
       else if (SCsHelper::IsURL(object))
         stream.Attached("<- concept_file", SCsHelper::GetFormat(object));
+      stream.SetCurrentCommand(relationType);
   });
 }
