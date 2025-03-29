@@ -20,8 +20,8 @@ scnTexText
   using ScSCnCommandsHistory = std::vector<std::string>,
   ScSCnCommandsHistory * history = new ScSCnCommandsHistory(),
 
-  ScSCnPrefixTree * prefixTree = ScSCnPrefixTree::GetInstance(),
-  ScSCnFileStructsTree * fileStructsTree = ScSCnFileStructsTree::GetInstance(),
+  ScSCnPrefixTree * prefixTree = &ScSCnPrefixTree::GetInstance(),
+  ScSCnFileStructsTree * fileStructsTree = &ScSCnFileStructsTree::GetInstance(),
   ]
   :
   {

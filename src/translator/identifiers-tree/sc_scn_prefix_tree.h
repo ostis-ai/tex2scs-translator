@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include "translator/commands/sc_scn_tex2scs_translations.h"
@@ -7,7 +8,9 @@
 class ScSCnPrefixTree
 {
 public:
-  static ScSCnPrefixTree * GetInstance();
+  ~ScSCnPrefixTree();
+
+  static ScSCnPrefixTree & GetInstance();
 
   std::string Add(std::string const & key, std::string const & nodeType);
 
@@ -20,11 +23,9 @@ public:
   std::string Dump() const;
 
 protected:
-  static ScSCnPrefixTree * m_instance;
+  static std::unique_ptr<ScSCnPrefixTree> m_instance;
 
   ScSCnPrefixTree();
-
-  ~ScSCnPrefixTree();
 
 private:
   long long index;

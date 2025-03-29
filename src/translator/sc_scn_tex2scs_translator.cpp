@@ -36,9 +36,9 @@ bool ScSCnTex2SCsTranslator::Run(
   else
     SC_LOG_INFO("Set release mode");
 
-  ScSCnPrefixTree::GetInstance()->SetNewElementNumber(elementSysId);
+  ScSCnPrefixTree::GetInstance().SetNewElementNumber(elementSysId);
   SC_LOG_WARNING("First element system identifier: "
-    << ScSCnPrefixTree::GetInstance()->GetFreeElementSystemIdentifier());
+    << ScSCnPrefixTree::GetInstance().GetFreeElementSystemIdentifier());
 
   ScDirectory const & workDirectory{workDirectoryPath};
   m_filesCount = workDirectory.CountFiles(m_extensions);
@@ -61,7 +61,7 @@ bool ScSCnTex2SCsTranslator::Run(
   DumpFileStructs(targetDirectory);
 
   SC_LOG_WARNING("Free element system identifier: "
-    << ScSCnPrefixTree::GetInstance()->GetFreeElementSystemIdentifier());
+    << ScSCnPrefixTree::GetInstance().GetFreeElementSystemIdentifier());
   SC_LOG_INFO("Translation finished");
 
   return true;
@@ -137,11 +137,11 @@ void ScSCnTex2SCsTranslator::DumpIdentifiers(ScDirectory const & targetDirectory
   ScFile dumpFile = (targetDirPath.at(targetDirPath.size() - 1) == '/'
     ? targetDirPath : targetDirPath + "/") + "identifiers.scs";
 
-  std::string const scsText = ScSCnPrefixTree::GetInstance()->Dump();
+  std::string const scsText = ScSCnPrefixTree::GetInstance().Dump();
   dumpFile.Write(scsText);
 }
 
 void ScSCnTex2SCsTranslator::DumpFileStructs(ScDirectory const & targetDirectory)
 {
-  ScSCnFileStructsTree::GetInstance()->Dump(targetDirectory);
+  ScSCnFileStructsTree::GetInstance().Dump(targetDirectory);
 }

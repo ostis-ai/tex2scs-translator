@@ -4,27 +4,22 @@
 
 #include "translator/stream/scs_stream.h"
 
-ScSCnPrefixTree * ScSCnPrefixTree::m_instance;
+std::unique_ptr<ScSCnPrefixTree> ScSCnPrefixTree::m_instance;
 
 ScSCnPrefixTree::ScSCnPrefixTree()
 {
-  m_instance = nullptr;
   index = 0;
   m_translations = translations;
 }
 
-ScSCnPrefixTree::~ScSCnPrefixTree()
-{
-  delete m_instance;
-  m_instance = nullptr;
-}
+ScSCnPrefixTree::~ScSCnPrefixTree() = default;
 
-ScSCnPrefixTree * ScSCnPrefixTree::GetInstance()
+ScSCnPrefixTree & ScSCnPrefixTree::GetInstance()
 {
   if (m_instance == nullptr)
-    m_instance = new ScSCnPrefixTree();
+    m_instance = std::unique_ptr<ScSCnPrefixTree>(new ScSCnPrefixTree());
 
-  return m_instance;
+  return *m_instance;
 }
 
 std::string ScSCnPrefixTree::Add(std::string const & key, std::string const & nodeType)

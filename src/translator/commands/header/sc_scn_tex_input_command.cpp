@@ -13,7 +13,7 @@ ScSCnTexCommandResult ScSCnTexInputCommand::Complete(
   ScFile source{sourcePath};
 
   std::string const & name = source.GetName();
-  ScSCnFileStructsTree::GetInstance()->Add(name);
+  ScSCnFileStructsTree::GetInstance().Add(name);
 
   return SCsStream()
   .SetCurrentCommand("any")

@@ -4,24 +4,18 @@
 #include "translator/filesystem/sc_file.h"
 #include "translator/filesystem/sc_directory.h"
 
-ScSCnFileStructsTree * ScSCnFileStructsTree::m_instance;
+std::unique_ptr<ScSCnFileStructsTree> ScSCnFileStructsTree::m_instance = nullptr;
 
-ScSCnFileStructsTree::ScSCnFileStructsTree()
-{
-}
+ScSCnFileStructsTree::ScSCnFileStructsTree() = default;
 
-ScSCnFileStructsTree::~ScSCnFileStructsTree()
-{
-  delete m_instance;
-  m_instance = nullptr;
-}
+ScSCnFileStructsTree::~ScSCnFileStructsTree() = default;
 
-ScSCnFileStructsTree * ScSCnFileStructsTree::GetInstance()
+ScSCnFileStructsTree & ScSCnFileStructsTree::GetInstance()
 {
   if (m_instance == nullptr)
-    m_instance = new ScSCnFileStructsTree();
+    m_instance = std::unique_ptr<ScSCnFileStructsTree>(new ScSCnFileStructsTree());
 
-  return m_instance;
+  return *m_instance;
 }
 
 void ScSCnFileStructsTree::Add(std::string const & filePath)
