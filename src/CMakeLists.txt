@@ -17,31 +17,27 @@ add_custom_command(
     COMMENT "Generating SCnTexParser"
 )
 
-add_custom_target(SCnTexParser ALL
-    DEPENDS
-        "${GRAMMAR_DIR}/SCnTexLexer.cpp"
-        "${GRAMMAR_DIR}/SCnTexParser.cpp"
+add_library(SCnTexParser STATIC
+    "${GRAMMAR_DIR}/SCnTexLexer.cpp"
+    "${GRAMMAR_DIR}/SCnTexParser.cpp"
+)
+target_include_directories(SCnTexParser
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC ${ANTLR_DIR}/runtime/src
+    PUBLIC ${GRAMMAR_DIR}
 )
 
 file(GLOB_RECURSE SOURCES "*.cpp" "*.hpp")
-
-set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED ON)
-set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost REQUIRED COMPONENTS filesystem program_options)
-
 add_executable(scn-tex2scs ${SOURCES})
+
+find_package(Boost REQUIRED COMPONENTS filesystem program_options)
 target_link_libraries(scn-tex2scs
+    LINK_PRIVATE SCnTexParser
     LINK_PRIVATE antlr4_static
-    LINK_PRIVATE ${Boost_LIBRARIES}
+    LINK_PRIVATE Boost::filesystem
+    LINK_PRIVATE Boost::program_options
 )
+
 target_include_directories(scn-tex2scs
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-    PRIVATE ${GRAMMAR_DIR}
-    PRIVATE ${ANTLR_DIR}/runtime/src
-)
-
-add_dependencies(scn-tex2scs
-    antlr4_static
-    SCnTexParser
 )
