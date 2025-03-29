@@ -7,10 +7,10 @@ options
 
 @parser::header
 {
-#include "../translator/identifiers-tree/sc_scn_prefix_tree.h"
-#include "../translator/file-structs/sc_scn_file_structs_tree.h"
-#include "../translator/commands/sc_scn_tex2scs_commands.h"
-#include "../translator/log/sc_log.hpp"
+#include "translator/identifiers-tree/sc_scn_prefix_tree.h"
+#include "translator/file-structs/sc_scn_file_structs_tree.h"
+#include "translator/commands/sc_scn_tex2scs_commands.h"
+#include "translator/log/sc_log.hpp"
 }
 
 scnTexText
@@ -20,8 +20,8 @@ scnTexText
   using ScSCnCommandsHistory = std::vector<std::string>,
   ScSCnCommandsHistory * history = new ScSCnCommandsHistory(),
 
-  ScSCnPrefixTree * prefixTree = ScSCnPrefixTree::GetInstance(),
-  ScSCnFileStructsTree * fileStructsTree = ScSCnFileStructsTree::GetInstance(),
+  ScSCnPrefixTree * prefixTree = &ScSCnPrefixTree::GetInstance(),
+  ScSCnFileStructsTree * fileStructsTree = &ScSCnFileStructsTree::GetInstance(),
   ]
   :
   {
@@ -69,7 +69,7 @@ scnTexCommand[ScSCnCommandsHistory * history, ScSCnPrefixTree * prefixTree]
   )
   WS?
   {
-    ScScnTexCommandParams params;
+    ScSCnTexCommandParams params;
     params.push_back($commandName);
   }
   (WS? b=('{' | '[') WS?

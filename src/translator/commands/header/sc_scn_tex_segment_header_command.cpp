@@ -1,9 +1,9 @@
 #include "sc_scn_tex_segment_header_command.h"
 
-ScScnTexCommandResult ScSCnTexSegmentHeaderCommand::Complete(
+ScSCnTexCommandResult ScSCnTexSegmentHeaderCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   return ScSCnTexStructHeaderCommand::Complete(history, tree, params);
 }

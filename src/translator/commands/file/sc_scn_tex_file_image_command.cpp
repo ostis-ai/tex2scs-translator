@@ -1,11 +1,11 @@
 #include "sc_scn_tex_file_image_command.h"
 
-#include "../../helper/scs_helper.h"
+#include "translator/helper/scs_helper.h"
 
-ScScnTexCommandResult ScSCnTexFileImageCommand::Complete(
+ScSCnTexCommandResult ScSCnTexFileImageCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & content = params.at(params.size() - 1);
 

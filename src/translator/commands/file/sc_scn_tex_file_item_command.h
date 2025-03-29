@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../sc_scn_tex_command.h"
+#include "translator/commands/sc_scn_tex_command.h"
 
 class ScSCnTexFileItemCommand : public ScSCnTexCommand
 {
 public:
-  ScScnTexCommandResult Complete(
-      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScScnTexCommandParams const & params) override;
+  ScSCnTexCommandResult Complete(
+      ScSCnCommandsHistory & history, ScSCnPrefixTree & tree, ScSCnTexCommandParams const & params) override;
 };

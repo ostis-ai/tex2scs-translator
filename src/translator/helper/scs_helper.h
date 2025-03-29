@@ -1,22 +1,17 @@
 #pragma once
 
 #include <string>
-#include <sstream>
-#include <iostream>
-
-#include <functional>
-#include <unordered_set>
 
 class SCsHelper
 {
 public:
   static std::string scNode;
-  static std::string scNodeNoRoleRelation;
+  static std::string scNodeNonRoleRelation;
   static std::string scNodeRoleRelation;
   static std::string scNodeClass;
-  static std::string scNodeStruct;
+  static std::string scNodeStructure;
 
-  static std::string GetNodeTypeByIdtf(std::string const & idtf);
+  static std::string GetNodeTypeByIdentifier(std::string const & idtf);
 
   static std::string NoRole(std::string const & idtf);
 

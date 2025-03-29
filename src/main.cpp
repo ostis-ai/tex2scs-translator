@@ -1,12 +1,13 @@
+#include <iostream>
+#include <memory>
+
 #include <boost/program_options.hpp>
 
-#include <iostream>
-
-#include "sc_scn_tex2scs_translator_builder.h"
+#include "translator/sc_scn_tex2scs_translator.h"
 
 int main(int argc, const char * argv[]) try
 {
-  boost::program_options::options_description options_description("SCn-Tex2SCs-Translator usage");
+  boost::program_options::options_description options_description("tex2scs-translator usage");
   options_description.add_options()
       ("help", "Display this message")
       ("sources,s", boost::program_options::value<std::string>(), "Path with tex sources")
@@ -39,7 +40,7 @@ int main(int argc, const char * argv[]) try
   bool clearMode = vm.count("clear");
   size_t elementSysId = vm.count("id") && (vm["id"].as<int>() > 0) ? vm["id"].as<int>() : 0;
 
-  auto translator = ScSCnTex2SCsTranslatorBuilder::BuildDefaultTranslator(debugMode, clearMode);
+  auto translator = std::make_unique<ScSCnTex2SCsTranslator>(debugMode, clearMode);
   return translator->Run(workDirectory, targetDirectory, elementSysId) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 catch (std::exception const & e)

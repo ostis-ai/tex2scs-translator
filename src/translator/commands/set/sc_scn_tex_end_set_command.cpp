@@ -1,9 +1,9 @@
 #include "sc_scn_tex_end_set_command.h"
 
-ScScnTexCommandResult ScSCnTexEndSetCommand::Complete(
+ScSCnTexCommandResult ScSCnTexEndSetCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   return SCsStream()
   .PreFormatted()

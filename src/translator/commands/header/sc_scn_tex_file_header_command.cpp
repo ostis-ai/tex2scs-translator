@@ -1,11 +1,11 @@
 #include "sc_scn_tex_file_header_command.h"
 
-#include "../../helper/scs_helper.h"
+#include "translator/helper/scs_helper.h"
 
-ScScnTexCommandResult ScSCnTexFileHeaderCommand::Complete(
+ScSCnTexCommandResult ScSCnTexFileHeaderCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & text = params.at(1);
 

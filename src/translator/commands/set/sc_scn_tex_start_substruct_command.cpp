@@ -1,9 +1,9 @@
 #include "sc_scn_tex_start_substruct_command.h"
 
-ScScnTexCommandResult ScSCnTexStartSubstructCommand::Complete(
+ScSCnTexCommandResult ScSCnTexStartSubstructCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   return SCsStream()
   .Formatted([](SCsStream & stream) -> SCsStream {

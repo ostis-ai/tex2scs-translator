@@ -1,17 +1,17 @@
 #include "sc_scn_tex_scnitem_command.h"
 
-#include "../../helper/scs_helper.h"
+#include "translator/helper/scs_helper.h"
 
-ScScnTexCommandResult ScSCnTexScnitemCommand::Complete(
+ScSCnTexCommandResult ScSCnTexSCnItemCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & name = params.at(0);
   std::string object = SCsHelper::RemoveHtmlTags(params.at(1));
 
   if (!SCsHelper::IsFile(object) && !SCsHelper::IsURL(object) && !SCsHelper::IsNoNamed(object))
-    object = tree.Add(object, SCsHelper::GetNodeTypeByIdtf(object));
+    object = tree.Add(object, SCsHelper::GetNodeTypeByIdentifier(object));
 
   return SCsStream()
     .PreFormatted()

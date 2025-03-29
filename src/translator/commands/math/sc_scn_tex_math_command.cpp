@@ -1,10 +1,10 @@
 #include "sc_scn_tex_math_command.h"
 
 /// 0: command 1: <expression> 2: <expression>
-ScScnTexCommandResult ScSCnTexMathCommand::Complete(
+ScSCnTexCommandResult ScSCnTexMathCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & commandType = params.at(COMMAND_POS);
 

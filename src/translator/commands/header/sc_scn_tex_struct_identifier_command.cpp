@@ -1,6 +1,6 @@
-#include "sc_scn_tex_keyword_command.h"
+#include "sc_scn_tex_struct_identifier_command.h"
 
-ScSCnTexCommandResult ScSCnTexKeywordCommand::Complete(
+ScSCnTexCommandResult ScSCnTexStructIdentifierCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
     ScSCnTexCommandParams const & params)
@@ -8,6 +8,6 @@ ScSCnTexCommandResult ScSCnTexKeywordCommand::Complete(
   std::string const & identifier = params.at(1);
 
   return SCsStream().Row([&identifier]() -> SCsStream {
-    return { identifier };
+    return { "<b><em>", identifier, "</em></b>" };
   });
 }

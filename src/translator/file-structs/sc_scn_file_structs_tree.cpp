@@ -1,15 +1,21 @@
-#include "sc_scn_file_structs_tree.h"
+#include "translator/file-structs/sc_scn_file_structs_tree.h"
 
-#include "../stream/scs_stream.h"
+#include "translator/stream/scs_stream.h"
+#include "translator/filesystem/sc_file.h"
+#include "translator/filesystem/sc_directory.h"
 
-ScSCnFileStructsTree * ScSCnFileStructsTree::m_instance;
+std::unique_ptr<ScSCnFileStructsTree> ScSCnFileStructsTree::m_instance = nullptr;
 
-ScSCnFileStructsTree * ScSCnFileStructsTree::GetInstance()
+ScSCnFileStructsTree::ScSCnFileStructsTree() = default;
+
+ScSCnFileStructsTree::~ScSCnFileStructsTree() = default;
+
+ScSCnFileStructsTree & ScSCnFileStructsTree::GetInstance()
 {
   if (m_instance == nullptr)
-    m_instance = new ScSCnFileStructsTree();
+    m_instance = std::unique_ptr<ScSCnFileStructsTree>(new ScSCnFileStructsTree());
 
-  return m_instance;
+  return *m_instance;
 }
 
 void ScSCnFileStructsTree::Add(std::string const & filePath)

@@ -1,34 +1,43 @@
 set(GRAMMAR_DIR "${CMAKE_CURRENT_LIST_DIR}/grammar")
 set(TRANSLATOR_DIR "${CMAKE_CURRENT_LIST_DIR}/translator")
 
-find_package(Java)
+find_package(Java REQUIRED)
 
-add_custom_command(OUTPUT
-    "${GRAMMAR_DIR}/SCnTexLexer.cpp"
-    "${GRAMMAR_DIR}/SCnTexLexer.h"
-    "${GRAMMAR_DIR}/SCnTexParser.cpp"
-    "${GRAMMAR_DIR}/SCnTexParser.h"
+add_custom_command(
+    OUTPUT
+        "${GRAMMAR_DIR}/SCnTexLexer.cpp"
+        "${GRAMMAR_DIR}/SCnTexLexer.h"
+        "${GRAMMAR_DIR}/SCnTexParser.cpp"
+        "${GRAMMAR_DIR}/SCnTexParser.h"
     COMMAND "${Java_JAVA_EXECUTABLE}" -jar "${ANTLR_DIR}/antlr-4.7.1-complete.jar"
-        ${GRAMMAR_DIR}/SCnTex.g4 -no-listener -no-visitor
-    WORKING_DIRECTORY "${TRANSLATOR_DIR}"
-    DEPENDS ${GRAMMAR_DIR}/SCnTex.g4
+        -o "${GRAMMAR_DIR}" "${GRAMMAR_DIR}/SCnTex.g4"
+        -no-listener -no-visitor
+    WORKING_DIRECTORY "${GRAMMAR_DIR}"
+    DEPENDS "${GRAMMAR_DIR}/SCnTex.g4"
+    COMMENT "Generating SCnTexParser"
+)
+
+add_library(SCnTexParser STATIC
+    "${GRAMMAR_DIR}/SCnTexLexer.cpp"
+    "${GRAMMAR_DIR}/SCnTexParser.cpp"
+)
+target_include_directories(SCnTexParser
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC ${ANTLR_DIR}/runtime/src
+    PUBLIC ${GRAMMAR_DIR}
 )
 
 file(GLOB_RECURSE SOURCES "*.cpp" "*.hpp")
+add_executable(scn-tex2scs ${SOURCES})
 
-set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED ON)
-set(Boost_USE_STATIC_RUNTIME OFF)
-
-find_package(Boost 1.71.0 COMPONENTS filesystem program_options)
-
-add_executable(scn-tex2scs
-    ${SOURCES}
-    ${Boost_INCLUDE_DIRS}
-    "${ANTLR_DIR}/runtime/src"
+find_package(Boost REQUIRED COMPONENTS filesystem program_options)
+target_link_libraries(scn-tex2scs
+    LINK_PRIVATE SCnTexParser
+    LINK_PRIVATE antlr4_static
+    LINK_PRIVATE Boost::filesystem
+    LINK_PRIVATE Boost::program_options
 )
 
-target_include_directories(scn-tex2scs PRIVATE ${ANTLR_DIR}/runtime/src)
-target_link_libraries(scn-tex2scs antlr4_static ${Boost_LIBRARIES} ${LIBCURL_LIBRARIES})
-
-add_dependencies(scn-tex2scs antlr4_static)
+target_include_directories(scn-tex2scs
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+)

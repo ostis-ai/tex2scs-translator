@@ -1,10 +1,10 @@
 #include "sc_scn_tex_end_list_command.h"
 
 /// 0: end 1: <command_name> 2: <relation>?
-ScScnTexCommandResult ScSCnTexEndListCommand::Complete(
+ScSCnTexCommandResult ScSCnTexEndListCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   std::string const & relationSetType = params.at(COMMAND_TYPE_POS);
 

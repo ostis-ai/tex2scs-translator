@@ -2,20 +2,17 @@
 
 #include <string>
 #include <sstream>
-#include <iostream>
 #include <cstdint>
 
 #include <functional>
 #include <unordered_set>
 
-#include "sc_string_stream.h"
+#include "translator/stream/sc_string_stream.h"
 
 class SCsStream : protected ScStringStream
 {
 public:
-  SCsStream()
-  {
-  }
+  SCsStream();
 
   template <typename... Args>
   SCsStream(Args const &... args)
@@ -26,92 +23,31 @@ public:
       *this << item;
   }
 
-  SCsStream & operator<< (std::string const & string) override
-  {
-    m_instance << string;
-    return *this;
-  }
+  SCsStream & operator<< (std::string const & string) override;
 
-  SCsStream & Row(std::function<void(SCsStream &)> const & row)
-  {
-    row(*this);
-    return *this;
-  }
+  SCsStream & Row(std::function<void(SCsStream &)> const & row);
 
-  SCsStream & Row(std::function<SCsStream()> const & row)
-  {
-    *this << row();
-    return *this;
-  }
+  SCsStream & Row(std::function<SCsStream()> const & row);
 
-  SCsStream & Offset(std::function<void(SCsStream &)> const & formatted)
-  {
-    formatted(*this << DefineEndline() <<  DefineOffset());
-    return *this;
-  }
+  SCsStream & Offset(std::function<void(SCsStream &)> const & formatted);
 
-  SCsStream & Offset(std::function<SCsStream()> const & formatted)
-  {
-    *this << DefineEndline() << DefineOffset() << formatted();
-    return *this;
-  }
+  SCsStream & Offset(std::function<SCsStream()> const & formatted);
 
-  SCsStream & Formatted(std::function<void(SCsStream &)> const & formatted)
-  {
-    formatted(*this << DefineSemicolons() << DefineEndline() << DefineOffset());
-    return *this;
-  }
+  SCsStream & Formatted(std::function<void(SCsStream &)> const & formatted);
 
-  SCsStream & PreFormatted(std::function<void(SCsStream &)> const & formatted = {})
-  {
-    PreFormat();
-    if (formatted)
-      formatted(*this);
-    return *this;
-  }
+  SCsStream & PreFormatted(std::function<void(SCsStream &)> const & formatted = {});
 
-  SCsStream & Formatted(std::function<SCsStream()> const & formatted)
-  {
-    *this << DefineSemicolons() << DefineEndline() << DefineOffset() << formatted();
-    return *this;
-  }
+  SCsStream & Formatted(std::function<SCsStream()> const & formatted);
 
-  SCsStream & Tabulated(std::function<void(SCsStream &)> const & tabulated)
-  {
-    AddTab();
-    tabulated(*this);
-    RemoveTab();
+  SCsStream & Tabulated(std::function<void(SCsStream &)> const & tabulated);
 
-    return *this;
-  }
+  SCsStream & Tabulated(std::function<SCsStream()> const & tabulated);
 
-  SCsStream & Tabulated(std::function<SCsStream()> const & tabulated)
-  {
-    AddTab();
-    *this << tabulated();
-    RemoveTab();
+  SCsStream & AddTab();
 
-    return *this;
-  }
+  SCsStream & RemoveTab();
 
-  SCsStream & AddTab()
-  {
-    Tab();
-    return *this;
-  }
-
-  SCsStream & RemoveTab()
-  {
-    Untab();
-    return *this;
-  }
-
-  SCsStream & SetCurrentCommand(std::string const & name = "any")
-  {
-    m_lastCommand = m_currentCommand;
-    m_currentCommand = name;
-    return *this;
-  }
+  SCsStream & SetCurrentCommand(std::string const & name = "any");
 
   template <typename... Args>
   SCsStream & Attached(Args const &... args)
@@ -123,20 +59,9 @@ public:
     return *this;
   }
 
-  static void Clear()
-  {
-    m_offset = "";
-    m_indent = 0;
-    m_semicolons = ";";
-    m_lastCommand = "";
-    m_currentCommand = "";
-    m_attached.clear();
-  }
+  static void Clear();
 
-  operator std::string() override
-  {
-    return m_instance.str();
-  }
+  operator std::string() override;
 
 private:
   static std::string m_offset;

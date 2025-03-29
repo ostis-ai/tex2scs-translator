@@ -1,9 +1,9 @@
 #include "sc_scn_tex_qq_command.h"
 
-ScScnTexCommandResult ScSCnTexQQCommand::Complete(
+ScSCnTexCommandResult ScSCnTexQQCommand::Complete(
     ScSCnCommandsHistory & history,
     ScSCnPrefixTree & tree,
-    ScScnTexCommandParams const & params)
+    ScSCnTexCommandParams const & params)
 {
   ScStringStream stream;
   stream << "\"" << params.at(1) << "\"";

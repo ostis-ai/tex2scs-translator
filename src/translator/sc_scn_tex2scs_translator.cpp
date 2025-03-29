@@ -1,6 +1,15 @@
 #include "sc_scn_tex2scs_translator.h"
-#include "log/sc_log.hpp"
-#include "helper/scs_helper.h"
+
+#include <utility>
+
+#include "translator/log/sc_log.hpp"
+#include "translator/helper/scs_helper.h"
+#include "translator/filesystem/sc_file.h"
+#include "translator/filesystem/sc_directory.h"
+#include "translator/commands/sc_scn_tex_command.h"
+
+#include "grammar/SCnTexLexer.h"
+#include "grammar/SCnTexParser.h"
 
 ScSCnTex2SCsTranslator::ScSCnTex2SCsTranslator(bool debugMode, bool clearMode)
 {
@@ -27,9 +36,9 @@ bool ScSCnTex2SCsTranslator::Run(
   else
     SC_LOG_INFO("Set release mode");
 
-  ScSCnPrefixTree::GetInstance()->SetNewElementNumber(elementSysId);
+  ScSCnPrefixTree::GetInstance().SetNewElementNumber(elementSysId);
   SC_LOG_WARNING("First element system identifier: "
-    << ScSCnPrefixTree::GetInstance()->GetFreeElementSystemIdentifier());
+    << ScSCnPrefixTree::GetInstance().GetFreeElementSystemIdentifier());
 
   ScDirectory const & workDirectory{workDirectoryPath};
   m_filesCount = workDirectory.CountFiles(m_extensions);
@@ -52,7 +61,7 @@ bool ScSCnTex2SCsTranslator::Run(
   DumpFileStructs(targetDirectory);
 
   SC_LOG_WARNING("Free element system identifier: "
-    << ScSCnPrefixTree::GetInstance()->GetFreeElementSystemIdentifier());
+    << ScSCnPrefixTree::GetInstance().GetFreeElementSystemIdentifier());
   SC_LOG_INFO("Translation finished");
 
   return true;
@@ -128,11 +137,11 @@ void ScSCnTex2SCsTranslator::DumpIdentifiers(ScDirectory const & targetDirectory
   ScFile dumpFile = (targetDirPath.at(targetDirPath.size() - 1) == '/'
     ? targetDirPath : targetDirPath + "/") + "identifiers.scs";
 
-  std::string const scsText = ScSCnPrefixTree::GetInstance()->Dump();
+  std::string const scsText = ScSCnPrefixTree::GetInstance().Dump();
   dumpFile.Write(scsText);
 }
 
 void ScSCnTex2SCsTranslator::DumpFileStructs(ScDirectory const & targetDirectory)
 {
-  ScSCnFileStructsTree::GetInstance()->Dump(targetDirectory);
+  ScSCnFileStructsTree::GetInstance().Dump(targetDirectory);
 }

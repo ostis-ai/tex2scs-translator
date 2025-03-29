@@ -2,31 +2,17 @@
 
 #include <string>
 #include <sstream>
-#include <iostream>
 
 class ScStringStream
 {
 public:
-  ScStringStream()
-  {
-    m_instance = std::stringstream();
-  }
+  ScStringStream();
 
-  virtual ScStringStream & operator<< (std::string const & string)
-  {
-    m_instance << string;
-    return *this;
-  }
+  virtual ScStringStream & operator<< (std::string const & string);
 
-  void operator>> (std::string & string)
-  {
-    m_instance >> string;
-  }
+  void operator>> (std::string & string);
 
-  virtual operator std::string()
-  {
-    return m_instance.str();
-  }
+  virtual operator std::string();
 
 protected:
   std::stringstream m_instance;
