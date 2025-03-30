@@ -5,6 +5,16 @@
 
 #include "translator/sc_scn_tex2scs_translator.h"
 
+/*!
+ * @brief The main function of the tex2scs-translator application.
+ *
+ * The main function parses command-line arguments, sets up the translator, and runs the translation process.
+ * It also handles exceptions and provides usage information.
+ *
+ * @param argc The number of command-line arguments.
+ * @param argv An array of command-line argument strings.
+ * @return EXIT_SUCCESS if the translation process is successful, EXIT_FAILURE otherwise.
+ */
 int main(int argc, const char * argv[]) try
 {
   boost::program_options::options_description options_description("tex2scs-translator usage");
