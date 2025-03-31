@@ -59,6 +59,3 @@ sudo apt-get update
 
 sudo apt-get install -y --no-install-recommends "${packages[@]}"
 sudo apt autoremove
-
-echo "Java installed at: $JAVA_HOME"
-java -version # Verify installation.
