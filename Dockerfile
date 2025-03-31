@@ -1,4 +1,4 @@
-FROM debian:11.4-slim as base
+FROM debian:11.4-slim AS base
 
 USER root
 
@@ -13,9 +13,11 @@ RUN groupadd -g "${GID}" user && \
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 COPY ./scripts/install_deps_ubuntu.sh /tmp/install_deps_ubuntu.sh
-RUN /tmp/install_deps_ubuntu.sh --dev
+RUN /tmp/install_deps_ubuntu.sh
 
-FROM base as buildenv
+FROM base AS buildenv
+
+RUN /tmp/install_deps_ubuntu.sh --dev
 
 COPY . /tex2scs-translator
 RUN chown -R "${UID}:${GID}" /tex2scs-translator
@@ -31,4 +33,4 @@ USER user
 
 COPY --from=buildenv /tex2scs-translator /tex2scs-translator
 
-ENTRYPOINT ["/bin/bash", "-c", "./tex2scs-translator/bin/scn-tex2scs -d -c -s /kb -t /kb-translated"]
+ENTRYPOINT ["/bin/bash", "-c", "./tex2scs-translator/bin/scn-tex2scs -d -s /kb -t /kb-translated"]
