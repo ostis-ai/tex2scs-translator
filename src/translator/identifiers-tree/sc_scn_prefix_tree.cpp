@@ -22,6 +22,11 @@ ScSCnPrefixTree & ScSCnPrefixTree::GetInstance()
   return *m_instance;
 }
 
+std::string ScSCnPrefixTree::Add(std::string const & key, std::string const & nodeType)
+{
+    return Add(key, std::list{nodeType});
+}
+
 std::string ScSCnPrefixTree::Add(std::string const & key, std::list<std::string> const & nodeTypeWithAdditionalClasses)
 {
   auto const & it = m_translations.find(key);
