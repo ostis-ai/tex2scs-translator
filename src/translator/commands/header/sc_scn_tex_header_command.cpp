@@ -9,9 +9,9 @@ ScSCnTexCommandResult ScSCnTexHeaderCommand::Complete(
     ScSCnPrefixTree & tree,
     ScSCnTexCommandParams const & params)
 {
-  std::string const & systemIdentifier = SCsHelper::RemoveHtmlTags(params.at(1));
-  std::string const & systemIdentifier = tree.Add(systemIdentifier, SCsHelper::GetNodeTypeWithAdditionalClasses(systemIdentifier));
-  lastHeader = systemIdentifier;
+  std::string const & identifier = SCsHelper::RemoveHtmlTags(params.at(1));
+  std::string const & systemIdentifier = tree.Add(identifier, SCsHelper::GetNodeTypeWithAdditionalClasses(identifier;
+  lastHeader = identifier;
 
   return SCsStream()
     .PreFormatted()

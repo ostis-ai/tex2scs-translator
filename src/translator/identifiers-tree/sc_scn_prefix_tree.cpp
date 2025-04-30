@@ -28,11 +28,11 @@ std::string ScSCnPrefixTree::Add(std::string const & key, std::list<std::string>
   if (it != m_translations.end())
   {
     std::string const & identifier = it->second.first;
-    std::string const & type = it->second.second;
+    std::string const & type = it->second.second.front();
     if (type == "sc_node")
-      m_translations[it->first] = {identifier, nodeTypeWithAdditionalClasses[0]};
+      m_translations[it->first] = {identifier, nodeTypeWithAdditionalClasses};
     return identifier;
-  }
+  } 
 
   std::string const & value = ".system_element_" + std::to_string(index);
   m_translations.insert({ key, { value, nodeTypeWithAdditionalClasses } });
@@ -76,13 +76,8 @@ std::string ScSCnPrefixTree::Dump() const
       classesWithAdditionalTypesStr += ";\n";
 
       return { item.second.first, " => nrel_main_idtf: [", item.first, "] "
-<<<<<<< HEAD
                "(* <- lang_ru;; => nrel_format: format_html;; *);;\n",
-               item.second.first, " <- ", item.second.second, ";;\n\n" };
-=======
-                                                                       "(* <- lang_ru;; => nrel_format: format_html;; *);;\n",
                classesWithAdditionalTypesStr, "\n" };
->>>>>>> 041af40 (feat: introduce logic to add additinal classes on all elemnts with specific type)
     });
   }
   return stream;

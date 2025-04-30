@@ -35,19 +35,19 @@ std::string SCsHelper::GetNodeTypeByIdentifier(std::string const & identifier)
 
 std::list<std::string> SCsHelper::GetNodeAdditionalClassesByType(std::string const & type)
 {
-    if (type == scNodeClass)
-        return {entityClass};
+  if (type == scNodeClass)
+    return {entityClass};
 
-    return {};
+  return {};
 }
 
-std::list<std::string> SCsHelper::GetNodeTypeWithAdditionalClasses(std::string const & idtf)
+std::list<std::string> SCsHelper::GetNodeTypeWithAdditionalClasses(std::string const & identifier)
 {
-    std::string type = GetNodeTypeByIdtf(idtf);
-    std::list<std::string> additionalClasses = GetNodeAdditionalClassesByType(type);
+  std::string const & type = GetNodeTypeByIdentifier(identifier);
+  std::list<std::string> additionalClasses = GetNodeAdditionalClassesByType(type);
 
-    additionalClasses.emplace_front(type);
-    return additionalClasses;
+  additionalClasses.emplace_front(type);
+  return additionalClasses;
 }
 
 std::string SCsHelper::NoRole(std::string const & identifier)
