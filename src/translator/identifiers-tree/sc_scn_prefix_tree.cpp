@@ -24,18 +24,23 @@ ScSCnPrefixTree & ScSCnPrefixTree::GetInstance()
 
 std::string ScSCnPrefixTree::Add(std::string const & key, std::string const & nodeType)
 {
+  return Add(key, std::list{nodeType});
+}
+
+std::string ScSCnPrefixTree::Add(std::string const & key, std::list<std::string> const & nodeTypeWithAdditionalClasses)
+{
   auto const & it = m_translations.find(key);
   if (it != m_translations.end())
   {
     std::string const & identifier = it->second.first;
-    std::string const & type = it->second.second;
+    std::string const & type = it->second.second.front();
     if (type == "sc_node")
-      m_translations[it->first] = {identifier, nodeType};
+      m_translations[it->first] = {identifier, nodeTypeWithAdditionalClasses};
     return identifier;
-  }
-  
+  } 
+
   std::string const & value = ".system_element_" + std::to_string(index);
-  m_translations.insert({ key, { value, nodeType } });
+  m_translations.insert({ key, { value, nodeTypeWithAdditionalClasses } });
 
   ++index;
 
@@ -67,9 +72,17 @@ std::string ScSCnPrefixTree::Dump() const
   for (auto const & item : m_translations)
   {
     stream.Row([&item]() -> SCsStream {
+      std::list<std::string> const & classesWithAdditionalTypes = item.second.second;
+
+      std::string classesWithAdditionalTypesStr = item.second.first + " <- ";
+      for (auto const & typeOrClass : classesWithAdditionalTypes)
+        classesWithAdditionalTypesStr += typeOrClass + "; ";
+      classesWithAdditionalTypesStr.pop_back();// we want ";;" after last element, not a "; ;"
+      classesWithAdditionalTypesStr += ";\n";
+
       return { item.second.first, " => nrel_main_idtf: [", item.first, "] "
                "(* <- lang_ru;; => nrel_format: format_html;; *);;\n",
-               item.second.first, " <- ", item.second.second, ";;\n\n" };
+               classesWithAdditionalTypesStr, "\n" };
     });
   }
   return stream;

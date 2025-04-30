@@ -10,7 +10,7 @@ ScSCnTexCommandResult ScSCnTexHeaderCommand::Complete(
     ScSCnTexCommandParams const & params)
 {
   std::string const & identifier = SCsHelper::RemoveHtmlTags(params.at(1));
-  std::string const & systemIdentifier = tree.Add(identifier, SCsHelper::GetNodeTypeByIdentifier(identifier));
+  std::string const & systemIdentifier = tree.Add(identifier, SCsHelper::GetNodeTypeWithAdditionalClasses(identifier));
   lastHeader = identifier;
 
   return SCsStream()

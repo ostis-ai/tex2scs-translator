@@ -11,6 +11,8 @@ std::string SCsHelper::scNodeRoleRelation{"sc_node_role_relation"};
 std::string SCsHelper::scNodeClass{"sc_node_class"};
 std::string SCsHelper::scNodeStructure{"sc_node_structure"};
 
+std::string SCsHelper::entityClass{"entity_class"};
+
 std::string SCsHelper::m_currentFilePath;
 std::string SCsHelper::m_currentFileDirectoryName;
 
@@ -29,6 +31,23 @@ std::string SCsHelper::GetNodeTypeByIdentifier(std::string const & identifier)
     return scNodeClass;
   else
     return scNode;
+}
+
+std::list<std::string> SCsHelper::GetNodeAdditionalClassesByType(std::string const & type)
+{
+  if (type == scNodeClass)
+    return {entityClass};
+
+  return {};
+}
+
+std::list<std::string> SCsHelper::GetNodeTypeWithAdditionalClasses(std::string const & identifier)
+{
+  std::string const & type = GetNodeTypeByIdentifier(identifier);
+  std::list<std::string> additionalClasses = GetNodeAdditionalClassesByType(type);
+
+  additionalClasses.emplace_front(type);
+  return additionalClasses;
 }
 
 std::string SCsHelper::NoRole(std::string const & identifier)

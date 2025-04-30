@@ -38,6 +38,16 @@ public:
   std::string Add(std::string const & key, std::string const & nodeType);
 
   /*!
+   * @brief Adds a new identifier to the prefix tree.
+   *
+   * @param key The key (identifier) to be added.
+   * @param nodeTypeWithAdditionalClasses The type of the node (e.g., "sc_node", "sc_node_class", etc.)
+   * and additional classes it should belong to.
+   * @return The unique identifier (sys_id) of the added node.
+   */
+  std::string Add(std::string const & key, std::list<std::string> const & nodeTypeWithAdditionalClasses);
+
+  /*!
    * @brief Retrieves the value associated with the given key from the prefix tree.
    *
    * @param key The key (identifier) to retrieve the value for.

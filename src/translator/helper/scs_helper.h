@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <list>
 
 class SCsHelper
 {
@@ -11,13 +12,19 @@ public:
   static std::string scNodeClass;
   static std::string scNodeStructure;
 
-  static std::string GetNodeTypeByIdentifier(std::string const & idtf);
+  static std::string entityClass;
 
-  static std::string NoRole(std::string const & idtf);
+  static std::string GetNodeTypeByIdentifier(std::string const & identifier);
 
-  static std::string Role(std::string const & idtf);
+  static std::list<std::string> GetNodeAdditionalClassesByType(std::string const & type);
 
-  static std::string File(std::string const & idtf);
+  static std::list<std::string> GetNodeTypeWithAdditionalClasses(std::string const & identifier);
+
+  static std::string NoRole(std::string const & identifier);
+
+  static std::string Role(std::string const & identifier);
+
+  static std::string File(std::string const & identifier);
 
   static bool IsFile(std::string const & string);
 
@@ -25,7 +32,7 @@ public:
 
   static std::string Url(std::string const & path);
 
-  static std::string FileClass(std::string const & idtf);
+  static std::string FileClass(std::string const & identifier);
 
   static bool IsURL(std::string const & string);
 

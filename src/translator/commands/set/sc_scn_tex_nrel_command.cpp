@@ -68,7 +68,7 @@ ScSCnTexCommandResult ScSCnTexNRelCommand::Complete(
             ? urlItem == m_urlTypes.cend()
               ? SCsHelper::IsURL(object) || SCsHelper::IsFile(object)
                 ? object
-                : tree.Add(object, SCsHelper::GetNodeTypeByIdentifier(object))
+                : tree.Add(object, SCsHelper::GetNodeTypeWithAdditionalClasses(object))
               : SCsHelper::Url(object)
             : SCsHelper::FileClass(object)
           : SCsHelper::File(object);
